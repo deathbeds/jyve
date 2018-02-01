@@ -1,0 +1,8 @@
+#!/bin/bash
+# This is used by repo2docker _after_ environment.yml, but still during the
+# docker build, which is simpler than a dedicated Dockerfile
+set -ex
+jlpm
+jlpm build
+jupyter labextension install . --no-build
+jupyter lab build

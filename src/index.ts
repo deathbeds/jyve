@@ -15,6 +15,7 @@ const extension: JupyterLabPlugin<void> = {
     console.log('🎩 patching!');
     patches.patchGetSpecs(app);
     patches.patchSessionManager(app);
+    patches.patchChangeKernel(app);
     console.log('🎩 activated!');
   }
 };

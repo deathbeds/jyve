@@ -13,8 +13,8 @@ const extension: JupyterLabPlugin<void> = {
   autoStart: true,
   activate: (app: JupyterLab) => {
     console.log('🎩 patching!');
-    patches.patchSessionManager(app);
     patches.patchGetSpecs(app);
+    patches.patchSessionManager(app);
     console.log('🎩 activated!');
   }
 };

@@ -31,6 +31,7 @@
     "@jupyterlab/application": "^0.15.2"
   },
   "devDependencies": {
+    "@types/es6-promise": "^3.3.0",
     "rimraf": "^2.6.1",
     "typescript": "~2.7.1"
   },

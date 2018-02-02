@@ -8,8 +8,8 @@ import {
 } from '@jupyterlab/services';
 
 import {
-  BrowserSession,
-} from '../session';
+  DefaultBrowserSession,
+} from '../services/session/default';
 
 import {
   KERNELS,
@@ -29,7 +29,7 @@ export function patchSessionManager(app: JupyterLab) {
 
     let serverSettings = this.serverSettings;
 
-    const session = await BrowserSession.startNew({...options, serverSettings});
+    const session = new DefaultBrowserSession();
 
     this._onStarted(session);
 

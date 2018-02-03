@@ -4,11 +4,11 @@ import {
 
 import {
   IBrowserKernelManager,
-} from '@deathbeds/browserkernels';
+} from 'browserkernels';
 
 import {
   kernelSpec,
-} from '@deathbeds/browserkernel-js-unsafe';
+} from 'browserkernel-js-unsafe';
 
 
 const extension: JupyterLabPlugin<void> = {

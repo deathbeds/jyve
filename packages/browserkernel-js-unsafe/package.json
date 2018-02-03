@@ -1,34 +1,36 @@
 {
-  "name": "@deathbeds/browserkernel-js-unsafe",
-  "version": "0.1.0",
+  "author": "Dead Pixels Collective",
+  "bugs": {
+    "url": "https://github.com/deathbeds/solos/issues?q=label:core"
+  },
+  "dependencies": {
+    "@jupyterlab/application": "^0.15.2"
+  },
   "description": "A totally unsafe browser js kernel",
+  "devDependencies": {
+    "@types/es6-promise": "^3.3.0",
+    "typescript": "~2.7.1"
+  },
+  "files": [
+    "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
+  ],
+  "homepage": "https://github.com/deathbeds/solos/tree/master/packages/browserkernels",
   "keywords": [
     "jupyter",
     "jupyterlab"
   ],
-  "homepage": "https://github.com/deathbeds/solos/tree/master/packages/browserkernels",
-  "bugs": {
-    "url": "https://github.com/deathbeds/solos/issues?q=label:core"
-  },
   "license": "BSD-3-Clause",
-  "author": "Dead Pixels Collective",
-  "files": [
-    "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
-  ],
   "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "name": "browserkernel-js-unsafe",
   "repository": {
     "type": "git",
     "url": "https://github.com/deathbeds/solos.git"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "link-labextension": "jupyter labextension link . --no-build",
+    "watch": "tsc --watch"
   },
-  "dependencies": {
-    "@jupyterlab/application": "^0.15.2"
-  },
-  "devDependencies": {
-    "@types/es6-promise": "^3.3.0",
-    "typescript": "~2.7.1"
-  }
+  "types": "lib/index.d.ts",
+  "version": "0.1.0"
 }

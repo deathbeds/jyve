@@ -21,6 +21,11 @@
     "type": "git",
     "url": "https://github.com/deathbeds/solos.git"
   },
+  "scripts": {
+    "build": "lerna run --parallel build",
+    "watch": "lerna run --parallel watch",
+    "link-labextension": "lerna run link-labextension"
+  },
   "dependencies": {},
   "devDependencies": {
      "@jupyterlab/eslint-plugin-jinja": "^0.2.0",

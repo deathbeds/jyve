@@ -23,7 +23,7 @@ import {
  * The browser kernel manager token.
  */
 export
-const IBrowserKernelManager = new Token<IBrowserKernelManager>('@deathbeds/browserkernels:IBrowserKernelManager');
+const IBrowserKernelManager = new Token<IBrowserKernelManager>('browserkernels:IBrowserKernelManager');
 /* tslint:enable */
 
 export interface IBrowserKernelManager {

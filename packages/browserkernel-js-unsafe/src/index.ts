@@ -4,7 +4,7 @@ import {
 
 import {
   BrowserKernelManager,
-} from '@deathbeds/browserkernels';
+} from 'browserkernels';
 
 
 export const kernelSpec = {

@@ -5,7 +5,7 @@ import {
 import {
   IBrowserKernelManager,
   BrowserKernelManager,
-} from '@deathbeds/browserkernels';
+} from 'browserkernels';
 
 import '../style/index.css';
 

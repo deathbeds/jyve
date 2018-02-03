@@ -3,6 +3,7 @@
 # docker build, which is simpler than a dedicated Dockerfile
 set -ex
 jlpm
-jlpm build
-jupyter labextension install . --no-build
+jlpm lerna bootstrap
+jlpm lerna build
+jlpm lerna link
 jupyter lab build

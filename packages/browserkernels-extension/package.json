@@ -1,0 +1,39 @@
+{
+  "name": "@deathbeds/browserkernels-extension",
+  "version": "0.1.0",
+  "description": "Jupyter Kernels in the Browser",
+  "keywords": [
+    "extension",
+    "jupyter",
+    "jupyterlab"
+  ],
+  "homepage": "https://github.com/deathbeds/solos/tree/master/jupyterlab_browserkernels",
+  "bugs": {
+    "url": "https://github.com/deathbeds/solos/issues?q=label:extension"
+  },
+  "license": "BSD-3-Clause",
+  "author": "Dead Pixels Collective",
+  "files": [
+    "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deathbeds/solos.git"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@jupyterlab/application": "^0.15.2",
+    "@deathbeds/browserkernels": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/es6-promise": "^3.3.0",
+    "typescript": "~2.7.1"
+  },
+  "jupyterlab": {
+    "extension": true
+  }
+}

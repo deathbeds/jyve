@@ -1,40 +1,44 @@
 {
-  "name": "solos",
-  "private": true,
-  "version": "0.1.0",
+  "author": "Dead Pixels Collective",
+  "bugs": {
+    "url": "https://github.com/deathbeds/solos/issues"
+  },
+  "dependencies": {
+  },
   "description": "Jupyter Kernels in the Browser",
+  "devDependencies": {
+    "lerna": "^2.5.0",
+    "tslint": "^5.9.1",
+    "typescript": "~2.7.1",
+    "rimraf": "^2.6.1",
+    "verdaccio": "^2.7.4"
+  },
+  "files": [
+    "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
+  ],
+  "homepage": "https://github.com/deathbeds/solos",
   "keywords": [
     "extension",
     "jupyter",
     "jupyterlab"
   ],
-  "homepage": "https://github.com/deathbeds/solos",
-  "bugs": {
-    "url": "https://github.com/deathbeds/solos/issues"
-  },
   "license": "BSD-3-Clause",
-  "author": "Dead Pixels Collective",
-  "files": [
-    "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
-  ],
+  "name": "solos",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/deathbeds/solos.git"
   },
   "scripts": {
     "build": "lerna run --parallel build",
+    "clean": "lerna run --parallel clean",
+    "lab:link": "lerna run lab:link",
     "watch": "lerna run --parallel watch",
-    "link-labextension": "lerna run link-labextension"
+    "serve": "verdaccio -c verdaccio/config.yaml",
+    "publish:local": "lerna run --parallel publish:local"
   },
-  "dependencies": {},
-  "devDependencies": {
-     "@jupyterlab/eslint-plugin-jinja": "^0.2.0",
-     "eslint": "^4.12.1",
-     "lerna": "^2.4.0",
-     "npm-run-all": "~4.1.1",
-     "tslint": "^5.8.0"
-   },
-   "workspaces": [
-     "packages/*"
-   ]
+  "version": "0.1.0",
+  "workspaces": [
+    "packages/*"
+  ]
 }

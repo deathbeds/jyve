@@ -1,15 +1,19 @@
-# jupyterlab_browserkernels
+# solos
 
-Jupyter Kernels in the Browser
+Experimental, unsafe Jupyter Kernels in the Browser
 
 
 ## Before
 Install:
-* JupyterLab
+* JupyterLab >=0.31.2
 
 ## Install
 ```bash
-jupyter labextension install jupyterlab_browserkernels
+# the core manager
+jupyter labextension install @deathbeds/browserkernels-extension
+# the individual kernels
+jupyter labextension install @deathbeds/browserkernels-js-unsafe-extension
+# ...
 ```
 
 ## Development
@@ -22,7 +26,7 @@ Install:
 ### Setup
 ```bash
 conda env update
-source activate jupyterlab_browserkernels-dev
+source activate solos
 ./postBuild
 ```
 

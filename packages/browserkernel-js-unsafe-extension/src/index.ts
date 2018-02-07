@@ -1,24 +1,19 @@
-import {
-  JupyterLab, JupyterLabPlugin
-} from '@jupyterlab/application';
+import {JupyterLab, JupyterLabPlugin} from '@jupyterlab/application';
+import {IBrowserKernelManager} from '@deathbeds/browserkernels';
+import {kernelSpec} from '@deathbeds/browserkernel-js-unsafe';
 
-import {
-  IBrowserKernelManager,
-} from 'browserkernels';
-
-import {
-  kernelSpec,
-} from 'browserkernel-js-unsafe';
-
+const id = '@deathbeds/browkerkernel-js-unsafe-extension';
 
 const extension: JupyterLabPlugin<void> = {
-  id: 'jupyterlab_browserkernels',
+  id,
   autoStart: true,
   requires: [IBrowserKernelManager],
-  activate: (app: JupyterLab, browserKernels) => {
-    browserKernels.register('unsafe', {
-      spec: kernelSpec
+  activate: async (app: JupyterLab, browserKernels: IBrowserKernelManager) => {
+    console.log(`[${id}] activating...`);
+    await browserKernels.register({
+      kernelSpec
     });
+    console.log(`...[${id}] activated!`);
   }
 };
 

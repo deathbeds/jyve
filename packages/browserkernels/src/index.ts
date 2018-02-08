@@ -3,10 +3,11 @@ import {Token} from '@phosphor/coreutils';
 // import {ISignal, Signal} from '@phosphor/signaling';
 
 import {JupyterLab} from '@jupyterlab/application';
-import {Kernel} from '@jupyterlab/services';
+import {Kernel, Session} from '@jupyterlab/services';
+
 
 import {patches} from './patches';
-
+import {BrowserSession} from './session';
 
 /* tslint:disable */
 /**
@@ -17,15 +18,23 @@ const IBrowserKernelManager = new Token<IBrowserKernelManager>('@deathbeds/brows
 /* tslint:enable */
 
 export interface IBrowserKernelManager {
-  register(options: BrowserKernelManager.IOptions): Promise<void>;
   ready: Promise<void>;
   specs: Kernel.ISpecModels;
+  register(options: BrowserKernelManager.IOptions): Promise<void>;
+  startNew(
+    options: BrowserKernelManager.ISessionOptions
+  ): Promise<Session.ISession>;
+  makeKernel(options: Kernel.IOptions, id: string): BrowserKernelManager.IBrowserKernel;
 }
 
 export class BrowserKernelManager implements IBrowserKernelManager {
   private _lab: JupyterLab;
   private _specs: Kernel.ISpecModels = {default: '', kernelspecs: {}};
+  private _factories = new Map<string, BrowserKernelManager.IKernelFactory>();
   private _ready = new PromiseDelegate<void>();
+
+  get specs() { return this._specs; }
+  get ready(): Promise<void> { return this._ready.promise; }
 
   constructor(lab: JupyterLab) {
     this._lab = lab;
@@ -33,32 +42,42 @@ export class BrowserKernelManager implements IBrowserKernelManager {
   }
 
   async register(options: BrowserKernelManager.IOptions) {
-    console.log(`awaiting ready...`);
     await this.ready;
-    console.log(`registering ${options.kernelSpec.name}`);
     this._specs.kernelspecs[options.kernelSpec.name] = options.kernelSpec;
-    console.log(`fetching specs...`);
+    this._factories.set(options.kernelSpec.name, options.newKernel);
     return await this._lab.serviceManager.sessions.refreshSpecs();
   }
 
-  async patch() {
-    await patches.patchGetSpecs(this._lab, this);
-    // patches.patchSessionManager(this._lab);
-    // patches.patchChangeKernel(this._lab);
+  patch() {
+    patches.patchGetSpecs(this._lab, this);
+    patches.patchStartNew(this._lab, this);
     this._ready.resolve(void 0);
   }
 
-  get specs() {
-    return this._specs;
+  startNew(
+    options: BrowserKernelManager.ISessionOptions
+  ): Promise<Session.ISession> {
+    console.log(`making session for ${options.name}`);
+    return BrowserSession.startNew({...options, manager: this});
   }
 
-  get ready(): Promise<void> {
-    return this._ready.promise;
+  makeKernel(options: Kernel.IOptions, id: string): BrowserKernelManager.IBrowserKernel {
+    console.log(`making kernel for ${options.name}`);
+    const factory = this._factories.get(options.name);
+    return factory(options, id);
   }
 }
 
 export namespace BrowserKernelManager {
+  export interface IKernelFactory {
+    (options: Kernel.IOptions, id: string): Kernel.IKernel;
+  }
   export interface IOptions {
     kernelSpec: Kernel.ISpecModel;
+    newKernel: IKernelFactory;
   }
+  export interface ISessionOptions extends Session.IOptions {
+    manager?: IBrowserKernelManager;
+  }
+  export interface IBrowserKernel extends Kernel.IKernel {}
 }

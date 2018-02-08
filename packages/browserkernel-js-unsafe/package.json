@@ -4,6 +4,7 @@
     "url": "https://github.com/deathbeds/solos/issues"
   },
   "dependencies": {
+    "@deathbeds/browserkernels": "^0.1.0",
     "@jupyterlab/application": "^0.15.4"
   },
   "description": "A totally unsafe browser js kernel",

@@ -4,7 +4,11 @@
     "url": "https://github.com/deathbeds/solos/issues"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.15.4"
+    "@jupyterlab/application": "^0.15.4",
+    "mock-socket": "^7.1.0"
+  },
+  "devDependencies": {
+    "@types/socket.io": "^1.4.31"
   },
   "description": "Jupyter Kernels in the Browser",
   "files": [

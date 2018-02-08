@@ -1,9 +1,7 @@
-import {patchGetSpecs} from './kernel';
-// import {patchSessionManager} from './sessionmanager';
-// import {patchChangeKernel} from './session';
+import {patchGetSpecs} from './getSpecs';
+import {patchStartNew} from './startNew';
 
 export const patches = {
-  // patchSessionManager,
   patchGetSpecs,
-  // patchChangeKernel,
+  patchStartNew,
 };

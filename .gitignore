@@ -8,3 +8,4 @@ _notebooks/
 htpasswd
 *.log
 verdaccio/packages/
+_scripts/

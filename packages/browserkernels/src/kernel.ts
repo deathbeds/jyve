@@ -22,20 +22,31 @@ export class BrowserKernel extends DefaultKernel implements BrowserKernelManager
     this.userNS = {};
   }
 
+
+  sendJSON(data: any) {
+    this.server.send(JSON.stringify(data));
+  }
+
   async onMessage(msg: KernelMessage.IMessage) {
     switch (msg.header.msg_type) {
       case 'kernel_info_request':
-        this.server.sendJSON(this.fakeStatusReply(msg, 'busy'));
-        this.server.sendJSON(this.fakeKernelInfo(msg));
-        this.server.sendJSON(this.fakeStatusReply(msg, 'idle'));
+        this.sendJSON(this.fakeKernelInfo(msg));
         return true;
       default:
         return false;
     }
   }
 
-  private async _onMessage(msg: string) {
-    await this.onMessage(JSON.parse(msg));
+  private async _onMessage(rawMsg: string) {
+    const msg = JSON.parse(rawMsg) as KernelMessage.IMessage;
+    this.sendJSON(this.fakeStatusReply(msg, 'busy'));
+    const handled = await this.onMessage(msg);
+    this.sendJSON(this.fakeStatusReply(msg, 'idle'));
+    if (!handled) {
+      console.groupCollapsed(`unhandled ${msg.header.msg_type}`);
+      console.log(JSON.stringify(msg, null, 2));
+      console.groupEnd();
+    }
   }
 
   async getSpec() {

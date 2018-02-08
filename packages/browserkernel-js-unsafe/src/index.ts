@@ -29,15 +29,14 @@ export class JSUnsafeBrowserKernel extends BrowserKernel {
   }
 
   async onMessage(msg: KernelMessage.IMessage) {
-    if (await super.onMessage(msg)) {
-      return;
+    const handled = await super.onMessage(msg);
+    if (handled) {
+      return handled;
     }
     const {msg_type} = msg.header;
     switch (msg_type) {
       case 'execute_request':
-        this.server.sendJSON(this.fakeStatusReply(msg, 'busy'));
         await this.executeWithEval(msg);
-        this.server.sendJSON(this.fakeStatusReply(msg, 'idle'));
         return true;
       default:
         return false;
@@ -53,10 +52,10 @@ export class JSUnsafeBrowserKernel extends BrowserKernel {
         result = await eval(code);
         /* tslint:enable */
       }).call(this.userNS);
-      this.server.sendJSON(this.fakeExecuteResult(msg, {
+      this.sendJSON(this.fakeExecuteResult(msg, {
         'text/plain': `${result}`
       }));
-      this.server.sendJSON(this.fakeExecuteReply(msg));
+      this.sendJSON(this.fakeExecuteReply(msg));
     } catch (err) {
       let errMsg = this.fakeExecuteReply(msg, 'error');
       errMsg.content = {
@@ -65,7 +64,7 @@ export class JSUnsafeBrowserKernel extends BrowserKernel {
         traceback: (err.stack || '').split('\n'),
         ...errMsg.content
       };
-      this.server.sendJSON(errMsg);
+      this.sendJSON(errMsg);
       return;
     }
   }

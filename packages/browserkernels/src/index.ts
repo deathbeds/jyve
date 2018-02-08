@@ -49,8 +49,8 @@ export class BrowserKernelManager implements IBrowserKernelManager {
   }
 
   patch() {
-    patches.patchGetSpecs(this._lab, this);
-    patches.patchStartNew(this._lab, this);
+    [patches.patchGetSpecs, patches.patchStartNew, patches.patchRestartKernel]
+      .map((fn) => fn(this._lab, this));
     this._ready.resolve(void 0);
   }
 

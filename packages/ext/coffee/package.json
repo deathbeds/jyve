@@ -1,18 +1,18 @@
 {
   "author": "Dead Pixels Collective",
   "bugs": {
-    "url": "https://github.com/deathbeds/solos/issues"
+    "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@deathbeds/browserkernel-js-unsafe": "^0.1.0",
-    "@deathbeds/browserkernels": "^0.1.0",
+    "@deathbeds/jyve-coffee-unsafe": "^0.1.0",
+    "@deathbeds/jyve": "^0.1.0",
     "@jupyterlab/application": "^0.15.4"
   },
   "description": "An extension for a totally unsafe browser js kernel",
   "files": [
     "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
   ],
-  "homepage": "https://github.com/deathbeds/solos",
+  "homepage": "https://github.com/deathbeds/jyve",
   "jupyterlab": {
     "extension": true
   },
@@ -23,10 +23,10 @@
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
-  "name": "@deathbeds/browserkernel-js-unsafe-extension",
+  "name": "@deathbeds/jyve-coffee-unsafe-extension",
   "repository": {
     "type": "git",
-    "url": "https://github.com/deathbeds/solos.git"
+    "url": "https://github.com/deathbeds/jyve.git"
   },
   "scripts": {
     "build": "tsc",

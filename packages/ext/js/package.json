@@ -1,17 +1,18 @@
 {
   "author": "Dead Pixels Collective",
   "bugs": {
-    "url": "https://github.com/deathbeds/solos/issues"
+    "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@deathbeds/browserkernels": "^0.1.0",
+    "@deathbeds/jyve-js-unsafe": "^0.1.0",
+    "@deathbeds/jyve": "^0.1.0",
     "@jupyterlab/application": "^0.15.4"
   },
-  "description": "Jupyter Kernels in the Browser",
+  "description": "An extension for a totally unsafe browser js kernel",
   "files": [
     "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
   ],
-  "homepage": "https://github.com/deathbeds/solos",
+  "homepage": "https://github.com/deathbeds/jyve",
   "jupyterlab": {
     "extension": true
   },
@@ -22,16 +23,16 @@
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
-  "name": "@deathbeds/browserkernels-extension",
+  "name": "@deathbeds/jyve-js-unsafe-extension",
   "repository": {
     "type": "git",
-    "url": "https://github.com/deathbeds/solos.git"
+    "url": "https://github.com/deathbeds/jyve.git"
   },
   "scripts": {
     "build": "tsc",
+    "clean": "rimraf lib",
     "lab:link": "jupyter labextension link . --no-build",
     "watch": "tsc --watch",
-    "clean": "rimraf lib",
     "publish:local": "npm publish --registry http://localhost:4873"
   },
   "types": "lib/index.d.ts",

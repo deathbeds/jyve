@@ -1,27 +1,27 @@
 {
   "author": "Dead Pixels Collective",
   "bugs": {
-    "url": "https://github.com/deathbeds/solos/issues"
+    "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@deathbeds/browserkernels": "^0.1.0",
+    "@deathbeds/jyve": "^0.1.0",
     "@jupyterlab/application": "^0.15.4"
   },
   "description": "A totally unsafe browser js kernel",
   "files": [
     "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
   ],
-  "homepage": "https://github.com/deathbeds/solos",
+  "homepage": "https://github.com/deathbeds/jyve",
   "keywords": [
     "jupyter",
     "jupyterlab"
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
-  "name": "@deathbeds/browserkernel-js-unsafe",
+  "name": "@deathbeds/jyve-js-unsafe",
   "repository": {
     "type": "git",
-    "url": "https://github.com/deathbeds/solos.git"
+    "url": "https://github.com/deathbeds/jyve.git"
   },
   "scripts": {
     "build": "tsc",

@@ -1,13 +1,15 @@
 import {Kernel, KernelMessage} from '@jupyterlab/services';
+import {JSUnsafeKernel} from '@deathbeds/jyve-js-unsafe';
+
 
 import {
-  BrowserKernel,
-} from '@deathbeds/browserkernels/lib/kernel';
+  jyve,
+} from '@deathbeds/jyve/lib/kernel';
 
 export const kernelSpec: Kernel.ISpecModel = {
-  display_name: 'JS (eval)',
-  name: 'browserkernel-js-unsafe',
-  language: 'javascript',
+  display_name: 'coffee (eval)',
+  name: 'jyve-coffee-unsafe',
+  language: 'coffeescript',
   argv: ['na'],
   resources: {
     'logo-32x32': '/kernelspecs/python3/logo-32x32.png',
@@ -16,15 +18,15 @@ export const kernelSpec: Kernel.ISpecModel = {
 };
 
 
-export class JSUnsafeBrowserKernel extends BrowserKernel {
+export class CoffeeUnsafeKernel extends JSUnsafeKernel {
   protected kernelSpec = kernelSpec;
 
-  browserKernelInfo() {
-    let info = super.browserKernelInfo();
+  jyveInfo() {
+    let info = super.jyveInfo();
 
     return {
       ...info,
-      implementation: 'browserkernel-js-unsafe'
+      implementation: 'jyve-coffee-unsafe'
     };
   }
 
@@ -70,6 +72,6 @@ export class JSUnsafeBrowserKernel extends BrowserKernel {
   }
 }
 
-export function newKernel(options: BrowserKernel.IOptions, id: string) {
-  return new JSUnsafeBrowserKernel(options, id);
+export function newKernel(options: jyve.IOptions, id: string) {
+  return new JSUnsafeKernel(options, id);
 }

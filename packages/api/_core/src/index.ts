@@ -7,30 +7,30 @@ import {Kernel, Session} from '@jupyterlab/services';
 
 
 import {patches} from './patches';
-import {BrowserSession} from './session';
+import {JyveSession} from './session';
 
 /* tslint:disable */
 /**
  * The browser kernel manager token.
  */
 export
-const IBrowserKernelManager = new Token<IBrowserKernelManager>('@deathbeds/browserkernels:IBrowserKernelManager');
+const IJyve = new Token<IJyve>('@deathbeds/jyve:IJyve');
 /* tslint:enable */
 
-export interface IBrowserKernelManager {
+export interface IJyve {
   ready: Promise<void>;
   specs: Kernel.ISpecModels;
-  register(options: BrowserKernelManager.IOptions): Promise<void>;
+  register(options: Jyve.IOptions): Promise<void>;
   startNew(
-    options: BrowserKernelManager.ISessionOptions
+    options: Jyve.ISessionOptions
   ): Promise<Session.ISession>;
-  makeKernel(options: Kernel.IOptions, id: string): BrowserKernelManager.IBrowserKernel;
+  makeKernel(options: Kernel.IOptions, id: string): Jyve.Ijyve;
 }
 
-export class BrowserKernelManager implements IBrowserKernelManager {
+export class Jyve implements IJyve {
   private _lab: JupyterLab;
   private _specs: Kernel.ISpecModels = {default: '', kernelspecs: {}};
-  private _factories = new Map<string, BrowserKernelManager.IKernelFactory>();
+  private _factories = new Map<string, Jyve.IKernelFactory>();
   private _ready = new PromiseDelegate<void>();
 
   get specs() { return this._specs; }
@@ -41,7 +41,7 @@ export class BrowserKernelManager implements IBrowserKernelManager {
     this.patch();
   }
 
-  async register(options: BrowserKernelManager.IOptions) {
+  async register(options: Jyve.IOptions) {
     await this.ready;
     this._specs.kernelspecs[options.kernelSpec.name] = options.kernelSpec;
     this._factories.set(options.kernelSpec.name, options.newKernel);
@@ -55,18 +55,18 @@ export class BrowserKernelManager implements IBrowserKernelManager {
   }
 
   startNew(
-    options: BrowserKernelManager.ISessionOptions
+    options: Jyve.ISessionOptions
   ): Promise<Session.ISession> {
-    return BrowserSession.startNew({...options, manager: this});
+    return JyveSession.startNew({...options, manager: this});
   }
 
-  makeKernel(options: Kernel.IOptions, id: string): BrowserKernelManager.IBrowserKernel {
+  makeKernel(options: Kernel.IOptions, id: string): Jyve.Ijyve {
     const factory = this._factories.get(options.name);
     return factory(options, id);
   }
 }
 
-export namespace BrowserKernelManager {
+export namespace Jyve {
   export interface IKernelFactory {
     (options: Kernel.IOptions, id: string): Kernel.IKernel;
   }
@@ -75,7 +75,7 @@ export namespace BrowserKernelManager {
     newKernel: IKernelFactory;
   }
   export interface ISessionOptions extends Session.IOptions {
-    manager?: IBrowserKernelManager;
+    manager?: IJyve;
   }
-  export interface IBrowserKernel extends Kernel.IKernel {}
+  export interface Ijyve extends Kernel.IKernel {}
 }

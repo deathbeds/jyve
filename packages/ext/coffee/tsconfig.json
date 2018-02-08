@@ -16,6 +16,6 @@
   },
   "include": [
     "./src/**/*",
-    "../browserkernels/src/@types/**/*"
+    "../../api/_core/src/@types/**/*"
   ]
 }

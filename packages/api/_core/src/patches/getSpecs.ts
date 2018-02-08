@@ -4,12 +4,12 @@ import {JupyterLab} from '@jupyterlab/application';
 import {Kernel} from '@jupyterlab/services/lib/kernel';
 
 
-import {IBrowserKernelManager} from '..';
+import {IJyve} from '..';
 
 
 export function patchGetSpecs(
   app: JupyterLab,
-  browserKernels: IBrowserKernelManager
+  jyve: IJyve
 ) {
   /* tslint:disable */
   (app.serviceManager.sessions as any)._refreshSpecs = function() {
@@ -18,7 +18,7 @@ export function patchGetSpecs(
         default: specs.default,
         kernelspecs: {
           ...specs.kernelspecs,
-          ...browserKernels.specs.kernelspecs
+          ...jyve.specs.kernelspecs
         }
       };
       if (!JSONExt.deepEqual(newSpecs, this._specs)) {

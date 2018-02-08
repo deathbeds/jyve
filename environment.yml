@@ -1,12 +1,12 @@
 # This is used by repo2docker. conda can install all the Jupyter dependencies.
 
-name: solos-dev
+name: jyve-dev
 
 channels:
   - conda-forge
   - defaults
 
 dependencies:
-  - jupyterlab >=0.31.4,<0.32
+  - jupyterlab >=0.31.5,<0.32
   - nodejs >=8.9.3
   - python >=3.6,<3.7

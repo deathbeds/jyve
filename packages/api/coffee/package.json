@@ -1,0 +1,37 @@
+{
+  "author": "Dead Pixels Collective",
+  "bugs": {
+    "url": "https://github.com/deathbeds/jyve/issues"
+  },
+  "dependencies": {
+    "@deathbeds/jyve": "^0.1.0",
+    "@jupyterlab/application": "^0.15.4",
+    "coffeescript": "^2.2.1"
+  },
+  "description": "A totally unsafe browser coffeescript kernel",
+  "files": [
+    "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
+  ],
+  "homepage": "https://github.com/deathbeds/jyve",
+  "keywords": [
+    "coffeescript",
+    "jupyter",
+    "jupyterlab"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "lib/index.js",
+  "name": "@deathbeds/jyve-coffee-unsafe",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deathbeds/jyve.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "lab:link": "jupyter labextension link . --no-build",
+    "publish:local": "npm publish --registry http://localhost:4873",
+    "watch": "tsc --watch"
+  },
+  "types": "lib/index.d.ts",
+  "version": "0.1.0"
+}

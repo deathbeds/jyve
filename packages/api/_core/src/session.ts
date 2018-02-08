@@ -4,27 +4,27 @@ import {Session, Kernel, ServerConnection} from '@jupyterlab/services';
 import {uuid} from '@jupyterlab/coreutils';
 
 
-import {BrowserKernel} from './kernel';
-import {BrowserKernelSocket, BrowserSocketServer} from './socket';
-import {BrowserKernelManager} from '.';
+import {jyve} from './kernel';
+import {jyveocket, JyveServerServer} from './socket';
+import {Jyve} from '.';
 
 
-export class BrowserSession extends DefaultSession {}
+export class JyveSession extends DefaultSession {}
 
 export
-namespace BrowserSession {
+namespace JyveSession {
   /**
    * Start a new session.
    */
   export async function startNew(
-    options: BrowserKernelManager.ISessionOptions
+    options: Jyve.ISessionOptions
   ): Promise<Session.ISession> {
     const kernelId = uuid();
     const sessionId = uuid();
 
     const serverSettings = {
       ...options.serverSettings || ServerConnection.makeSettings(),
-      WebSocket: BrowserKernelSocket as any
+      WebSocket: jyveocket as any
     };
 
     const kernelModel: Kernel.IModel = {
@@ -32,7 +32,7 @@ namespace BrowserSession {
       name: options.name
     };
 
-    const kernelURL = BrowserKernel.kernelURL(
+    const kernelURL = jyve.kernelURL(
       kernelId, sessionId, serverSettings);
 
     const model: Session.IModel = {
@@ -43,14 +43,14 @@ namespace BrowserSession {
       kernel: kernelModel
     };
 
-    const kernelOptions: BrowserKernel.IOptions = {
+    const kernelOptions: jyve.IOptions = {
       name: options.kernelName,
       clientId: sessionId,
-      server: new BrowserSocketServer(kernelURL),
+      server: new JyveServerServer(kernelURL),
       serverSettings
     };
 
-    // const kernel = new BrowserKernel(kernelOptions, kernelModel.id);
+    // const kernel = new jyve(kernelOptions, kernelModel.id);
     const kernel = options.manager.makeKernel(kernelOptions, kernelId);
 
     return new DefaultSession({

@@ -4,42 +4,36 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
+    "@deathbeds/jyve": "^0.1.0",
+    "@jupyterlab/application": "^0.15.4"
   },
   "description": "Jupyter Kernels in the Browser",
-  "devDependencies": {
-    "lerna": "^2.5.0",
-    "tslint": "^5.9.1",
-    "typescript": "~2.7.1",
-    "rimraf": "^2.6.1",
-    "verdaccio": "^2.7.4"
-  },
   "files": [
     "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
   ],
   "homepage": "https://github.com/deathbeds/jyve",
+  "jupyterlab": {
+    "extension": true
+  },
   "keywords": [
     "extension",
     "jupyter",
     "jupyterlab"
   ],
   "license": "BSD-3-Clause",
-  "name": "_Jyve",
-  "private": true,
+  "main": "lib/index.js",
+  "name": "@deathbeds/jyve-extension",
   "repository": {
     "type": "git",
     "url": "https://github.com/deathbeds/jyve.git"
   },
   "scripts": {
-    "build": "lerna run --parallel build",
-    "clean": "lerna run --parallel clean",
-    "lab:link": "lerna run lab:link",
-    "watch": "lerna run --parallel watch",
-    "serve": "verdaccio -c verdaccio/config.yaml",
-    "publish:local": "lerna run --parallel publish:local"
+    "build": "tsc",
+    "lab:link": "jupyter labextension link . --no-build",
+    "watch": "tsc --watch",
+    "clean": "rimraf lib",
+    "publish:local": "npm publish --registry http://localhost:4873"
   },
-  "version": "0.1.0",
-  "workspaces": [
-    "packages/api/*",
-    "packages/ext/*"
-  ]
+  "types": "lib/index.d.ts",
+  "version": "0.1.0"
 }

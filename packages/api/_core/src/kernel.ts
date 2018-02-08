@@ -2,20 +2,20 @@ import {URLExt} from '@jupyterlab/coreutils';
 import {DefaultKernel} from '@jupyterlab/services/lib/kernel/default';
 import {Kernel, ServerConnection, KernelMessage} from '@jupyterlab/services';
 import {uuid, nbformat} from '@jupyterlab/coreutils';
-import {BrowserSocketServer} from './socket';
+import {JyveServerServer} from './socket';
 
-import {BrowserKernelManager} from '.';
+import {Jyve} from '.';
 
 const KERNEL_SERVICE_URL = 'api/kernels';
 
 
-export class BrowserKernel extends DefaultKernel implements BrowserKernelManager.IBrowserKernel {
+export class jyve extends DefaultKernel implements Jyve.Ijyve {
   protected kernelSpec: Kernel.ISpecModel;
-  protected server: BrowserSocketServer;
+  protected server: JyveServerServer;
   protected userNS: any;
   private _executionCount = 0;
 
-  constructor(options: BrowserKernel.IOptions, id: string) {
+  constructor(options: jyve.IOptions, id: string) {
     super(options, id);
     this.server = options.server;
     this.server.on('message', async (msg: any) => await this._onMessage(msg));
@@ -53,7 +53,7 @@ export class BrowserKernel extends DefaultKernel implements BrowserKernelManager
     return this.kernelSpec;
   }
 
-  browserKernelInfo(): KernelMessage.IInfoReply {
+  jyveInfo(): KernelMessage.IInfoReply {
     return {
       banner: 'This kernel is running in your browser',
       help_links: [
@@ -66,7 +66,7 @@ export class BrowserKernel extends DefaultKernel implements BrowserKernelManager
           url: 'https://caniuse.com',
         }
       ],
-      implementation: 'browserkernel',
+      implementation: 'jyve',
       implementation_version: '0.1.0',
       language_info: {
         codemirror_mode: {
@@ -104,7 +104,7 @@ export class BrowserKernel extends DefaultKernel implements BrowserKernelManager
       msg_type: header.msg_type,
       parent_header: parent.header,
       metadata: {},
-      content: this.browserKernelInfo(),
+      content: this.jyveInfo(),
       buffers: [] as ArrayBuffer[],
       channel: 'shell' as KernelMessage.Channel
     };
@@ -167,9 +167,9 @@ export class BrowserKernel extends DefaultKernel implements BrowserKernelManager
   }
 }
 
-export namespace BrowserKernel {
+export namespace jyve {
   export interface IOptions extends Kernel.IOptions {
-    server: BrowserSocketServer;
+    server: JyveServerServer;
   }
   export function kernelURL(
     kernelId: string,

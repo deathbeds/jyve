@@ -8,14 +8,9 @@ const extension: JupyterLabPlugin<void> = {
   id,
   autoStart: true,
   requires: [IBrowserKernelManager],
-  activate: async (app: JupyterLab, browserKernels: IBrowserKernelManager) => {
-    console.log(`[${id}] activating...`);
-    await browserKernels.register({
-      kernelSpec,
-      newKernel,
-    });
-    console.log(`...[${id}] activated!`);
-  }
+  activate: (
+    app: JupyterLab, browserKernels: IBrowserKernelManager
+  ) => browserKernels.register({kernelSpec, newKernel})
 };
 
 export default extension;

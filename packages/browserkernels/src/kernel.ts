@@ -12,12 +12,14 @@ const KERNEL_SERVICE_URL = 'api/kernels';
 export class BrowserKernel extends DefaultKernel implements BrowserKernelManager.IBrowserKernel {
   protected kernelSpec: Kernel.ISpecModel;
   protected server: BrowserSocketServer;
+  protected userNS: any;
   private _executionCount = 0;
 
   constructor(options: BrowserKernel.IOptions, id: string) {
     super(options, id);
     this.server = options.server;
     this.server.on('message', (msg: any) => this._onMessage(msg));
+    this.userNS = {};
   }
 
   onMessage(msg: KernelMessage.IMessage) {
@@ -75,7 +77,6 @@ export class BrowserKernel extends DefaultKernel implements BrowserKernelManager
   }
 
   fakeKernelInfo(parent: KernelMessage.IMessage) {
-    console.log('fake kernel info', parent.header.msg_id);
     const header = this.fakeHeader('kernel_info_reply');
     return {
       header,
@@ -93,7 +94,6 @@ export class BrowserKernel extends DefaultKernel implements BrowserKernelManager
     parent: KernelMessage.IMessage,
     status: Kernel.Status='idle'
   ): KernelMessage.IMessage {
-    console.log('fake idle', parent.header.msg_id);
     const header = this.fakeHeader('status');
     return {
       header,
@@ -110,7 +110,6 @@ export class BrowserKernel extends DefaultKernel implements BrowserKernelManager
   fakeExecuteReply(
     parent: KernelMessage.IMessage, status='ok'
   ): KernelMessage.IMessage {
-    console.log('fake execute', parent.header.msg_id);
     const header = this.fakeHeader('execute_reply');
     return {
       header,
@@ -132,7 +131,6 @@ export class BrowserKernel extends DefaultKernel implements BrowserKernelManager
     data: nbformat.IMimeBundle = {},
     metadata: nbformat.OutputMetadata = {}
   ): KernelMessage.IMessage {
-    console.log('fake execute', parent.header.msg_id);
     const header = this.fakeHeader('execute_result');
     return {
       header,
@@ -147,7 +145,6 @@ export class BrowserKernel extends DefaultKernel implements BrowserKernelManager
       channel: 'iopub' as KernelMessage.Channel
     };
   }
-
 }
 
 export namespace BrowserKernel {
@@ -161,11 +158,6 @@ export namespace BrowserKernel {
   ) {
     let partialUrl = URLExt.join(settings.wsUrl, KERNEL_SERVICE_URL,
                                  encodeURIComponent(kernelId));
-
-    // Strip any authentication from the display string.
-    let display = partialUrl.replace(/^((?:\w+:)?\/\/)(?:[^@\/]+@)/, '$1');
-    console.log('Starting WebSocket:', display);
-
     let url = URLExt.join(
         partialUrl,
         'channels?session_id=' + encodeURIComponent(clientId)

@@ -19,8 +19,6 @@ namespace BrowserSession {
   export async function startNew(
     options: BrowserKernelManager.ISessionOptions
   ): Promise<Session.ISession> {
-    console.log('startNew');
-
     const kernelId = uuid();
     const sessionId = uuid();
 

@@ -57,12 +57,10 @@ export class BrowserKernelManager implements IBrowserKernelManager {
   startNew(
     options: BrowserKernelManager.ISessionOptions
   ): Promise<Session.ISession> {
-    console.log(`making session for ${options.name}`);
     return BrowserSession.startNew({...options, manager: this});
   }
 
   makeKernel(options: Kernel.IOptions, id: string): BrowserKernelManager.IBrowserKernel {
-    console.log(`making kernel for ${options.name}`);
     const factory = this._factories.get(options.name);
     return factory(options, id);
   }

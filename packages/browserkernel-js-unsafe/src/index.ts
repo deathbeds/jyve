@@ -32,8 +32,7 @@ export class JSUnsafeBrowserKernel extends BrowserKernel {
     if (super.onMessage(msg)) {
       return;
     }
-    const {msg_type, msg_id} = msg.header;
-    console.log('onMessage', msg_id, msg);
+    const {msg_type} = msg.header;
     switch (msg_type) {
       case 'execute_request':
         this.server.sendJSON(this.fakeStatusReply(msg, 'busy'));
@@ -47,10 +46,13 @@ export class JSUnsafeBrowserKernel extends BrowserKernel {
 
   executeWithEval(msg: KernelMessage.IMessage) {
     const {code} = (msg.content as any);
+    let result: any;
     try {
-      /* tslint:disable */
-      const result: any = eval(code);
-      /* tslint:enable */
+      (function() {
+        /* tslint:disable */
+        result = eval(code);
+        /* tslint:enable */
+      }).call(this.userNS);
 
       this.server.sendJSON(this.fakeExecuteResult(msg, {
         'text/plain': `${result}`

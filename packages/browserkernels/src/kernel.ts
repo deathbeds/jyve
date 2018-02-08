@@ -18,11 +18,11 @@ export class BrowserKernel extends DefaultKernel implements BrowserKernelManager
   constructor(options: BrowserKernel.IOptions, id: string) {
     super(options, id);
     this.server = options.server;
-    this.server.on('message', (msg: any) => this._onMessage(msg));
+    this.server.on('message', async (msg: any) => await this._onMessage(msg));
     this.userNS = {};
   }
 
-  onMessage(msg: KernelMessage.IMessage) {
+  async onMessage(msg: KernelMessage.IMessage) {
     switch (msg.header.msg_type) {
       case 'kernel_info_request':
         this.server.sendJSON(this.fakeStatusReply(msg, 'busy'));
@@ -34,8 +34,8 @@ export class BrowserKernel extends DefaultKernel implements BrowserKernelManager
     }
   }
 
-  private _onMessage(msg: string) {
-    this.onMessage(JSON.parse(msg));
+  private async _onMessage(msg: string) {
+    await this.onMessage(JSON.parse(msg));
   }
 
   async getSpec() {
@@ -45,7 +45,16 @@ export class BrowserKernel extends DefaultKernel implements BrowserKernelManager
   browserKernelInfo(): KernelMessage.IInfoReply {
     return {
       banner: 'This kernel is running in your browser',
-      help_links: [],
+      help_links: [
+        {
+          text: 'MDN Web Docs',
+          url: 'https://developer.mozilla.org',
+        },
+        {
+          text: 'Can I use ... ?',
+          url: 'https://caniuse.com',
+        }
+      ],
       implementation: 'browserkernel',
       implementation_version: '0.1.0',
       language_info: {

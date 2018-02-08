@@ -28,15 +28,15 @@ export class JSUnsafeBrowserKernel extends BrowserKernel {
     };
   }
 
-  onMessage(msg: KernelMessage.IMessage): boolean {
-    if (super.onMessage(msg)) {
+  async onMessage(msg: KernelMessage.IMessage) {
+    if (await super.onMessage(msg)) {
       return;
     }
     const {msg_type} = msg.header;
     switch (msg_type) {
       case 'execute_request':
         this.server.sendJSON(this.fakeStatusReply(msg, 'busy'));
-        this.executeWithEval(msg);
+        await this.executeWithEval(msg);
         this.server.sendJSON(this.fakeStatusReply(msg, 'idle'));
         return true;
       default:
@@ -44,16 +44,15 @@ export class JSUnsafeBrowserKernel extends BrowserKernel {
     }
   }
 
-  executeWithEval(msg: KernelMessage.IMessage) {
+  async executeWithEval(msg: KernelMessage.IMessage) {
     const {code} = (msg.content as any);
     let result: any;
     try {
-      (function() {
+      await (async function() {
         /* tslint:disable */
-        result = eval(code);
+        result = await eval(code);
         /* tslint:enable */
       }).call(this.userNS);
-
       this.server.sendJSON(this.fakeExecuteResult(msg, {
         'text/plain': `${result}`
       }));
@@ -67,6 +66,7 @@ export class JSUnsafeBrowserKernel extends BrowserKernel {
         ...errMsg.content
       };
       this.server.sendJSON(errMsg);
+      return;
     }
   }
 }

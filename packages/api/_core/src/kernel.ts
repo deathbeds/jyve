@@ -158,6 +158,27 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
       channel: 'iopub' as KernelMessage.Channel
     };
   }
+
+  fakeError(
+    parent: KernelMessage.IMessage,
+    ename: string,
+    evalue: string,
+    traceback: string[]
+  ): KernelMessage.IMessage {
+    const header = this.fakeHeader('error');
+    return {
+      header,
+      parent_header: parent.header,
+      metadata: {},
+      content: {
+        ename,
+        evalue,
+        traceback
+      },
+      buffers: [] as ArrayBuffer[],
+      channel: 'iopub' as KernelMessage.Channel
+    };
+  }
 }
 
 export namespace JyveKernel {

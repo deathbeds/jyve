@@ -53,15 +53,29 @@ export class JSUnsafeKernel extends JyveKernel {
       }));
       this.sendJSON(this.fakeExecuteReply(msg));
     } catch (err) {
-      let errMsg = this.fakeExecuteReply(msg, 'error');
-      errMsg.content = {
-        ename: `${err.name}`,
-        ealue: `${err.message}`,
-        traceback: (err.stack || '').split('\n'),
-        ...errMsg.content
-      };
+      console.groupCollapsed(`${err}`);
+      console.error(err);
+      console.groupEnd();
+
+      this.sendJSON(this.fakeExecuteResult(msg, {
+        'text/plain': `${err}`
+      }));
+
+      const ename = err.name;
+      const evalue = err.message;
+      const traceback = (err.stack || '').split('\n');
+
+      let errMsg = this.fakeError(msg, ename, evalue, traceback);
       this.sendJSON(errMsg);
-      return;
+
+      let errReply = this.fakeExecuteReply(msg, 'error');
+      errReply.content = {
+        ename,
+        evalue,
+        traceback,
+        ...errReply.content
+      };
+      this.sendJSON(errReply);
     }
   }
 }

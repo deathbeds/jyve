@@ -47,12 +47,7 @@ export class JSUnsafeKernel extends JyveKernel {
     let result: any;
     try {
       const transpiled = await this.transpile(code);
-      console.log('transpiled', transpiled);
-      // const trimmed = `${transpiled}/* ENDJYVE */`.replace(
-      //   /;?[\s\n]*\/\* ENDJYVE.*/gm, '');
-      // console.log('trimmed', trimmed);
       result = await this.execute(transpiled);
-      console.log('result', result);
       this.sendJSON(this.fakeExecuteResult(msg, {
         'text/plain': `${result}`
       }));

@@ -32,6 +32,9 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
 
   async onMessage(msg: KernelMessage.IMessage) {
     switch (msg.header.msg_type) {
+      case 'execute_request':
+        this.sendJSON(this.fakeExecuteInput(msg));
+        return false;
       case 'kernel_info_request':
         this.sendJSON(this.fakeKernelInfo(msg));
         return true;
@@ -121,7 +124,8 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   }
 
   fakeExecuteReply(
-    parent: KernelMessage.IMessage, status='ok'
+    parent: KernelMessage.IMessage,
+    status = 'ok'
   ): KernelMessage.IMessage {
     const header = this.fakeHeader('execute_reply');
     return {
@@ -129,7 +133,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
       parent_header: parent.header,
       metadata: {},
       content: {
-        execution_count: this._executionCount++,
+        execution_count: this._executionCount,
         payload: [] as string[],
         status: status,
         user_expressions: {}
@@ -150,7 +154,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
       parent_header: parent.header,
       metadata: {},
       content: {
-        execution_count: this._executionCount++,
+        execution_count: this._executionCount,
         data,
         metadata,
       },
@@ -174,6 +178,23 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
         ename,
         evalue,
         traceback
+      },
+      buffers: [] as ArrayBuffer[],
+      channel: 'iopub' as KernelMessage.Channel
+    };
+  }
+
+  fakeExecuteInput(
+    parent: KernelMessage.IMessage
+  ): KernelMessage.IMessage {
+    const header = this.fakeHeader('execute_input');
+    return {
+      header,
+      parent_header: parent.header,
+      metadata: {},
+      content: {
+        code: parent.content.code,
+        execution_count: this._executionCount++
       },
       buffers: [] as ArrayBuffer[],
       channel: 'iopub' as KernelMessage.Channel

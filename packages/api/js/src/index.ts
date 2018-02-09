@@ -2,28 +2,17 @@ import {Kernel, KernelMessage} from '@jupyterlab/services';
 
 import {JyveKernel} from '@deathbeds/jyve/lib/kernel';
 
-export const kernelSpec: Kernel.ISpecModel = {
-  display_name: 'JS (eval)',
-  name: 'jyve-js-unsafe',
-  language: 'javascript',
-  argv: ['na'],
-  resources: {
-    'logo-32x32': '/kernelspecs/python3/logo-32x32.png',
-    'logo-64x64': '/kernelspecs/python3/logo-64x64.png'
-  }
-};
+const {jyve} = (require('../package.json') as any);
+
+
+export const kernelSpec: Kernel.ISpecModel = jyve.kernelspec;
 
 
 export class JSUnsafeKernel extends JyveKernel {
   protected kernelSpec = kernelSpec;
 
   jyveInfo() {
-    let info = super.jyveInfo();
-
-    return {
-      ...info,
-      implementation: 'jyve-js-unsafe'
-    };
+    return {...super.jyveInfo(), implementation: kernelSpec.name};
   }
 
   async onMessage(msg: KernelMessage.IMessage) {

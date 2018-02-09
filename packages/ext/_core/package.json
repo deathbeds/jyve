@@ -16,9 +16,10 @@
     "extension": true
   },
   "keywords": [
-    "extension",
     "jupyter",
-    "jupyterlab"
+    "jupyterlab",
+    "jupyterlab-extension",
+    "jyve"
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",

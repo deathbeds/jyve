@@ -6,6 +6,9 @@ import {JyveServerServer} from './socket';
 
 import {Jyve} from '.';
 
+const {jyve, name, version} = (require('../package.json') as any);
+
+
 const KERNEL_SERVICE_URL = 'api/kernels';
 
 
@@ -62,27 +65,13 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
       banner: 'This kernel is running in your browser',
       help_links: [
         {
-          text: 'MDN Web Docs',
-          url: 'https://developer.mozilla.org',
+          text: 'Jyve on GitHub',
+          url: 'https://github.com/deatheds/jyve'
         },
-        {
-          text: 'Can I use ... ?',
-          url: 'https://caniuse.com',
-        }
       ],
-      implementation: 'jyve',
-      implementation_version: '0.1.0',
-      language_info: {
-        codemirror_mode: {
-          name: 'javascript'
-        },
-        file_extension: '.js',
-        mimetype: 'text/javascript',
-        name: 'javascript',
-        nbconvert_exporter: 'javascript',
-        pygments_lexer: 'javascript',
-        version: 'ES2015'
-      },
+      implementation: name,
+      implementation_version: version,
+      language_info: jyve.language_info,
       protocol_version: '5.1',
       status: 'ok'
     };

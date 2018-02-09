@@ -16,7 +16,8 @@
   "keywords": [
     "coffeescript",
     "jupyter",
-    "jupyterlab"
+    "jupyterlab",
+    "jyve"
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
@@ -33,5 +34,31 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "jyve": {
+    "kernelspec": {
+      "display_name": "CoffeeScript (unsafe)",
+      "name": "jyve-coffee-unsafe",
+      "language": "CoffeeScript",
+      "arvg": ["echo", "jyve"],
+      "resources": {}
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "coffeescript"
+      },
+      "file_extension": ".coffee",
+      "mimetype": "text/coffeescript",
+      "name": "coffeescript",
+      "nbconvert_exporter": "coffeescript",
+      "pygments_lexer": "coffeescript",
+      "version": "2.2.1"
+    },
+    "help_links": [
+      {
+        "text": "CoffeeScript",
+        "url": "http://coffeescript.org/"
+      }
+    ]
+  }
 }

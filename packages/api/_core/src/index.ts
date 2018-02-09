@@ -9,6 +9,8 @@ import {Kernel, Session} from '@jupyterlab/services';
 import {patches} from './patches';
 import {JyveSession} from './session';
 
+const {version} = (require('../package.json') as any);
+
 /* tslint:disable */
 /**
  * The browser kernel manager token.
@@ -25,6 +27,7 @@ export interface IJyve {
     options: Jyve.ISessionOptions
   ): Promise<Session.ISession>;
   makeKernel(options: Kernel.IOptions, id: string): Jyve.IJyveKernel;
+  version: string;
 }
 
 export class Jyve implements IJyve {
@@ -33,6 +36,7 @@ export class Jyve implements IJyve {
   private _factories = new Map<string, Jyve.IKernelFactory>();
   private _ready = new PromiseDelegate<void>();
 
+  get version() { return version; }
   get specs() { return this._specs; }
   get ready(): Promise<void> { return this._ready.promise; }
 

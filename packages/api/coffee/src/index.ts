@@ -5,44 +5,21 @@ import {Kernel, KernelMessage} from '@jupyterlab/services';
 import {JSUnsafeKernel} from '@deathbeds/jyve-js-unsafe';
 import {JyveKernel} from '@deathbeds/jyve/lib/kernel';
 
-export const kernelSpec: Kernel.ISpecModel = {
-  display_name: 'coffee (eval)',
-  name: 'jyve-coffee-unsafe',
-  language: 'coffeescript',
-  argv: ['na'],
-  resources: {
-    'logo-32x32': '/kernelspecs/python3/logo-32x32.png',
-    'logo-64x64': '/kernelspecs/python3/logo-64x64.png'
-  }
-};
+const {jyve} = (require('../package.json') as any);
+
+export const kernelSpec: Kernel.ISpecModel = jyve.kernelspec;
 
 
 export class CoffeeUnsafeKernel extends JSUnsafeKernel {
   protected kernelSpec = kernelSpec;
 
   jyveInfo(): KernelMessage.IInfoReply {
-    const info = super.jyveInfo();
+    const jsInfo = super.jyveInfo();
     return {
-      ...info,
-      help_links: [
-        ...info.help_links,
-        {
-          text: 'CoffeeScript',
-          url: 'http://coffeescript.org/'
-        },
-      ],
+      ...jsInfo,
+      help_links: [...jsInfo.help_links, ...jyve.help_links],
       implementation: kernelSpec.name,
-      language_info: {
-        codemirror_mode: {
-          name: 'coffeescript'
-        },
-        file_extension: '.coffee',
-        mimetype: 'text/coffeescript',
-        name: 'coffeescript',
-        nbconvert_exporter: 'coffeescript',
-        pygments_lexer: 'coffeescript',
-        version: 'ES2015'
-      }
+      language_info: jyve.language_info
     };
   }
 

@@ -17,9 +17,12 @@
     "extension": true
   },
   "keywords": [
-    "extension",
+    "coffee",
+    "coffeescript",
     "jupyter",
-    "jupyterlab"
+    "jupyterlab-extension",
+    "jupyterlab",
+    "jyve"
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",

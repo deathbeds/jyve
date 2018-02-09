@@ -14,7 +14,8 @@
   "homepage": "https://github.com/deathbeds/jyve",
   "keywords": [
     "jupyter",
-    "jupyterlab"
+    "jupyterlab",
+    "jyve"
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
@@ -31,5 +32,35 @@
     "publish:local": "npm publish --registry http://localhost:4873"
   },
   "types": "lib/index.d.ts",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "jyve": {
+    "kernelspec": {
+      "display_name": "JavaScript (unsafe)",
+      "name": "jyve-js-unsafe",
+      "language": "JavaScript",
+      "arvg": ["echo", "jyve"],
+      "resources": {}
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "javascript"
+      },
+      "file_extension": ".js",
+      "mimetype": "text/javascript",
+      "name": "javascript",
+      "nbconvert_exporter": "javascript",
+      "pygments_lexer": "javascript",
+      "version": "ES2015"
+    },
+    "help_links": [
+      {
+        "text": "MDN Web Docs",
+        "url": "https://developer.mozilla.org"
+      },
+      {
+        "text": "Can I use ... ?",
+        "url": "https://caniuse.com"
+      }
+    ]
+  }
 }

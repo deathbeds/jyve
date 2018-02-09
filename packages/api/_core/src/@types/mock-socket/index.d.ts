@@ -7,5 +7,8 @@ declare module 'mock-socket' {
     constructor(url: string, options?: any);
     on(event: TEvent, callback: Function): void;
     send(data: any, options?: any): void;
+    start(): void;
+    stop(callback: Function): void;
+    close(): void;
   }
 }

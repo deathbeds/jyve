@@ -5,7 +5,7 @@ import {uuid} from '@jupyterlab/coreutils';
 
 
 import {JyveKernel} from './kernel';
-import {JyveSocket, JyveServerServer} from './socket';
+import {JyveSocket, JyveServer} from './socket';
 import {Jyve} from '.';
 
 
@@ -46,11 +46,10 @@ namespace JyveSession {
     const kernelOptions: JyveKernel.IOptions = {
       name: options.kernelName,
       clientId: sessionId,
-      server: new JyveServerServer(kernelURL),
+      server: new JyveServer(kernelURL),
       serverSettings
     };
 
-    // const kernel = new jyve(kernelOptions, kernelModel.id);
     const kernel = options.manager.makeKernel(kernelOptions, kernelId);
 
     return new DefaultSession({

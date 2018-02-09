@@ -2,7 +2,7 @@ import {URLExt} from '@jupyterlab/coreutils';
 import {DefaultKernel} from '@jupyterlab/services/lib/kernel/default';
 import {Kernel, ServerConnection, KernelMessage} from '@jupyterlab/services';
 import {uuid, nbformat} from '@jupyterlab/coreutils';
-import {JyveServerServer} from './socket';
+import {JyveServer} from './socket';
 
 import {Jyve} from '.';
 
@@ -14,7 +14,7 @@ const KERNEL_SERVICE_URL = 'api/kernels';
 
 export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   protected kernelSpec: Kernel.ISpecModel;
-  protected server: JyveServerServer;
+  protected server: JyveServer;
   protected userNS: any;
   private _executionCount = 0;
 
@@ -23,8 +23,8 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     this.server = options.server;
     this.server.on('message', async (msg: any) => await this._onMessage(msg));
     this.userNS = {};
+    (this as any)._connectionPromise.resolve(void 0);
   }
-
 
   sendJSON(data: any) {
     this.server.send(JSON.stringify(data));
@@ -204,7 +204,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
 
 export namespace JyveKernel {
   export interface IOptions extends Kernel.IOptions {
-    server: JyveServerServer;
+    server: JyveServer;
   }
   export function kernelURL(
     kernelId: string,

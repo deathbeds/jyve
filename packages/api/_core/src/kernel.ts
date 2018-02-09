@@ -9,13 +9,13 @@ import {Jyve} from '.';
 const KERNEL_SERVICE_URL = 'api/kernels';
 
 
-export class jyve extends DefaultKernel implements Jyve.Ijyve {
+export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   protected kernelSpec: Kernel.ISpecModel;
   protected server: JyveServerServer;
   protected userNS: any;
   private _executionCount = 0;
 
-  constructor(options: jyve.IOptions, id: string) {
+  constructor(options: JyveKernel.IOptions, id: string) {
     super(options, id);
     this.server = options.server;
     this.server.on('message', async (msg: any) => await this._onMessage(msg));
@@ -51,6 +51,10 @@ export class jyve extends DefaultKernel implements Jyve.Ijyve {
 
   async getSpec() {
     return this.kernelSpec;
+  }
+
+  get info() {
+    return this.jyveInfo();
   }
 
   jyveInfo(): KernelMessage.IInfoReply {
@@ -167,7 +171,7 @@ export class jyve extends DefaultKernel implements Jyve.Ijyve {
   }
 }
 
-export namespace jyve {
+export namespace JyveKernel {
   export interface IOptions extends Kernel.IOptions {
     server: JyveServerServer;
   }

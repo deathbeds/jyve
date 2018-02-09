@@ -4,8 +4,8 @@ import {Session, Kernel, ServerConnection} from '@jupyterlab/services';
 import {uuid} from '@jupyterlab/coreutils';
 
 
-import {jyve} from './kernel';
-import {jyveocket, JyveServerServer} from './socket';
+import {JyveKernel} from './kernel';
+import {JyveSocket, JyveServerServer} from './socket';
 import {Jyve} from '.';
 
 
@@ -24,7 +24,7 @@ namespace JyveSession {
 
     const serverSettings = {
       ...options.serverSettings || ServerConnection.makeSettings(),
-      WebSocket: jyveocket as any
+      WebSocket: JyveSocket as any
     };
 
     const kernelModel: Kernel.IModel = {
@@ -32,7 +32,7 @@ namespace JyveSession {
       name: options.name
     };
 
-    const kernelURL = jyve.kernelURL(
+    const kernelURL = JyveKernel.kernelURL(
       kernelId, sessionId, serverSettings);
 
     const model: Session.IModel = {
@@ -43,7 +43,7 @@ namespace JyveSession {
       kernel: kernelModel
     };
 
-    const kernelOptions: jyve.IOptions = {
+    const kernelOptions: JyveKernel.IOptions = {
       name: options.kernelName,
       clientId: sessionId,
       server: new JyveServerServer(kernelURL),

@@ -1,8 +1,6 @@
 import {Kernel, KernelMessage} from '@jupyterlab/services';
 
-import {
-  jyve,
-} from '@deathbeds/jyve/lib/kernel';
+import {JyveKernel} from '@deathbeds/jyve/lib/kernel';
 
 export const kernelSpec: Kernel.ISpecModel = {
   display_name: 'JS (eval)',
@@ -16,7 +14,7 @@ export const kernelSpec: Kernel.ISpecModel = {
 };
 
 
-export class JSUnsafeKernel extends jyve {
+export class JSUnsafeKernel extends JyveKernel {
   protected kernelSpec = kernelSpec;
 
   jyveInfo() {
@@ -43,15 +41,29 @@ export class JSUnsafeKernel extends jyve {
     }
   }
 
+  async transpile(code: string) {
+    return code;
+  }
+
+  async execute(code: string) {
+    return await (async function() {
+      /* tslint:disable */
+      return await eval(code);
+      /* tslint:enable */
+    }).call(this.userNS);
+  }
+
   async executeWithEval(msg: KernelMessage.IMessage) {
     const {code} = (msg.content as any);
     let result: any;
     try {
-      await (async function() {
-        /* tslint:disable */
-        result = await eval(code);
-        /* tslint:enable */
-      }).call(this.userNS);
+      const transpiled = await this.transpile(code);
+      console.log('transpiled', transpiled);
+      // const trimmed = `${transpiled}/* ENDJYVE */`.replace(
+      //   /;?[\s\n]*\/\* ENDJYVE.*/gm, '');
+      // console.log('trimmed', trimmed);
+      result = await this.execute(transpiled);
+      console.log('result', result);
       this.sendJSON(this.fakeExecuteResult(msg, {
         'text/plain': `${result}`
       }));
@@ -70,6 +82,6 @@ export class JSUnsafeKernel extends jyve {
   }
 }
 
-export function newKernel(options: jyve.IOptions, id: string) {
+export function newKernel(options: JyveKernel.IOptions, id: string) {
   return new JSUnsafeKernel(options, id);
 }

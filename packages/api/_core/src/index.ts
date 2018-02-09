@@ -24,7 +24,7 @@ export interface IJyve {
   startNew(
     options: Jyve.ISessionOptions
   ): Promise<Session.ISession>;
-  makeKernel(options: Kernel.IOptions, id: string): Jyve.Ijyve;
+  makeKernel(options: Kernel.IOptions, id: string): Jyve.IJyveKernel;
 }
 
 export class Jyve implements IJyve {
@@ -60,7 +60,7 @@ export class Jyve implements IJyve {
     return JyveSession.startNew({...options, manager: this});
   }
 
-  makeKernel(options: Kernel.IOptions, id: string): Jyve.Ijyve {
+  makeKernel(options: Kernel.IOptions, id: string): Jyve.IJyveKernel {
     const factory = this._factories.get(options.name);
     return factory(options, id);
   }
@@ -77,5 +77,5 @@ export namespace Jyve {
   export interface ISessionOptions extends Session.IOptions {
     manager?: IJyve;
   }
-  export interface Ijyve extends Kernel.IKernel {}
+  export interface IJyveKernel extends Kernel.IKernel {}
 }

@@ -1,10 +1,9 @@
+import * as coffeescript from 'coffeescript';
+
 import {Kernel, KernelMessage} from '@jupyterlab/services';
+
 import {JSUnsafeKernel} from '@deathbeds/jyve-js-unsafe';
-
-
-import {
-  jyve,
-} from '@deathbeds/jyve/lib/kernel';
+import {JyveKernel} from '@deathbeds/jyve/lib/kernel';
 
 export const kernelSpec: Kernel.ISpecModel = {
   display_name: 'coffee (eval)',
@@ -21,57 +20,37 @@ export const kernelSpec: Kernel.ISpecModel = {
 export class CoffeeUnsafeKernel extends JSUnsafeKernel {
   protected kernelSpec = kernelSpec;
 
-  jyveInfo() {
-    let info = super.jyveInfo();
-
+  jyveInfo(): KernelMessage.IInfoReply {
+    const info = super.jyveInfo();
     return {
       ...info,
-      implementation: 'jyve-coffee-unsafe'
+      help_links: [
+        ...info.help_links,
+        {
+          text: 'CoffeeScript',
+          url: 'http://coffeescript.org/'
+        },
+      ],
+      implementation: kernelSpec.name,
+      language_info: {
+        codemirror_mode: {
+          name: 'coffeescript'
+        },
+        file_extension: '.coffee',
+        mimetype: 'text/coffeescript',
+        name: 'coffeescript',
+        nbconvert_exporter: 'coffeescript',
+        pygments_lexer: 'coffeescript',
+        version: 'ES2015'
+      }
     };
   }
 
-  async onMessage(msg: KernelMessage.IMessage) {
-    const handled = await super.onMessage(msg);
-    if (handled) {
-      return handled;
-    }
-    const {msg_type} = msg.header;
-    switch (msg_type) {
-      case 'execute_request':
-        await this.executeWithEval(msg);
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  async executeWithEval(msg: KernelMessage.IMessage) {
-    const {code} = (msg.content as any);
-    let result: any;
-    try {
-      await (async function() {
-        /* tslint:disable */
-        result = await eval(code);
-        /* tslint:enable */
-      }).call(this.userNS);
-      this.sendJSON(this.fakeExecuteResult(msg, {
-        'text/plain': `${result}`
-      }));
-      this.sendJSON(this.fakeExecuteReply(msg));
-    } catch (err) {
-      let errMsg = this.fakeExecuteReply(msg, 'error');
-      errMsg.content = {
-        ename: `${err.name}`,
-        ealue: `${err.message}`,
-        traceback: (err.stack || '').split('\n'),
-        ...errMsg.content
-      };
-      this.sendJSON(errMsg);
-      return;
-    }
+  async transpile(code: string) {
+    return coffeescript.compile(code, {bare: true});
   }
 }
 
-export function newKernel(options: jyve.IOptions, id: string) {
-  return new JSUnsafeKernel(options, id);
+export function newKernel(options: JyveKernel.IOptions, id: string) {
+  return new CoffeeUnsafeKernel(options, id);
 }

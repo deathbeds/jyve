@@ -3,7 +3,8 @@
   "bugs": {
     "url": "https://github.com/deathbeds/jyve/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+  },
   "description": "Jupyter Kernels in the Browser",
   "devDependencies": {
     "@types/node": "^9.4.2",
@@ -30,12 +31,17 @@
     "url": "https://github.com/deathbeds/jyve.git"
   },
   "scripts": {
-    "build": "lerna run --parallel build",
+    "bootstrap": "jlpm && jlpm lerna bootstrap && jlpm clean && jlpm build && jlpm lab:link",
+    "build": "jlpm build:core && jlpm build:js && jlpm build:coffee && jlpm build:ext",
+    "build:coffee": "lerna run build --scope '@deathbeds/jyve-coffee-unsafe'",
+    "build:core": "lerna run build --scope '@deathbeds/jyve'",
+    "build:ext": "lerna run build --scope '@deathbeds/*-extension'",
+    "build:js": "lerna run build --scope '@deathbeds/jyve-js-unsafe'",
     "clean": "lerna run --parallel clean",
     "lab:link": "lerna run lab:link",
-    "watch": "lerna run --parallel watch",
+    "publish:local": "lerna run --parallel publish:local",
     "serve": "verdaccio -c verdaccio/config.yaml",
-    "publish:local": "lerna run --parallel publish:local"
+    "watch": "lerna run --parallel watch"
   },
   "version": "0.1.0",
   "workspaces": [

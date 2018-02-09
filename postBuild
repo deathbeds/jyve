@@ -2,16 +2,7 @@
 # This is used by repo2docker _after_ environment.yml, but still during the
 # docker build, which is simpler than a dedicated Dockerfile
 set -ex
-# do this first, since if we can't build the default, who cares
-jupyter lab build
-jlpm
-jlpm lerna bootstrap
 
-# not strictly necessary, but avoids issues with local usage
-jlpm clean
-
-# because of ordering, leaf packages might fail at first. no deeper than 3...
-jlpm build || jlpm build || jlpm build
-
-jlpm lab:link
+jlpm bootstrap || jlpm bootstrap || jlpm bootstrap
+jupyter labextension list
 jupyter lab build

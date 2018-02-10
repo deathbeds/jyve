@@ -39,6 +39,7 @@
     "build:js": "lerna run build --scope '@deathbeds/jyve-js-unsafe'",
     "clean": "lerna run --parallel clean",
     "lab:link": "lerna run lab:link",
+    "lab:watch": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm watch",
     "publish:local": "lerna run --parallel publish:local",
     "serve": "verdaccio -c verdaccio/config.yaml",
     "watch": "lerna run --parallel watch"

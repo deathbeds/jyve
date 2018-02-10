@@ -52,11 +52,13 @@ export class JSUnsafeKernel extends JyveKernel {
         'text/plain': `${result}`
       }));
       this.sendJSON(this.fakeExecuteReply(msg));
+      this.sendJSON(this.fakeStatusReply(msg, 'idle'));
     } catch (err) {
       console.groupCollapsed(`${err}`);
       console.error(err);
       console.groupEnd();
 
+      this.sendJSON(this.fakeStatusReply(msg, 'idle'));
       this.sendJSON(this.fakeExecuteResult(msg, {
         'text/plain': `${err}`
       }));

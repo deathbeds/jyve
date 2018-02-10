@@ -24,10 +24,16 @@ export class CoffeeUnsafeKernel extends JSUnsafeKernel {
   }
 
   async transpile(code: string) {
-    return coffeescript.compile(code, {bare: true});
+    return await CoffeeUnsafeKernel.transform(code);
   }
 }
 
 export function newKernel(options: JyveKernel.IOptions, id: string) {
   return new CoffeeUnsafeKernel(options, id);
+}
+
+export namespace CoffeeUnsafeKernel {
+  export async function transform (code: string): Promise<string> {
+    return coffeescript.compile(code, {bare: true});
+  }
 }

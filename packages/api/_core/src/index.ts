@@ -53,8 +53,7 @@ export class Jyve implements IJyve {
   }
 
   patch() {
-    [patches.patchGetSpecs, patches.patchStartNew, patches.patchRestartKernel]
-      .map((fn) => fn(this._lab, this));
+    Object.keys(patches).map((fn) => (patches as any)[fn](this._lab, this));
     this._ready.resolve(void 0);
   }
 

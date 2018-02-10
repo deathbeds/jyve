@@ -2,15 +2,13 @@ import {URLExt} from '@jupyterlab/coreutils';
 import {DefaultKernel} from '@jupyterlab/services/lib/kernel/default';
 import {Kernel, ServerConnection, KernelMessage} from '@jupyterlab/services';
 import {uuid, nbformat} from '@jupyterlab/coreutils';
-import {JyveServer} from './socket';
+import {JyveServer, JyveRequest, jyveFetch} from './socket';
 
 import {Jyve} from '.';
 
 const {jyve, name, version} = (require('../package.json') as any);
 
-
 const KERNEL_SERVICE_URL = 'api/kernels';
-
 
 export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   protected kernelSpec: Kernel.ISpecModel;
@@ -30,24 +28,47 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     this.server.send(JSON.stringify(data));
   }
 
+  private _serverSettings: ServerConnection.ISettings;
+
+  get serverSettings() {
+    return {
+      ...this._serverSettings,
+      Request: JyveRequest,
+      fetch: jyveFetch
+    };
+  }
+
+  set serverSettings(serverSettings) {
+    this._serverSettings = serverSettings;
+  }
+
   async onMessage(msg: KernelMessage.IMessage) {
     switch (msg.header.msg_type) {
       case 'execute_request':
         this.sendJSON(this.fakeExecuteInput(msg));
         return false;
       case 'kernel_info_request':
-        this.sendJSON(this.fakeKernelInfo(msg));
+        console.log('sending idle');
+        this.sendJSON(this.fakeStatusReply(msg, 'idle'));
+        setTimeout(() => {
+          console.log('sending info');
+          this.sendJSON(this.fakeKernelInfoReply(msg));
+        }, 1);
         return true;
       default:
         return false;
     }
   }
 
+  handleRestart() {
+    this.userNS = {};
+    return super.handleRestart();
+  }
+
   private async _onMessage(rawMsg: string) {
     const msg = JSON.parse(rawMsg) as KernelMessage.IMessage;
     this.sendJSON(this.fakeStatusReply(msg, 'busy'));
     const handled = await this.onMessage(msg);
-    this.sendJSON(this.fakeStatusReply(msg, 'idle'));
     if (!handled) {
       console.groupCollapsed(`unhandled ${msg.header.msg_type}`);
       console.log(JSON.stringify(msg, null, 2));
@@ -92,7 +113,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     };
   }
 
-  fakeKernelInfo(parent: KernelMessage.IMessage) {
+  fakeKernelInfoReply(parent: KernelMessage.IMessage) {
     const header = this.fakeHeader('kernel_info_reply');
     return {
       header,

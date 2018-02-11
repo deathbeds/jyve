@@ -5,6 +5,7 @@ import {uuid, nbformat} from '@jupyterlab/coreutils';
 import {JyveServer, JyveRequest, jyveFetch} from './socket';
 
 import {Jyve} from '.';
+import {Display} from './display';
 
 const {jyve, name, version} = (require('../package.json') as any);
 
@@ -15,13 +16,19 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   protected server: JyveServer;
   protected userNS: any;
   private _executionCount = 0;
+  display: Display;
 
   constructor(options: JyveKernel.IOptions, id: string) {
     super(options, id);
     this.server = options.server;
     this.server.on('message', async (msg: any) => await this._onMessage(msg));
-    this.userNS = {};
+    this.display = new Display(this);
+    this.resetUserNS();
     (this as any)._connectionPromise.resolve(void 0);
+  }
+
+  resetUserNS() {
+    this.userNS = {};
   }
 
   sendJSON(data: any) {
@@ -48,10 +55,8 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
         this.sendJSON(this.fakeExecuteInput(msg));
         return false;
       case 'kernel_info_request':
-        console.log('sending idle');
         this.sendJSON(this.fakeStatusReply(msg, 'idle'));
         setTimeout(() => {
-          console.log('sending info');
           this.sendJSON(this.fakeKernelInfoReply(msg));
         }, 1);
         return true;
@@ -61,7 +66,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   }
 
   handleRestart() {
-    this.userNS = {};
+    this.resetUserNS();
     return super.handleRestart();
   }
 
@@ -176,6 +181,27 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
       metadata: {},
       content: {
         execution_count: this._executionCount,
+        data,
+        metadata,
+      },
+      buffers: [] as ArrayBuffer[],
+      channel: 'iopub' as KernelMessage.Channel
+    };
+  }
+
+  fakeDisplayData(
+    parent: KernelMessage.IMessage,
+    data: nbformat.IMimeBundle = {},
+    metadata: nbformat.OutputMetadata = {}
+  ): KernelMessage.IMessage {
+    const header = this.fakeHeader('execute_result');
+    return {
+      header,
+      parent_header: parent.header,
+      metadata: {},
+      content: {
+        execution_count: this._executionCount,
+        transient: {},
         data,
         metadata,
       },

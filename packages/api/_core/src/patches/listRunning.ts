@@ -14,9 +14,10 @@ export function patchListRunning(
     settings: ServerConnection.ISettings
   ) {
     const running = await listRunning(settings);
-    console.log('could have changed');
+    console.groupCollapsed('could have changed listRunning');
     console.table(running);
     console.log(running);
+    console.groupEnd();
     return running;
   };
 }

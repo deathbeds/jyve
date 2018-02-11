@@ -34,20 +34,27 @@ export class JSUnsafeKernel extends JyveKernel {
     return code;
   }
 
-  async execute(code: string) {
+  async execute(code: string, userNS: any) {
     return await (async function() {
       /* tslint:disable */
       return await eval(code);
       /* tslint:enable */
-    }).call(this.userNS);
+    }).call(userNS);
   }
 
   async executeWithEval(msg: KernelMessage.IMessage) {
     const {code} = (msg.content as any);
     let result: any;
+    let execNS = {
+      ...this.userNS,
+      display: this.display.messageContext(msg)
+    };
     try {
       const transpiled = await this.transpile(code);
-      result = await this.execute(transpiled);
+      result = await this.execute(transpiled, execNS);
+      if (result == null) {
+        result = '';
+      }
       this.sendJSON(this.fakeExecuteResult(msg, {
         'text/plain': `${result}`
       }));
@@ -79,6 +86,12 @@ export class JSUnsafeKernel extends JyveKernel {
       };
       this.sendJSON(errReply);
     }
+    Object.keys(execNS).map((k) => {
+      if (k === 'display') {
+        return;
+      }
+      this.userNS[k] = execNS[k];
+    });
   }
 }
 

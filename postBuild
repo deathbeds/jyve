@@ -7,9 +7,9 @@ jlpm bootstrap || jlpm bootstrap || jlpm bootstrap
 jupyter labextension list
 
 # this first build is usually broken in subtle ways
-jupyter lab build
+jupyter lab build || echo "initial lab build failed, continuing..."
 
-# this is awful, but works for now until we've got a few releases out
+# this is awful, but works for now until we've got a few API things ironed out
 LAB_PATH=$(jupyter lab path | head -n1 | sed 's/.*: *//')
 DB_ROOT=$LAB_PATH/staging/node_modules/@deathbeds
 SRC_ROOT=$(pwd)/packages

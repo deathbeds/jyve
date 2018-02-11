@@ -3,7 +3,8 @@ import {Token} from '@phosphor/coreutils';
 // import {ISignal, Signal} from '@phosphor/signaling';
 
 import {JupyterLab} from '@jupyterlab/application';
-import {Kernel, Session} from '@jupyterlab/services';
+import {nbformat} from '@jupyterlab/coreutils';
+import {Kernel, Session, KernelMessage} from '@jupyterlab/services';
 
 
 import {patches} from './patches';
@@ -71,7 +72,7 @@ export class Jyve implements IJyve {
 
 export namespace Jyve {
   export interface IKernelFactory {
-    (options: Kernel.IOptions, id: string): Kernel.IKernel;
+    (options: Kernel.IOptions, id: string): Jyve.IJyveKernel;
   }
   export interface IOptions {
     kernelSpec: Kernel.ISpecModel;
@@ -80,5 +81,13 @@ export namespace Jyve {
   export interface ISessionOptions extends Session.IOptions {
     manager?: IJyve;
   }
-  export interface IJyveKernel extends Kernel.IKernel {}
+  export interface IJyveKernel extends Kernel.IKernel {
+    fakeDisplayData(
+      parent: KernelMessage.IMessage,
+      data?: nbformat.IMimeBundle,
+      metadata?: nbformat.OutputMetadata
+    ): KernelMessage.IMessage;
+
+    sendJSON(obj: any): void;
+  }
 }

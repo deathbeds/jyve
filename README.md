@@ -7,7 +7,8 @@ Experimental, unsafe Jupyter Kernels in the Browser.
 
 ## Before
 Install:
-* JupyterLab >=0.31.5
+* JupyterLab >=0.31.5 from [pip](https://pypi.io/project/jupyterlab) or
+  [conda](https://anaconda.org/conda-forge/jupyterlab)
 
 ## Install
 ```bash

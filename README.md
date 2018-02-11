@@ -1,6 +1,6 @@
 # jyve
 
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/deathbeds/jyve/master)
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/deathbeds/jyve/master?urlpath=lab/tree/notebooks/index.ipynb)
 
 Experimental, unsafe Jupyter Kernels in the Browser.
 

@@ -3,6 +3,32 @@
 # docker build, which is simpler than a dedicated Dockerfile
 set -ex
 
-jlpm bootstrap || jlpm bootstrap || jlpm bootstrap
-jupyter labextension list
-jupyter lab build
+# jlpm bootstrap || jlpm bootstrap || jlpm bootstrap
+# jupyter labextension list
+#
+# # this first build is usually broken in subtle ways
+# jupyter lab build
+
+# this is awful, but works for now until we've got a few releases out
+LAB_PATH=$(jupyter lab path | head -n1 | sed 's/.*: *//')
+DB_ROOT=$LAB_PATH/staging/node_modules/@deathbeds
+SRC_ROOT=$(pwd)/packages
+
+unlink ${DB_ROOT}/* || echo "wasn't symlinked"
+rm -rf ${DB_ROOT}
+mkdir -p ${DB_ROOT}
+
+ls -lathr ${DB_ROOT}
+
+ln -s ${SRC_ROOT}/api/_core/    ${DB_ROOT}/jyve
+ln -s ${SRC_ROOT}/api/coffee/   ${DB_ROOT}/jyve-coffee-unsafe
+ln -s ${SRC_ROOT}/api/js/       ${DB_ROOT}/jyve-js-unsafe
+
+ln -s ${SRC_ROOT}/ext/_core/    ${DB_ROOT}/jyve-extension
+ln -s ${SRC_ROOT}/ext/coffee/   ${DB_ROOT}/jyve-coffee-unsafe-extension
+ln -s ${SRC_ROOT}/ext/js/       ${DB_ROOT}/jyve-js-unsafe-extension
+
+ls -lathr ${DB_ROOT}
+
+cd ${LAB_PATH}/staging
+jlpm build

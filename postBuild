@@ -3,11 +3,11 @@
 # docker build, which is simpler than a dedicated Dockerfile
 set -ex
 
-# jlpm bootstrap || jlpm bootstrap || jlpm bootstrap
-# jupyter labextension list
-#
-# # this first build is usually broken in subtle ways
-# jupyter lab build
+jlpm bootstrap || jlpm bootstrap || jlpm bootstrap
+jupyter labextension list
+
+# this first build is usually broken in subtle ways
+jupyter lab build
 
 # this is awful, but works for now until we've got a few releases out
 LAB_PATH=$(jupyter lab path | head -n1 | sed 's/.*: *//')

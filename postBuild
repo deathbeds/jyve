@@ -7,7 +7,7 @@ jlpm bootstrap || jlpm bootstrap || jlpm bootstrap
 jupyter labextension list
 
 # this first build is usually broken in subtle ways
-jupyter lab build --dev-mode || echo "initial lab build failed, continuing..."
+jupyter lab build || echo "initial lab build failed, continuing..."
 
 # this is awful, but works for now until we've got a few API things ironed out
 LAB_PATH=$(jupyter lab path | head -n1 | sed 's/.*: *//')

@@ -34,21 +34,29 @@ export class JSUnsafeKernel extends JyveKernel {
     return code;
   }
 
-  async execute(code: string, userNS: any) {
-    return await (async function() {
+  execute(code: string, userNS: any) {
+    return new Promise(function(resolve) {
       /* tslint:disable */
-      return await eval(code);
+      ;(function(){
+        resolve(eval(code));
+      }).call(userNS);
       /* tslint:enable */
-    }).call(userNS);
+    });
+  }
+
+  async execNS(msg: KernelMessage.IMessage) {
+    return {
+      ...this.userNS,
+      display: this.display.messageContext(msg)
+    };
   }
 
   async executeWithEval(msg: KernelMessage.IMessage) {
     const {code} = (msg.content as any);
     let result: any;
-    let execNS = {
-      ...this.userNS,
-      display: this.display.messageContext(msg)
-    };
+
+    const execNS = await this.execNS(msg);
+
     try {
       const transpiled = await this.transpile(code);
       result = await this.execute(transpiled, execNS);

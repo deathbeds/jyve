@@ -7,7 +7,7 @@ jlpm bootstrap || jlpm bootstrap || jlpm bootstrap
 jupyter labextension list
 
 # this first build is usually broken in subtle ways
-jupyter lab build || echo "initial lab build failed, continuing..."
+jupyter lab build --dev-mode || echo "initial lab build failed, continuing..."
 
 # this is awful, but works for now until we've got a few API things ironed out
 LAB_PATH=$(jupyter lab path | head -n1 | sed 's/.*: *//')
@@ -21,10 +21,12 @@ mkdir -p ${DB_ROOT}
 ls -lathr ${DB_ROOT}
 
 ln -s ${SRC_ROOT}/api/_core/    ${DB_ROOT}/jyve
+ln -s ${SRC_ROOT}/api/brython/  ${DB_ROOT}/jyve-brython-unsafe
 ln -s ${SRC_ROOT}/api/coffee/   ${DB_ROOT}/jyve-coffee-unsafe
 ln -s ${SRC_ROOT}/api/js/       ${DB_ROOT}/jyve-js-unsafe
 
 ln -s ${SRC_ROOT}/ext/_core/    ${DB_ROOT}/jyve-extension
+ln -s ${SRC_ROOT}/ext/brython/  ${DB_ROOT}/jyve-brython-unsafe-extension
 ln -s ${SRC_ROOT}/ext/coffee/   ${DB_ROOT}/jyve-coffee-unsafe-extension
 ln -s ${SRC_ROOT}/ext/js/       ${DB_ROOT}/jyve-js-unsafe-extension
 

@@ -1,0 +1,67 @@
+{
+  "author": "Dead Pixels Collective",
+  "bugs": {
+    "url": "https://github.com/deathbeds/jyve/issues"
+  },
+  "peerDependencies": {
+    "@deathbeds/jyve": "^0.1.0"
+  },
+  "dependencies": {
+    "@jupyterlab/application": "^0.15.4",
+    "brython": "^3.4.0",
+    "raw-loader": "~0.5.1"
+  },
+  "description": "A totally unsafe browser brython kernel",
+  "files": [
+    "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
+  ],
+  "homepage": "https://github.com/deathbeds/jyve",
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jyve"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "lib/index.js",
+  "name": "@deathbeds/jyve-brython-unsafe",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deathbeds/jyve.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "lab:link": "jupyter labextension link . --no-build",
+    "watch": "tsc --watch",
+    "publish:local": "npm publish --registry http://localhost:4873"
+  },
+  "types": "lib/index.d.ts",
+  "version": "0.1.0",
+  "jyve": {
+    "kernelspec": {
+      "display_name": "Brython (unsafe)",
+      "name": "jyve-brython-unsafe",
+      "language": "python",
+      "arvg": ["echo", "jyve"],
+      "resources": {}
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "ES2015"
+    },
+    "help_links": [
+      {
+        "text": "Brython",
+        "url": "https://www.brython.info/"
+      }
+    ]
+  }
+}

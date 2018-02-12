@@ -1,0 +1,9 @@
+.jp-LauncherCard[title^="Brython"] .jp-LauncherCard-noKernelIcon{
+  color: transparent;
+  background-image: url("./brython.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: var(--jp-private-launcher-large-icon-size);
+  height: var(--jp-private-launcher-large-icon-size);
+}

@@ -41,7 +41,7 @@
     "kernelspec": {
       "display_name": "CoffeeScript (unsafe)",
       "name": "jyve-coffee-unsafe",
-      "language": "CoffeeScript",
+      "language": "coffeescript",
       "arvg": ["echo", "jyve"],
       "resources": {}
     },

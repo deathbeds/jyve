@@ -7,7 +7,7 @@ const {jyve} = (require('../package.json') as any);
 
 export const kernelSpec: Kernel.ISpecModel = jyve.kernelspec;
 
-const DEBUG = false;
+const DEBUG = true;
 
 
 export class BrythonUnsafeKernel extends JSUnsafeKernel {
@@ -41,7 +41,7 @@ export class BrythonUnsafeKernel extends JSUnsafeKernel {
 
     let execNS = await super.execNS(parent);
     const brython =  await this.brython();
-    brython.$options = {debug: 10};
+    brython.$options = {debug: DEBUG ? 10 : 0};
 
     execNS = {
       ...execNS,

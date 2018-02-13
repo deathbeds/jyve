@@ -37,7 +37,7 @@
   "version": "0.1.0",
   "jyve": {
     "kernelspec": {
-      "display_name": "JS (unsafe)",
+      "display_name": "JS (unsafe) — Jyve",
       "name": "jyve-js-unsafe",
       "language": "javascript",
       "arvg": ["echo", "jyve"],

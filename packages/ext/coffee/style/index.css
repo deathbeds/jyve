@@ -1,9 +1,3 @@
-.jp-LauncherCard[title^="CoffeeScript"] .jp-LauncherCard-noKernelIcon{
-  color: transparent;
+.jp-Launcher-cardContainer .jp-LauncherCard[title$=" — Jyve"][title^="CoffeeScript"]  .jp-LauncherCard-noKernelIcon{
   background-image: url("./coffeescript.svg");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: var(--jp-private-launcher-large-icon-size);
-  height: var(--jp-private-launcher-large-icon-size);
 }

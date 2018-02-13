@@ -39,7 +39,7 @@
   "version": "0.1.0",
   "jyve": {
     "kernelspec": {
-      "display_name": "Brython (unsafe)",
+      "display_name": "Brython (unsafe) — Jyve",
       "name": "jyve-brython-unsafe",
       "language": "python",
       "arvg": ["echo", "jyve"],

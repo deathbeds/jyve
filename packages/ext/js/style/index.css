@@ -1,9 +1,7 @@
-.jp-LauncherCard[title^="JS"] .jp-LauncherCard-noKernelIcon{
-  color: transparent;
+.jp-Launcher-cardContainer .jp-LauncherCard[title$=" — Jyve"][title^="JS"] {
+  background-image: none;
+}
+
+.jp-Launcher-cardContainer .jp-LauncherCard[title$=" — Jyve"][title^="JS"]  .jp-LauncherCard-noKernelIcon {
   background-image: url("./js.svg");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: var(--jp-private-launcher-large-icon-size);
-  height: var(--jp-private-launcher-large-icon-size);
 }

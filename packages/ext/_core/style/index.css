@@ -8,7 +8,7 @@
 .jp-Launcher-cardContainer .jp-LauncherCard[title$=" — Jyve"] {
   border-radius: var(--jyv-kernel-border-radius);
   background-size: calc(var(--jyv-phi) * 1rem);
-  background-position: right 1rem top 2.5rem;
+  background-position: right 1rem top 2.35rem;
   background-repeat: no-repeat;
   background-image: url("./js.svg");
   border: 0;

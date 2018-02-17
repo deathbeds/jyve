@@ -26,7 +26,9 @@ export class BrythonUnsafeKernel extends JSUnsafeKernel {
 
   async brython() {
     if (!this._brython) {
-      this._brython = await BrythonUnsafeKernel.brython();
+      this._brython = await BrythonUnsafeKernel.brython(
+        this.iframe.contentWindow
+      );
     }
     return this._brython;
   }
@@ -70,11 +72,13 @@ export class BrythonUnsafeKernel extends JSUnsafeKernel {
 
     return `
       ${DEBUG ? 'debugger;' : ''}
-      var __BRYTHON__ = this.__BRYTHON__;
-      var None = __BRYTHON__.None;
-      var dict = __BRYTHON__.builtins.dict;
+      if(!__BRYTHON__.$jyveLocalsMain) {
+        __BRYTHON__.$jyveLocalsMain = {}
+      }
       __BRYTHON__.meta_path = __BRYTHON__.$meta_path.slice();
-      ${src}`;
+      __BRYTHON__.imported['__main__'] = this.__BRYTHON__ || {};
+      ${src}
+    `;
   }
 }
 
@@ -83,15 +87,16 @@ export function newKernel(options: JyveKernel.IOptions, id: string) {
 }
 
 export namespace BrythonUnsafeKernel {
-  export async function brython() {
-    if ((window as any).__BRYTHON__) {
-      return (window as any).__BRYTHON__;
-    }
+  function wait(timeout: number) {
+    return new Promise(resolve => {
+      setTimeout(() => resolve('resolved'), timeout);
+    });
+  }
 
-    function wait(timeout: number) {
-      return new Promise(resolve => {
-        setTimeout(() => resolve('resolved'), timeout);
-      });
+  export async function brython(window: any) {
+    const document = window.document;
+    if (window.__BRYTHON__) {
+      return window.__BRYTHON__;
     }
 
     const brythonSrc = (require('!!raw-loader!brython') as any) as string;
@@ -106,11 +111,11 @@ export namespace BrythonUnsafeKernel {
     brythonStdLibScript.id = 'jyve-brython-stdlib';
     document.body.appendChild(brythonStdLibScript);
 
-    while (!((window as any).__BRYTHON__ && (window as any).__BRYTHON__.$meta_path)) {
+    while (!(window.__BRYTHON__ && window.__BRYTHON__.$meta_path)) {
       await wait(100);
     }
 
-    let brythonInstance = (window as any).__BRYTHON__;
+    let brythonInstance = window.__BRYTHON__;
 
     return brythonInstance;
   }

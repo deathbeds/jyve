@@ -3,6 +3,7 @@
   --jyv-kernel-icon-size: var(--jp-private-launcher-large-icon-size);
   --jyv-kernel-border-radius: 0;
   --jyv-color-brand1: #f7df1e;
+  --jyv-icon-frame: url("./filter-frames.svg");
 }
 
 .jp-Launcher-cardContainer .jp-LauncherCard[title$=" — Jyve"] {
@@ -21,4 +22,19 @@
   background-repeat: no-repeat;
   width: var(--jyv-kernel-icon-size);
   height: var(--jyv-kernel-icon-size);
+}
+
+.jyv-Frame {
+  display: flex;
+  flex-direction: column;
+}
+
+.jyv-Frame iframe {
+  flex: 1;
+  border: none;
+}
+
+.jyv-FrameIcon {
+  background-image: var(--jyv-icon-frame);
+  background-size: contain;
 }

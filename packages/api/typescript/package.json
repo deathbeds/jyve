@@ -1,0 +1,67 @@
+{
+  "author": "Dead Pixels Collective",
+  "bugs": {
+    "url": "https://github.com/deathbeds/jyve/issues"
+  },
+  "peerDependencies": {
+    "@deathbeds/jyve": "^0.1.0"
+  },
+  "dependencies": {
+    "@jupyterlab/application": "^0.15.4",
+    "typescript": "~2.7.2",
+    "typescript-simple": "~8.0.6"
+  },
+  "description": "A totally unsafe browser TypeScript kernel",
+  "files": [
+    "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
+  ],
+  "homepage": "https://github.com/deathbeds/jyve",
+  "keywords": [
+    "typescript",
+    "jupyter",
+    "jupyterlab",
+    "jyve"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "lib/index.js",
+  "name": "@deathbeds/jyve-typescript-unsafe",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deathbeds/jyve.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "lab:link": "jupyter labextension link . --no-build",
+    "publish:local": "npm publish --registry http://localhost:4873",
+    "watch": "tsc --watch"
+  },
+  "types": "lib/index.d.ts",
+  "version": "0.1.0",
+  "jyve": {
+    "kernelspec": {
+      "display_name": "TypeScript (unsafe) — Jyve",
+      "name": "jyve-typescript-unsafe",
+      "language": "typescript",
+      "arvg": ["echo", "jyve"],
+      "resources": {}
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "typescript"
+      },
+      "file_extension": ".ts",
+      "mimetype": "application/x-typescript",
+      "name": "typescript",
+      "nbconvert_exporter": "typescript",
+      "pygments_lexer": "typescript",
+      "version": "2.2.1"
+    },
+    "help_links": [
+      {
+        "text": "TypeScript",
+        "url": "https://www.typescriptlang.org"
+      }
+    ]
+  }
+}

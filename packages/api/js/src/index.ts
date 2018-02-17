@@ -35,7 +35,7 @@ export class JSUnsafeKernel extends JyveKernel {
   }
 
   execute(code: string, userNS: any) {
-    const _window = (this.iframe.contentWindow as any);
+    const _window = ((this.iframe()).contentWindow as any);
     return new Promise(function(resolve) {
       /* tslint:disable */
       ;(function(){

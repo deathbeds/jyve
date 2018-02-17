@@ -4,6 +4,7 @@ import {DefaultKernel} from '@jupyterlab/services/lib/kernel/default';
 import {Kernel, ServerConnection, KernelMessage} from '@jupyterlab/services';
 import {uuid, nbformat} from '@jupyterlab/coreutils';
 import {JyveServer, JyveRequest, jyveFetch} from './socket';
+import {ISignal, Signal} from '@phosphor/signaling';
 
 import {Jyve} from '.';
 import {Display} from './display';
@@ -20,6 +21,8 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   private _executionCount = 0;
   private _iframe: HTMLIFrameElement;
   private _lab: JupyterLab;
+  private _frameRequested = new Signal<this, Jyve.IFrameOptions>(this);
+
   display: Display;
 
   constructor(options: JyveKernel.IOptions, id: string) {
@@ -31,10 +34,20 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     this.resetUserNS();
   }
 
-  get iframe() { return this._iframe; }
-  set iframe(iframe) {
-    this._iframe = iframe;
-    (this as any)._connectionPromise.resolve(void 0);
+  get frameRequested(): ISignal<this, Jyve.IFrameOptions> {
+    return this._frameRequested;
+  }
+
+
+  iframe(iframe?: HTMLIFrameElement) {
+    if (iframe) {
+      this._iframe = iframe;
+    } else {
+      if (this._iframe == null) {
+        this._frameRequested.emit({kernel: this});
+      }
+      return this._iframe;
+    }
   }
 
   resetUserNS() {
@@ -77,9 +90,9 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     }
   }
 
-  handleRestart() {
+  async handleRestart() {
     this.resetUserNS();
-    this.iframe.src = 'about:blank';
+    (await this.iframe()).src = 'about:blank';
 
     return super.handleRestart();
   }

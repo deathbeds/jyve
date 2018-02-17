@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "lib": [
+      "ES5",
+      "ES2015.Promise",
+      "DOM",
+      "ES2015.Collection",
+      "ES2016",
+      "ES6"
+    ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "outDir": "./lib",
+    "target": "ES5",
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "./src/**/*",
+    "../_core/src/@types/**/*"
+  ]
+}

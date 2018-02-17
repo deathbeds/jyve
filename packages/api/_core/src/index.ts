@@ -77,6 +77,9 @@ export class Jyve implements IJyve {
     options.lab = this._lab;
 
     const kernel = factory(options, id);
+    kernel.frameRequested.connect(() => {
+      this._frameRequested.emit({kernel});
+    });
     this._frameRequested.emit({kernel});
 
     return kernel;
@@ -101,7 +104,8 @@ export namespace Jyve {
     manager?: IJyve;
   }
   export interface IJyveKernel extends Kernel.IKernel {
-    iframe: HTMLIFrameElement;
+    iframe(iframe?: HTMLIFrameElement): HTMLIFrameElement;
+    frameRequested: ISignal<IJyveKernel, Jyve.IFrameOptions>;
     fakeDisplayData(
       parent: KernelMessage.IMessage,
       data?: nbformat.IMimeBundle,

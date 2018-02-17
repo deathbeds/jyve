@@ -32,9 +32,10 @@
   },
   "scripts": {
     "bootstrap": "jlpm && jlpm lerna bootstrap && jlpm clean && jlpm build && jlpm lab:link",
-    "build": "jlpm build:core && jlpm build:js && jlpm build:coffee && jlpm build:brython && jlpm build:ext",
+    "build": "jlpm build:core && jlpm build:js && jlpm build:coffee && jlpm build:typescript && jlpm build:brython && jlpm build:ext",
     "build:brython": "lerna run build --scope '@deathbeds/jyve-brython-unsafe'",
     "build:coffee": "lerna run build --scope '@deathbeds/jyve-coffee-unsafe'",
+    "build:typescript": "lerna run build --scope '@deathbeds/jyve-typescript-unsafe'",
     "build:core": "lerna run build --scope '@deathbeds/jyve'",
     "build:ext": "lerna run build --scope '@deathbeds/*-extension'",
     "build:js": "lerna run build --scope '@deathbeds/jyve-js-unsafe'",

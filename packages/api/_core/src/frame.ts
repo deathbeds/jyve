@@ -30,6 +30,6 @@ export class JyvePanel extends Widget {
   get kernel() { return this._kernel; }
   set kernel(kernel) {
     this._kernel = kernel;
-    this._kernel.iframe = this._iframe;
+    this._kernel.iframe(this._iframe);
   }
 }

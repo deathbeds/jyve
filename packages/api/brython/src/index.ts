@@ -27,7 +27,7 @@ export class BrythonUnsafeKernel extends JSUnsafeKernel {
   async brython() {
     if (!this._brython) {
       this._brython = await BrythonUnsafeKernel.brython(
-        this.iframe.contentWindow
+        (await this.iframe()).contentWindow
       );
     }
     return this._brython;

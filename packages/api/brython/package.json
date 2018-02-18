@@ -8,22 +8,22 @@
   },
   "dependencies": {
     "@jupyterlab/application": "^0.15.4",
-    "coffeescript": "^2.2.1"
+    "brython": "^3.4.0",
+    "raw-loader": "~0.5.1"
   },
-  "description": "A totally unsafe browser coffeescript kernel",
+  "description": "A totally unsafe browser brython kernel",
   "files": [
     "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
   ],
   "homepage": "https://github.com/deathbeds/jyve",
   "keywords": [
-    "coffeescript",
     "jupyter",
     "jupyterlab",
     "jyve"
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
-  "name": "@deathbeds/jyve-coffee-unsafe",
+  "name": "@deathbeds/jyve-brython-unsafe",
   "repository": {
     "type": "git",
     "url": "https://github.com/deathbeds/jyve.git"
@@ -32,34 +32,35 @@
     "build": "tsc",
     "clean": "rimraf lib",
     "lab:link": "jupyter labextension link . --no-build",
-    "publish:local": "npm publish --registry http://localhost:4873",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "publish:local": "npm publish --registry http://localhost:4873"
   },
   "types": "lib/index.d.ts",
   "version": "0.1.0",
   "jyve": {
     "kernelspec": {
-      "display_name": "CoffeeScript (unsafe) — Jyve",
-      "name": "jyve-coffee-unsafe",
-      "language": "coffeescript",
+      "display_name": "Brython (unsafe) — Jyve",
+      "name": "jyve-brython-unsafe",
+      "language": "python",
       "arvg": ["echo", "jyve"],
       "resources": {}
     },
     "language_info": {
       "codemirror_mode": {
-        "name": "coffeescript"
+        "name": "ipython",
+        "version": 3
       },
-      "file_extension": ".coffee",
-      "mimetype": "text/coffeescript",
-      "name": "coffeescript",
-      "nbconvert_exporter": "coffeescript",
-      "pygments_lexer": "coffeescript",
-      "version": "2.2.1"
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "ES2015"
     },
     "help_links": [
       {
-        "text": "CoffeeScript",
-        "url": "http://coffeescript.org/"
+        "text": "Brython",
+        "url": "https://www.brython.info/"
       }
     ]
   }

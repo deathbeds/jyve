@@ -1,0 +1,3 @@
+.jp-Launcher-cardContainer .jp-LauncherCard[title$=" — Jyve"][title^="Brython"]  .jp-LauncherCard-noKernelIcon {
+  background-image: url("./brython.svg");
+}

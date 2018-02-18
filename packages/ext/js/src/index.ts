@@ -4,6 +4,8 @@ import {kernelSpec, newKernel} from '@deathbeds/jyve-js-unsafe';
 
 const id = '@deathbeds/jyve-js-unsafe-extension';
 
+import '../style/index.css';
+
 const extension: JupyterLabPlugin<void> = {
   id,
   autoStart: true,

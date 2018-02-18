@@ -7,21 +7,26 @@
     "@deathbeds/jyve": "^0.1.0"
   },
   "dependencies": {
+    "@deathbeds/jyve-brython-unsafe": "^0.1.0",
     "@jupyterlab/application": "^0.15.4"
   },
-  "description": "A totally unsafe browser js kernel",
+  "description": "An extension for a totally unsafe browser brython kernel",
   "files": [
     "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
   ],
   "homepage": "https://github.com/deathbeds/jyve",
+  "jupyterlab": {
+    "extension": true
+  },
   "keywords": [
     "jupyter",
     "jupyterlab",
+    "jupyterlab-extension",
     "jyve"
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
-  "name": "@deathbeds/jyve-js-unsafe",
+  "name": "@deathbeds/jyve-brython-unsafe-extension",
   "repository": {
     "type": "git",
     "url": "https://github.com/deathbeds/jyve.git"
@@ -34,35 +39,5 @@
     "publish:local": "npm publish --registry http://localhost:4873"
   },
   "types": "lib/index.d.ts",
-  "version": "0.1.0",
-  "jyve": {
-    "kernelspec": {
-      "display_name": "JS (unsafe) — Jyve",
-      "name": "jyve-js-unsafe",
-      "language": "javascript",
-      "arvg": ["echo", "jyve"],
-      "resources": {}
-    },
-    "language_info": {
-      "codemirror_mode": {
-        "name": "javascript"
-      },
-      "file_extension": ".js",
-      "mimetype": "text/javascript",
-      "name": "javascript",
-      "nbconvert_exporter": "javascript",
-      "pygments_lexer": "javascript",
-      "version": "ES2015"
-    },
-    "help_links": [
-      {
-        "text": "MDN Web Docs",
-        "url": "https://developer.mozilla.org"
-      },
-      {
-        "text": "Can I use ... ?",
-        "url": "https://caniuse.com"
-      }
-    ]
-  }
+  "version": "0.1.0"
 }

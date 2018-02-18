@@ -1,8 +1,8 @@
 import {JupyterLab, JupyterLabPlugin} from '@jupyterlab/application';
 import {IJyve} from '@deathbeds/jyve';
-import {kernelSpec, newKernel} from '@deathbeds/jyve-coffee-unsafe';
+import {kernelSpec, newKernel} from '@deathbeds/jyve-brython-unsafe';
 
-const id = '@deathbeds/jyve-coffee-unsafe-extension';
+const id = '@deathbeds/jyve-brython-unsafe-extension';
 
 import '../style/index.css';
 

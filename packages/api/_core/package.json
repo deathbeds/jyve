@@ -35,7 +35,7 @@
     "publish:local": "npm publish --registry http://localhost:4873"
   },
   "types": "lib/index.d.ts",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "jyve": {
     "language_info": {
       "codemirror_mode": {

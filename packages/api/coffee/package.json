@@ -4,7 +4,7 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "peerDependencies": {
-    "@deathbeds/jyve": "^0.1.0"
+    "@deathbeds/jyve": "^0.2.0"
   },
   "dependencies": {
     "@jupyterlab/application": "^0.15.4",
@@ -36,7 +36,7 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "jyve": {
     "kernelspec": {
       "display_name": "CoffeeScript (unsafe) — Jyve",

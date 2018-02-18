@@ -4,10 +4,10 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "peerDependencies": {
-    "@deathbeds/jyve": "^0.1.0"
+    "@deathbeds/jyve": "^0.2.0"
   },
   "dependencies": {
-    "@deathbeds/jyve-brython-unsafe": "^0.1.0",
+    "@deathbeds/jyve-brython-unsafe": "^0.2.0",
     "@jupyterlab/application": "^0.15.4"
   },
   "description": "An extension for a totally unsafe browser brython kernel",
@@ -39,5 +39,5 @@
     "publish:local": "npm publish --registry http://localhost:4873"
   },
   "types": "lib/index.d.ts",
-  "version": "0.1.0"
+  "version": "0.2.0"
 }

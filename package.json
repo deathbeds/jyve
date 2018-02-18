@@ -46,7 +46,7 @@
     "serve": "verdaccio -c verdaccio/config.yaml",
     "watch": "lerna run --parallel watch"
   },
-  "version": "0.1.0",
+  "version": "0.2.0",
   "workspaces": [
     "packages/api/*",
     "packages/ext/*"

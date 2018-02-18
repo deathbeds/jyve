@@ -104,7 +104,6 @@ export class JSUnsafeKernel extends JyveKernel {
       }
       this.userNS[k] = execNS[k];
     });
-    console.log(this.userNS);
   }
 }
 

@@ -19,7 +19,6 @@ namespace JyveSession {
   export async function startNew(
     options: Jyve.ISessionOptions
   ): Promise<Session.ISession> {
-    console.log('startNew');
     const kernelId = uuid();
     const sessionId = uuid();
 

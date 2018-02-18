@@ -10,7 +10,6 @@ export class JyvePanel extends Widget {
   private _kernel: Jyve.IJyveKernel;
 
   constructor(options?: Widget.IOptions) {
-    console.log('creating an iframe');
     super(options);
     this.addClass(FRAME_CLASS);
     this.title.closable = true;

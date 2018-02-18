@@ -23,7 +23,6 @@ const extension: JupyterLabPlugin<core.IJyve> = {
       panel.kernel = opts.kernel;
       panel.id = `jyv-frame-${++nextFrameId}`;
       panel.title.label = opts.kernel.info.implementation;
-      console.log(panel);
       setTimeout(() => app.shell.addToMainArea(panel));
     });
 

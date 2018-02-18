@@ -8,10 +8,10 @@
   "description": "Jupyter Kernels in the Browser",
   "devDependencies": {
     "@types/node": "^9.4.2",
-    "lerna": "^2.5.0",
+    "lerna": "^2.9.0",
     "rimraf": "^2.6.1",
     "tslint": "^5.9.1",
-    "typescript": "~2.7.1",
+    "typescript": "~2.7.2",
     "verdaccio": "^2.7.4"
   },
   "files": [
@@ -32,9 +32,10 @@
   },
   "scripts": {
     "bootstrap": "jlpm && jlpm lerna bootstrap && jlpm clean && jlpm build && jlpm lab:link",
-    "build": "jlpm build:core && jlpm build:js && jlpm build:coffee && jlpm build:brython && jlpm build:ext",
+    "build": "jlpm build:core && jlpm build:js && jlpm build:coffee && jlpm build:typescript && jlpm build:brython && jlpm build:ext",
     "build:brython": "lerna run build --scope '@deathbeds/jyve-brython-unsafe'",
     "build:coffee": "lerna run build --scope '@deathbeds/jyve-coffee-unsafe'",
+    "build:typescript": "lerna run build --scope '@deathbeds/jyve-typescript-unsafe'",
     "build:core": "lerna run build --scope '@deathbeds/jyve'",
     "build:ext": "lerna run build --scope '@deathbeds/*-extension'",
     "build:js": "lerna run build --scope '@deathbeds/jyve-js-unsafe'",

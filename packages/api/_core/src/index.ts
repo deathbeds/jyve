@@ -1,6 +1,6 @@
 import {PromiseDelegate} from '@phosphor/coreutils';
 import {Token} from '@phosphor/coreutils';
-// import {ISignal, Signal} from '@phosphor/signaling';
+import {ISignal, Signal} from '@phosphor/signaling';
 
 import {JupyterLab} from '@jupyterlab/application';
 import {nbformat} from '@jupyterlab/coreutils';
@@ -9,6 +9,7 @@ import {Kernel, Session, KernelMessage} from '@jupyterlab/services';
 
 import {patches} from './patches';
 import {JyveSession} from './session';
+import {JyveKernel} from './kernel';
 
 const {version} = (require('../package.json') as any);
 
@@ -29,6 +30,7 @@ export interface IJyve {
   ): Promise<Session.ISession>;
   makeKernel(options: Kernel.IOptions, id: string): Jyve.IJyveKernel;
   version: string;
+  frameRequested: ISignal<IJyve, Jyve.IFrameOptions>;
 }
 
 export class Jyve implements IJyve {
@@ -36,6 +38,7 @@ export class Jyve implements IJyve {
   private _specs: Kernel.ISpecModels = {default: '', kernelspecs: {}};
   private _factories = new Map<string, Jyve.IKernelFactory>();
   private _ready = new PromiseDelegate<void>();
+  private _frameRequested = new Signal<this, Jyve.IFrameOptions>(this);
 
   get version() { return version; }
   get specs() { return this._specs; }
@@ -44,6 +47,10 @@ export class Jyve implements IJyve {
   constructor(lab: JupyterLab) {
     this._lab = lab;
     this.patch();
+  }
+
+  get frameRequested(): ISignal<this, Jyve.IFrameOptions> {
+    return this._frameRequested;
   }
 
   async register(options: Jyve.IOptions) {
@@ -64,15 +71,30 @@ export class Jyve implements IJyve {
     return JyveSession.startNew({...options, manager: this});
   }
 
-  makeKernel(options: Kernel.IOptions, id: string): Jyve.IJyveKernel {
+  makeKernel(options: JyveKernel.IOptions, id: string): Jyve.IJyveKernel {
     const factory = this._factories.get(options.name);
-    return factory(options, id);
+
+    options.lab = this._lab;
+
+    const kernel = factory(options, id);
+    kernel.frameRequested.connect(() => {
+      this._frameRequested.emit({kernel});
+    });
+    this._frameRequested.emit({kernel});
+
+    return kernel;
   }
 }
 
 export namespace Jyve {
   export interface IKernelFactory {
     (options: Kernel.IOptions, id: string): Jyve.IJyveKernel;
+  }
+  export interface IKernelOptions extends Kernel.IOptions {
+    lab: JupyterLab;
+  }
+  export interface IFrameOptions {
+    kernel: IJyveKernel;
   }
   export interface IOptions {
     kernelSpec: Kernel.ISpecModel;
@@ -82,6 +104,8 @@ export namespace Jyve {
     manager?: IJyve;
   }
   export interface IJyveKernel extends Kernel.IKernel {
+    iframe(iframe?: HTMLIFrameElement): HTMLIFrameElement;
+    frameRequested: ISignal<IJyveKernel, Jyve.IFrameOptions>;
     fakeDisplayData(
       parent: KernelMessage.IMessage,
       data?: nbformat.IMimeBundle,

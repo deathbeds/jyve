@@ -1,11 +1,14 @@
+import {JupyterLab} from '@jupyterlab/application';
 import {URLExt} from '@jupyterlab/coreutils';
 import {DefaultKernel} from '@jupyterlab/services/lib/kernel/default';
 import {Kernel, ServerConnection, KernelMessage} from '@jupyterlab/services';
 import {uuid, nbformat} from '@jupyterlab/coreutils';
 import {JyveServer, JyveRequest, jyveFetch} from './socket';
+import {ISignal, Signal} from '@phosphor/signaling';
 
 import {Jyve} from '.';
 import {Display} from './display';
+
 
 const {jyve, name, version} = (require('../package.json') as any);
 
@@ -16,19 +19,41 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   protected server: JyveServer;
   protected userNS: any;
   private _executionCount = 0;
+  private _iframe: HTMLIFrameElement;
+  private _lab: JupyterLab;
+  private _frameRequested = new Signal<this, Jyve.IFrameOptions>(this);
+
   display: Display;
 
   constructor(options: JyveKernel.IOptions, id: string) {
     super(options, id);
     this.server = options.server;
+    this._lab = options.lab;
     this.server.on('message', async (msg: any) => await this._onMessage(msg));
     this.display = new Display(this);
     this.resetUserNS();
-    (this as any)._connectionPromise.resolve(void 0);
+  }
+
+  get frameRequested(): ISignal<this, Jyve.IFrameOptions> {
+    return this._frameRequested;
+  }
+
+
+  iframe(iframe?: HTMLIFrameElement) {
+    if (iframe) {
+      this._iframe = iframe;
+    } else {
+      if (this._iframe == null) {
+        this._frameRequested.emit({kernel: this});
+      }
+      return this._iframe;
+    }
   }
 
   resetUserNS() {
-    this.userNS = {};
+    this.userNS = {
+      JupyterLab: this._lab
+    };
   }
 
   sendJSON(data: any) {
@@ -65,8 +90,10 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     }
   }
 
-  handleRestart() {
+  async handleRestart() {
     this.resetUserNS();
+    (await this.iframe()).src = 'about:blank';
+
     return super.handleRestart();
   }
 
@@ -252,6 +279,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
 export namespace JyveKernel {
   export interface IOptions extends Kernel.IOptions {
     server: JyveServer;
+    lab?: JupyterLab;
   }
   export function kernelURL(
     kernelId: string,

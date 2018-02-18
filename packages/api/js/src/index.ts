@@ -35,10 +35,14 @@ export class JSUnsafeKernel extends JyveKernel {
   }
 
   execute(code: string, userNS: any) {
+    const _window = ((this.iframe()).contentWindow as any);
     return new Promise(function(resolve) {
       /* tslint:disable */
       ;(function(){
-        resolve(eval(code));
+        Object.keys(userNS).map((k) => {
+          _window[k] = userNS[k];
+        });
+        resolve(_window.eval(code));
       }).call(userNS);
       /* tslint:enable */
     });
@@ -95,7 +99,7 @@ export class JSUnsafeKernel extends JyveKernel {
       this.sendJSON(errReply);
     }
     Object.keys(execNS).map((k) => {
-      if (k === 'display') {
+      if (['display', 'JupyterLab'].indexOf(k) === -1) {
         return;
       }
       this.userNS[k] = execNS[k];

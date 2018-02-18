@@ -1,0 +1,44 @@
+{
+  "author": "Dead Pixels Collective",
+  "bugs": {
+    "url": "https://github.com/deathbeds/jyve/issues"
+  },
+  "peerDependencies": {
+    "@deathbeds/jyve": "^0.1.0"
+  },
+  "dependencies": {
+    "@deathbeds/jyve-typescript-unsafe": "^0.1.0",
+    "@jupyterlab/application": "^0.15.4"
+  },
+  "description": "An extension for a totally unsafe browser js kernel",
+  "files": [
+    "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
+  ],
+  "homepage": "https://github.com/deathbeds/jyve",
+  "jupyterlab": {
+    "extension": true
+  },
+  "keywords": [
+    "typescript",
+    "jupyter",
+    "jupyterlab-extension",
+    "jupyterlab",
+    "jyve"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "lib/index.js",
+  "name": "@deathbeds/jyve-typescript-unsafe-extension",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deathbeds/jyve.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "lab:link": "jupyter labextension link . --no-build",
+    "watch": "tsc --watch",
+    "publish:local": "npm publish --registry http://localhost:4873"
+  },
+  "types": "lib/index.d.ts",
+  "version": "0.1.0"
+}

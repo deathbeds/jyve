@@ -3,10 +3,8 @@
   "bugs": {
     "url": "https://github.com/deathbeds/jyve/issues"
   },
-  "peerDependencies": {
-    "@deathbeds/jyve": "^0.2.0"
-  },
   "dependencies": {
+    "@deathbeds/jyve": "^0.2.0",
     "@jupyterlab/application": "^0.15.4"
   },
   "description": "Jupyter Kernels in the Browser",
@@ -38,5 +36,5 @@
     "publish:local": "npm publish --registry http://localhost:4873"
   },
   "types": "lib/index.d.ts",
-  "version": "0.2.0"
+  "version": "0.2.1"
 }

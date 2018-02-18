@@ -33,7 +33,7 @@ Install:
 
 ## Install
 ```bash
-# the core manager
+# the core manager, required but doesn't do anything by itself
 jupyter labextension install @deathbeds/jyve-extension
 # the base kernel
 jupyter labextension install @deathbeds/jyve-js-unsafe-extension
@@ -41,6 +41,16 @@ jupyter labextension install @deathbeds/jyve-js-unsafe-extension
 jupyter labextension install @deathbeds/jyve-coffee-unsafe-extension
 jupyter labextension install @deathbeds/jyve-typescript-unsafe-extension
 jupyter labextension install @deathbeds/jyve-brython-unsafe-extension
+```
+
+Or, since hey, this is Jyve:
+```bash
+jupyter labextension install \
+  @deathbeds/jyve-brython-unsafe-extension \
+  @deathbeds/jyve-coffee-unsafe-extension \
+  @deathbeds/jyve-extension \
+  @deathbeds/jyve-js-unsafe-extension \
+  @deathbeds/jyve-typescript-unsafe-extension
 ```
 
 

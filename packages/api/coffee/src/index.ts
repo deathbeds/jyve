@@ -28,7 +28,7 @@ export class CoffeeUnsafeKernel extends JSUnsafeKernel {
   }
 }
 
-export function newKernel(options: JyveKernel.IOptions, id: string) {
+export async function newKernel(options: JyveKernel.IOptions, id: string) {
   return new CoffeeUnsafeKernel(options, id);
 }
 

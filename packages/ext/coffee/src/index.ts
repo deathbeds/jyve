@@ -1,6 +1,5 @@
 import {JupyterLab, JupyterLabPlugin} from '@jupyterlab/application';
 import {IJyve} from '@deathbeds/jyve';
-import {kernelSpec, newKernel} from '@deathbeds/jyve-coffee-unsafe';
 
 const id = '@deathbeds/jyve-coffee-unsafe-extension';
 
@@ -10,9 +9,16 @@ const extension: JupyterLabPlugin<void> = {
   id,
   autoStart: true,
   requires: [IJyve],
-  activate: (
+  activate: async (
     app: JupyterLab, jyve: IJyve
-  ) => jyve.register({kernelSpec, newKernel})
+  ) => {
+    const jyveKernel: any = await import('@deathbeds/jyve-coffee-unsafe');
+
+    jyve.register({
+      kernelSpec: jyveKernel.kernelSpec,
+      newKernel: jyveKernel.newKernel
+    });
+  }
 };
 
 export default extension;

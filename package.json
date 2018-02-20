@@ -3,8 +3,7 @@
   "bugs": {
     "url": "https://github.com/deathbeds/jyve/issues"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "description": "Jupyter Kernels in the Browser",
   "devDependencies": {
     "@types/node": "^9.4.2",
@@ -12,7 +11,8 @@
     "rimraf": "^2.6.1",
     "tslint": "^5.9.1",
     "typescript": "~2.7.2",
-    "verdaccio": "^2.7.4"
+    "verdaccio": "^2.7.4",
+    "webpack-stats-duplicates": "^2.1.0"
   },
   "files": [
     "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
@@ -44,7 +44,8 @@
     "lab:watch": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm watch",
     "publish:local": "lerna run --parallel publish:local",
     "serve": "verdaccio -c verdaccio/config.yaml",
-    "watch": "lerna run --parallel watch"
+    "watch": "lerna run --parallel watch",
+    "lab:dupes": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm build --json > stats.json && webpack-stats-duplicates stats.json"
   },
   "version": "0.2.0",
   "workspaces": [

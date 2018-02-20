@@ -1,6 +1,4 @@
-import {
-  JupyterLab, JupyterLabPlugin
-} from '@jupyterlab/application';
+import {JupyterLab, JupyterLabPlugin} from '@jupyterlab/application';
 
 import * as core from '@deathbeds/jyve';
 import {JyvePanel} from '@deathbeds/jyve/lib/frame';

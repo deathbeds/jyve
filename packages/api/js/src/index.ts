@@ -107,6 +107,6 @@ export class JSUnsafeKernel extends JyveKernel {
   }
 }
 
-export function newKernel(options: JyveKernel.IOptions, id: string) {
+export async function newKernel(options: JyveKernel.IOptions, id: string) {
   return new JSUnsafeKernel(options, id);
 }

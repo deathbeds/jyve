@@ -28,7 +28,7 @@ export interface IJyve {
   startNew(
     options: Jyve.ISessionOptions
   ): Promise<Session.ISession>;
-  makeKernel(options: Kernel.IOptions, id: string): Jyve.IJyveKernel;
+  makeKernel(options: Kernel.IOptions, id: string): Promise<Jyve.IJyveKernel>;
   version: string;
   frameRequested: ISignal<IJyve, Jyve.IFrameOptions>;
 }
@@ -71,12 +71,12 @@ export class Jyve implements IJyve {
     return JyveSession.startNew({...options, manager: this});
   }
 
-  makeKernel(options: JyveKernel.IOptions, id: string): Jyve.IJyveKernel {
+  async makeKernel(options: JyveKernel.IOptions, id: string): Promise<Jyve.IJyveKernel> {
     const factory = this._factories.get(options.name);
 
     options.lab = this._lab;
 
-    const kernel = factory(options, id);
+    const kernel = await factory(options, id);
     kernel.frameRequested.connect(() => {
       this._frameRequested.emit({kernel});
     });
@@ -88,7 +88,7 @@ export class Jyve implements IJyve {
 
 export namespace Jyve {
   export interface IKernelFactory {
-    (options: Kernel.IOptions, id: string): Jyve.IJyveKernel;
+    (options: Kernel.IOptions, id: string): Promise<Jyve.IJyveKernel>;
   }
   export interface IKernelOptions extends Kernel.IOptions {
     lab: JupyterLab;

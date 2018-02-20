@@ -50,9 +50,9 @@ namespace JyveSession {
       serverSettings
     };
 
-    const kernel = options.manager.makeKernel(kernelOptions, kernelId);
+    const kernel = await options.manager.makeKernel(kernelOptions, kernelId);
 
-    return new DefaultSession({
+    return new JyveSession({
       path: model.path,
       type: model.type,
       name: model.name,

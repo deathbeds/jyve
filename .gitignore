@@ -9,3 +9,4 @@ htpasswd
 *.log
 verdaccio/packages/
 _scripts/
+__pycache__

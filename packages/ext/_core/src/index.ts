@@ -1,6 +1,6 @@
 import {JupyterLab, JupyterLabPlugin} from '@jupyterlab/application';
 
-import * as core from '@deathbeds/jyve';
+import * as core from '@deathbeds/jyve/lib/index';
 import {JyvePanel} from '@deathbeds/jyve/lib/frame';
 
 import '../style/index.css';

@@ -12,6 +12,7 @@
     "tslint": "^5.9.1",
     "typescript": "~2.7.2",
     "verdaccio": "^2.7.4",
+    "webpack-bundle-analyzer": "^2.10.0",
     "webpack-stats-duplicates": "^2.1.0"
   },
   "files": [
@@ -42,6 +43,8 @@
     "clean": "lerna run --parallel clean",
     "lab:link": "lerna run lab:link",
     "lab:watch": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm watch",
+    "lab:stats": "cd $CONDA_PREFIX/share/jupyter/lab/staging && ./node_modules/.bin/webpack --profile --json > stats.json",
+    "lab:viz": "cd $CONDA_PREFIX/share/jupyter/lab/staging && cp stats.json build/ && webpack-bundle-analyzer build/stats.json -p 6767",
     "publish:local": "lerna run --parallel publish:local",
     "serve": "verdaccio -c verdaccio/config.yaml",
     "watch": "lerna run --parallel watch",

@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "@jupyterlab/application": "^0.15.4",
-    "coffeescript": "^2.2.1"
+    "coffeescript": "^2.2.1",
+    "tslib": "^1.8.1"
   },
   "description": "A totally unsafe browser coffeescript kernel",
   "files": [

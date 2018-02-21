@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "@deathbeds/jyve-typescript-unsafe": "^0.2.0",
-    "@jupyterlab/application": "^0.15.4"
+    "@jupyterlab/application": "^0.15.4",
+    "tslib": "^1.8.1"
   },
   "description": "An extension for a totally unsafe browser js kernel",
   "files": [
@@ -40,5 +41,31 @@
     "publish:local": "npm publish --registry http://localhost:4873"
   },
   "types": "lib/index.d.ts",
-  "version": "0.2.0"
+  "version": "0.2.0",
+  "jyve": {
+    "kernelspec": {
+      "display_name": "TypeScript (unsafe) — Jyve",
+      "name": "jyve-typescript-unsafe",
+      "language": "typescript",
+      "arvg": ["echo", "jyve"],
+      "resources": {}
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "typescript"
+      },
+      "file_extension": ".ts",
+      "mimetype": "application/x-typescript",
+      "name": "typescript",
+      "nbconvert_exporter": "typescript",
+      "pygments_lexer": "typescript",
+      "version": "2.2.1"
+    },
+    "help_links": [
+      {
+        "text": "TypeScript",
+        "url": "https://www.typescriptlang.org"
+      }
+    ]
+  }
 }

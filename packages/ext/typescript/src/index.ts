@@ -1,6 +1,6 @@
 import {JupyterLab, JupyterLabPlugin} from '@jupyterlab/application';
 import {IJyve} from '@deathbeds/jyve';
-
+const pkg = (require('../package.json') as any);
 const id = '@deathbeds/jyve-typescript-unsafe-extension';
 
 import '../style/index.css';
@@ -9,14 +9,12 @@ const extension: JupyterLabPlugin<void> = {
   id,
   autoStart: true,
   requires: [IJyve],
-  activate: async (
+  activate: (
     app: JupyterLab, jyve: IJyve
   ) => {
-    const jyveKernel: any = await import('@deathbeds/jyve-typescript-unsafe');
-    console.log('jyveKernel', jyveKernel);
     jyve.register({
-      kernelSpec: jyveKernel.kernelSpec,
-      newKernel: jyveKernel.newKernel
+      kernelSpec: pkg.jyve.kernelspec,
+      newKernel: import('@deathbeds/jyve-typescript-unsafe') as any
     });
   }
 };

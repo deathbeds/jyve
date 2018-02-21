@@ -1,5 +1,6 @@
 import {JupyterLab, JupyterLabPlugin} from '@jupyterlab/application';
 import {IJyve} from '@deathbeds/jyve';
+const pkg = (require('../package.json') as any);
 
 const id = '@deathbeds/jyve-brython-unsafe-extension';
 
@@ -9,14 +10,12 @@ const extension: JupyterLabPlugin<void> = {
   id,
   autoStart: true,
   requires: [IJyve],
-  activate: async (
+  activate: (
     app: JupyterLab, jyve: IJyve
   ) => {
-    const jyveKernel: any = await import('@deathbeds/jyve-brython-unsafe');
-
     jyve.register({
-      kernelSpec: jyveKernel.kernelSpec,
-      newKernel: jyveKernel.newKernel
+      kernelSpec: pkg.jyve.kernelspec,
+      newKernel: import('@deathbeds/jyve-brython-unsafe') as any
     });
   }
 };

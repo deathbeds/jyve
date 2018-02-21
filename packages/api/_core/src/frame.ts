@@ -17,7 +17,6 @@ export class JyvePanel extends Widget {
 
     this._iframe = document.createElement('iframe');
     this.node.appendChild(this._iframe);
-    console.log(this);
   }
 
   protected onCloseRequest(msg: Message): void {

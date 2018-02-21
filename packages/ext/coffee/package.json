@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "@deathbeds/jyve-coffee-unsafe": "^0.2.0",
-    "@jupyterlab/application": "^0.15.4"
+    "@jupyterlab/application": "^0.15.4",
+    "tslib": "^1.8.1"
   },
   "description": "An extension for a totally unsafe browser js kernel",
   "files": [
@@ -41,5 +42,31 @@
     "publish:local": "npm publish --registry http://localhost:4873"
   },
   "types": "lib/index.d.ts",
-  "version": "0.2.0"
+  "version": "0.2.0",
+  "jyve": {
+    "kernelspec": {
+      "display_name": "CoffeeScript (unsafe) — Jyve",
+      "name": "jyve-coffee-unsafe",
+      "language": "coffeescript",
+      "arvg": ["echo", "jyve"],
+      "resources": {}
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "coffeescript"
+      },
+      "file_extension": ".coffee",
+      "mimetype": "text/coffeescript",
+      "name": "coffeescript",
+      "nbconvert_exporter": "coffeescript",
+      "pygments_lexer": "coffeescript",
+      "version": "2.2.1"
+    },
+    "help_links": [
+      {
+        "text": "CoffeeScript",
+        "url": "http://coffeescript.org/"
+      }
+    ]
+  }
 }

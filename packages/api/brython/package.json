@@ -9,7 +9,8 @@
   "dependencies": {
     "@jupyterlab/application": "^0.15.4",
     "brython": "^3.4.0",
-    "raw-loader": "~0.5.1"
+    "raw-loader": "~0.5.1",
+    "tslib": "^1.8.1"
   },
   "description": "A totally unsafe browser brython kernel",
   "files": [

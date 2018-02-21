@@ -16,43 +16,43 @@ export interface IFiles {
   http://blog.scottlogic.com/2015/01/20/typescript-compiler-api.html
 */
 export class JyveHost implements ts.LanguageServiceHost {
-    files: IFiles = {};
+  files: IFiles = {};
 
-    log(..._: any[]) { console.log(..._); }
-    trace(..._: any[]) { console['trace'](..._); }
-    error(..._: any[]) { console.error(..._); }
-    getCompilationSettings() { return ts.getDefaultCompilerOptions(); }
-    getScriptIsOpen(_: any) { return true; }
-    getCurrentDirectory() { return ''; }
-    getDefaultLibFileName(_: any) { return 'lib'; }
-    getScriptVersion(fn: string) {
-      return this.files[fn] ? `${this.files[fn].ver}` : '';
-    }
-    getScriptSnapshot(fn: string) {
-      return this.files[fn] ? this.files[fn].file : null;
-    }
+  log(..._: any[]) { console.log(..._); }
+  trace(..._: any[]) { console['trace'](..._); }
+  error(..._: any[]) { console.error(..._); }
+  getCompilationSettings() { return ts.getDefaultCompilerOptions(); }
+  getScriptIsOpen(_: any) { return true; }
+  getCurrentDirectory() { return ''; }
+  getDefaultLibFileName(_: any) { return 'lib'; }
+  getScriptVersion(fn: string) {
+    return this.files[fn] ? `${this.files[fn].ver}` : '';
+  }
+  getScriptSnapshot(fn: string) {
+    return this.files[fn] ? this.files[fn].file : null;
+  }
 
-    getScriptFileNames(): string[] {
-      let names: string[] = [];
-      for (let name in this.files) {
-        if (this.files.hasOwnProperty(name)) {
-          names.push(name);
-        }
-      }
-      return names;
-    }
-
-    addFile(fileName: string, body: string) {
-      let snap = ts.ScriptSnapshot.fromString(body);
-      snap.getChangeRange = (_) => undefined;
-      let existing = this.files[fileName];
-      if (existing) {
-        this.files[fileName].ver++;
-        this.files[fileName].file = snap;
-      } else {
-        this.files[fileName] = { ver: 1, file: snap };
+  getScriptFileNames(): string[] {
+    let names: string[] = [];
+    for (let name in this.files) {
+      if (this.files.hasOwnProperty(name)) {
+        names.push(name);
       }
     }
+    return names;
+  }
+
+  addFile(fileName: string, body: string) {
+    let snap = ts.ScriptSnapshot.fromString(body);
+    snap.getChangeRange = (_) => undefined;
+    let existing = this.files[fileName];
+    if (existing) {
+      this.files[fileName].ver++;
+      this.files[fileName].file = snap;
+    } else {
+      this.files[fileName] = { ver: 1, file: snap };
+    }
+  }
 }
 
 export class TypeScriptUnsafeKernel extends JSUnsafeKernel {

@@ -36,7 +36,7 @@ export interface IJyve {
 export class Jyve implements IJyve {
   private _lab: JupyterLab;
   private _specs: Kernel.ISpecModels = {default: '', kernelspecs: {}};
-  private _factories = new Map<string, Jyve.IKernelFactory>();
+  private _factories = new Map<string, Promise<Jyve.IKernelFactory>>();
   private _ready = new PromiseDelegate<void>();
   private _frameRequested = new Signal<this, Jyve.IFrameOptions>(this);
 
@@ -72,7 +72,7 @@ export class Jyve implements IJyve {
   }
 
   async makeKernel(options: JyveKernel.IOptions, id: string): Promise<Jyve.IJyveKernel> {
-    const factory = this._factories.get(options.name);
+    const factory = ((await this._factories.get(options.name)) as any).newKernel;
 
     options.lab = this._lab;
 
@@ -98,7 +98,7 @@ export namespace Jyve {
   }
   export interface IOptions {
     kernelSpec: Kernel.ISpecModel;
-    newKernel: IKernelFactory;
+    newKernel: Promise<IKernelFactory>;
   }
   export interface ISessionOptions extends Session.IOptions {
     manager?: IJyve;

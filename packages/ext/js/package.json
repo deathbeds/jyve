@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "@deathbeds/jyve-js-unsafe": "^0.2.0",
-    "@jupyterlab/application": "^0.15.4"
+    "@jupyterlab/application": "^0.15.4",
+    "tslib": "^1.8.1"
   },
   "description": "An extension for a totally unsafe browser js kernel",
   "files": [
@@ -39,5 +40,35 @@
     "publish:local": "npm publish --registry http://localhost:4873"
   },
   "types": "lib/index.d.ts",
-  "version": "0.2.0"
+  "version": "0.2.0",
+  "jyve": {
+    "kernelspec": {
+      "display_name": "JS (unsafe) — Jyve",
+      "name": "jyve-js-unsafe",
+      "language": "javascript",
+      "arvg": ["echo", "jyve"],
+      "resources": {}
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "javascript"
+      },
+      "file_extension": ".js",
+      "mimetype": "text/javascript",
+      "name": "javascript",
+      "nbconvert_exporter": "javascript",
+      "pygments_lexer": "javascript",
+      "version": "ES2015"
+    },
+    "help_links": [
+      {
+        "text": "MDN Web Docs",
+        "url": "https://developer.mozilla.org"
+      },
+      {
+        "text": "Can I use ... ?",
+        "url": "https://caniuse.com"
+      }
+    ]
+  }
 }

@@ -7,6 +7,7 @@ from glob import glob
 import binascii
 import json
 import re
+import notebook
 
 from pathlib import Path
 
@@ -97,14 +98,15 @@ class JyveExporter(HTMLExporter):
         "workspacesDir": "~/jyve/lab/workspaces",
         "workspacesUrl": "../lab/workspaces/",
         "baseUrl": "../",
-        "wsUrl": ""
+        "wsUrl": "",
+        "jyveOffline": True
     }, help="some reasonable fake values")
 
     def from_notebook_node(self, nb, resources=None, **kw):
-        local_host = "localhost:{}".format(self.port)
-        url_root = "http://{}".format(local_host)
-        output_root = join(resources["output_files_dir"], local_host)
+        url_root = "http://{}".format("localhost:{}".format(self.port))
+        output_root = join(resources["output_files_dir"])
         lab_path = self.lab_path()
+        static_path = str(Path(notebook.__file__).parent / "static")
         nb_names = [resources["metadata"]["name"]] + self.extra_notebooks
 
         urls = [
@@ -139,7 +141,7 @@ class JyveExporter(HTMLExporter):
 
             lab.kill()
 
-        self.copy_assets(output_root, lab_path)
+        self.copy_assets(output_root, lab_path, static_path)
         self.fix_urls(output_root, nb_names)
         self.fake_apis(output_root)
 
@@ -182,6 +184,7 @@ class JyveExporter(HTMLExporter):
         mirror_args = ["wget",
                        "--page-requisites",
                        "--convert-links",
+                       "-nH",
                        "-e", "robots=off",
                        "-P", resources["output_files_dir"],
                        "{}/{}?token={}".format(url_root, url, self.token)]
@@ -189,7 +192,7 @@ class JyveExporter(HTMLExporter):
         mirror = subprocess.Popen(mirror_args)
         mirror.wait()
 
-    def copy_assets(self, output_root, lab_path):
+    def copy_assets(self, output_root, lab_path, static_path):
         shutil.rmtree(join(output_root, "lab", "static"))
         shutil.copytree(join(lab_path, "static"),
                         join(output_root, "lab", "static"))
@@ -210,6 +213,14 @@ class JyveExporter(HTMLExporter):
             )
             urls.write_text(css)
 
+        # grab some stuff from notebook
+        components = Path(output_root) / "static" / "components"
+        if components.exists():
+            shutil.rmtree(components)
+        components.mkdir(exist_ok=True)
+        shutil.copytree(join(static_path, "components", "MathJax"),
+                        str(components / "MathJax"))
+
     def fix_index(self, output_root):
         index = join(output_root, "lab", "index.html")
         if exists(index):
@@ -226,12 +237,6 @@ class JyveExporter(HTMLExporter):
                 json.dumps(self.jupyter_config_data, indent=2)),
             idx.read_text(),
             flags=re.M | re.S)
-
-        # new_idx = re.sub(
-        #     r'(<head .*?>)',
-        #     '\\1<base href="./lab" />',
-        #     new_idx
-        # )
 
         new_idx = re.sub(r'src="lab', 'src="../lab', new_idx)
 

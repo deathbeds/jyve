@@ -15,6 +15,7 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "outDir": "./lib",
+"importHelpers": true,
     "target": "ES5",
     "types": [
       "node"

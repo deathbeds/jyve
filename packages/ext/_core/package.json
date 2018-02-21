@@ -5,7 +5,8 @@
   },
   "dependencies": {
     "@deathbeds/jyve": "^0.2.0",
-    "@jupyterlab/application": "^0.15.4"
+    "@jupyterlab/application": "^0.15.4",
+    "tslib": "^1.8.1"
   },
   "description": "Jupyter Kernels in the Browser",
   "files": [

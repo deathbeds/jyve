@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "@jupyterlab/application": "^0.15.4",
-    "typescript": "~2.7.2"
+    "typescript": "~2.7.2",
+    "tslib": "^1.8.1"
   },
   "description": "A totally unsafe browser TypeScript kernel",
   "files": [

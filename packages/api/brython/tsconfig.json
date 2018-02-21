@@ -16,13 +16,20 @@
     "noUnusedLocals": true,
     "noImplicitUseStrict": true,
     "outDir": "./lib",
+"importHelpers": true,
     "target": "ES5",
     "types": [
       "node"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "!!raw-loader!*": ["../../../node_modules/*"]
+    }
   },
   "include": [
+    "../_core/src/@types/**/*",
+    "./**/*",
     "./src/**/*",
-    "../_core/src/@types/**/*"
+    "./src/@types/**/*"
   ]
 }

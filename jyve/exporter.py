@@ -2,7 +2,6 @@ import subprocess
 import time
 import os
 import shutil
-from glob import glob
 import binascii
 import json
 import re
@@ -217,6 +216,9 @@ class JyveExporter(HTMLExporter):
         components.mkdir(exist_ok=True)
         copytree(str(static_path / "components" / "MathJax"),
                  str(components / "MathJax"))
+
+        [jsmap.unlink() for jsmap in output_root.rglob("*.js.map")]
+        [jsmap.unlink() for jsmap in output_root.rglob("stats.json")]
 
     def fix_index(self, output_root):
         index = output_root / "lab" / "index.html"

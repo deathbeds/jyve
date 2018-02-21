@@ -21,8 +21,7 @@ export class CoffeeUnsafeKernel extends JSUnsafeKernel {
   }
 
   async transpile(code: string) {
-    const coffeescript = await import(/* webpackChunkName: "coffeescript" */'coffeescript');
-    console.log('LOADED COFFEESCRIPT');
+    const coffeescript = await import('coffeescript');
     return coffeescript.compile(code, {bare: true});
   }
 }

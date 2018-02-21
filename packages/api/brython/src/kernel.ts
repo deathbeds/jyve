@@ -95,14 +95,14 @@ export namespace BrythonUnsafeKernel {
     }
 
 
-    const brythonSrc = (await import(/* webpackChunkName: "brython" */'!!raw-loader!brython')) as string;
+    const brythonSrc = (await import('!!raw-loader!brython')) as string;
     console.log('BRYTHON LOADAD');
     const brythonScript = document.createElement('script');
     brythonScript.textContent = brythonSrc;
     brythonScript.id = 'jyve-brython';
     document.body.appendChild(brythonScript);
 
-    const brythonStdLibSrc = (await import(/* webpackChunkName: "brython" */'!!raw-loader!brython/brython_stdlib.js')) as string;
+    const brythonStdLibSrc = (await import('!!raw-loader!brython/brython_stdlib.js')) as string;
     const brythonStdLibScript = document.createElement('script');
     brythonStdLibScript.textContent = brythonStdLibSrc;
     brythonStdLibScript.id = 'jyve-brython-stdlib';

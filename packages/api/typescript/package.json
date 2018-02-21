@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "@jupyterlab/application": "^0.15.4",
-    "typescript": "~2.7.2",
-    "tslib": "^1.8.1"
+    "tslib": "^1.8.1",
+    "typescript": "~2.7.2"
   },
   "description": "A totally unsafe browser TypeScript kernel",
   "files": [
@@ -43,7 +43,10 @@
       "display_name": "TypeScript (unsafe) — Jyve",
       "name": "jyve-typescript-unsafe",
       "language": "typescript",
-      "arvg": ["echo", "jyve"],
+      "arvg": [
+        "echo",
+        "jyve"
+      ],
       "resources": {}
     },
     "language_info": {

@@ -8,6 +8,5 @@ export const kernelSpec: Kernel.ISpecModel = jyve.kernelspec;
 
 export async function newKernel(options: JyveKernel.IOptions, id: string): Promise<Jyve.IJyveKernel> {
   let kernel = await import('./kernel');
-  console.log('BRYTHON KERNEL LOADED');
   return new kernel.BrythonUnsafeKernel(options, id);
 }

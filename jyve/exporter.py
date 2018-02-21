@@ -1,13 +1,13 @@
 import subprocess
 import time
 import os
-from os.path import join, exists
 import shutil
 from glob import glob
 import binascii
 import json
 import re
 import notebook
+from shutil import copytree, rmtree, copy2
 
 from pathlib import Path
 
@@ -104,9 +104,9 @@ class JyveExporter(HTMLExporter):
 
     def from_notebook_node(self, nb, resources=None, **kw):
         url_root = "http://{}".format("localhost:{}".format(self.port))
-        output_root = join(resources["output_files_dir"])
+        output_root = Path(resources["output_files_dir"])
         lab_path = self.lab_path()
-        static_path = str(Path(notebook.__file__).parent / "static")
+        static_path = Path(notebook.__file__).parent / "static"
         nb_names = [resources["metadata"]["name"]] + self.extra_notebooks
 
         urls = [
@@ -117,25 +117,21 @@ class JyveExporter(HTMLExporter):
         ] + self.extra_urls
 
         with TemporaryDirectory() as tmpdir:
+            td = Path(tmpdir)
             for i, nb_name in enumerate(nb_names):
-                nb_path = join(tmpdir, "{}.ipynb".format(nb_name))
+                nb_path = td / "{}.ipynb".format(nb_name)
                 if not i:
-                    with open(nb_path, "w+") as fp:
-                        nbformat.write(nb, fp, 4)
+                    nb_path.write_text(nbformat.writes(nb, 4))
                 else:
-                    parent = Path(nb_path).parent
-                    if not exists(parent):
+                    parent = nb_path.parent
+                    if not parent.exists():
                         urls += ["api/contents/{}".format(
                             parent.relative_to(tmpdir)
                         )]
-                    Path(nb_path).parent.mkdir(exist_ok=True)
-                    shutil.copy2(
-                        "{}.ipynb".format(nb_name),
-                        nb_path
-                    )
+                    parent.mkdir(exist_ok=True)
+                    copy2("{}.ipynb".format(nb_name), str(nb_path))
 
             lab = self.start_lab(url_root, tmpdir)
-            __import__("pprint").pprint(urls)
             for url in urls:
                 self.fetch_one(url_root, url, resources)
 
@@ -154,10 +150,11 @@ class JyveExporter(HTMLExporter):
             nb, resources, **kw)
 
     def lab_path(self):
-        return (subprocess.check_output(["jupyter-lab", "paths"])
-                .decode("utf-8")
-                .split("\n")[0]
-                .split(" directory: ")[1].strip())
+        return Path(
+            subprocess.check_output(["jupyter-lab", "paths"])
+            .decode("utf-8")
+            .split("\n")[0]
+            .split(" directory: ")[1].strip())
 
     def lab_args(self):
         return ["jupyter-lab",
@@ -193,19 +190,19 @@ class JyveExporter(HTMLExporter):
         mirror.wait()
 
     def copy_assets(self, output_root, lab_path, static_path):
-        shutil.rmtree(join(output_root, "lab", "static"))
-        shutil.copytree(join(lab_path, "static"),
-                        join(output_root, "lab", "static"))
+        out_static = output_root / "lab" / "static"
+        lab_static = lab_path / "static"
+        rmtree(str(out_static))
+        copytree(str(lab_static), str(out_static))
 
-        themes_out = join(output_root, "lab", "api", "themes")
-        if os.path.exists(themes_out):
-            shutil.rmtree(themes_out)
-        shutil.copytree(join(lab_path, "themes"), themes_out)
+        themes_out = output_root / "lab" / "api" / "themes"
+        if themes_out.exists():
+            rmtree(str(out_static))
+        copytree(str(lab_path / "themes"), str(themes_out))
 
-        for urls in Path(themes_out).rglob("urls.css"):
+        for urls in themes_out.rglob("urls.css"):
             css = urls.read_text()
             url_frag = urls.parent.relative_to(output_root)
-            print(urls)
             css = re.sub(
                 r"""(url\(['"])(images|icons)""",
                 r"\1../{}/\2".format(url_frag),
@@ -214,33 +211,30 @@ class JyveExporter(HTMLExporter):
             urls.write_text(css)
 
         # grab some stuff from notebook
-        components = Path(output_root) / "static" / "components"
+        components = output_root / "static" / "components"
         if components.exists():
-            shutil.rmtree(components)
+            rmtree(components)
         components.mkdir(exist_ok=True)
-        shutil.copytree(join(static_path, "components", "MathJax"),
-                        str(components / "MathJax"))
+        copytree(str(static_path / "components" / "MathJax"),
+                 str(components / "MathJax"))
 
     def fix_index(self, output_root):
-        index = join(output_root, "lab", "index.html")
-        if exists(index):
-            os.unlink(index)
-        shutil.move(
-            glob(join(output_root, "lab*token*"))[0],
-            index,
-        )
-        idx = Path(index)
+        index = output_root / "lab" / "index.html"
+        if index.exists():
+            index.unlink()
+
+        list(output_root.glob("lab*token*"))[0].rename(index)
 
         new_idx = re.sub(
             '(<script.*?id="jupyter-config-data".*?>).*?(</script>)',
             '\\1\n{}\n</script>'.format(
                 json.dumps(self.jupyter_config_data, indent=2)),
-            idx.read_text(),
+            index.read_text(),
             flags=re.M | re.S)
 
         new_idx = re.sub(r'src="lab', 'src="../lab', new_idx)
 
-        idx.write_text(new_idx)
+        index.write_text(new_idx)
 
     def fix_urls(self, output_root, nb_names):
         self.fix_index(output_root)
@@ -248,33 +242,29 @@ class JyveExporter(HTMLExporter):
         # handle the rest
         [
             shutil.move(str(t), str(t.parent / t.name.split("?")[0]))
-            for t in
-            (Path(output_root)).rglob("*?token={}".format(self.token))
+            for t in output_root.rglob("*?token={}".format(self.token))
         ]
 
         self.fix_contents(output_root, nb_names)
 
     def fix_contents(self, output_root, nb_names):
         parents = set()
+        contents_root = output_root / "api" / "contents"
 
         for nb_name in nb_names:
             parents = parents | set(
-                Path(output_root, "api", "contents", nb_name)
-                .relative_to(Path(output_root) / "api" / "contents")
-                .parents
+                (contents_root / nb_name).relative_to(contents_root).parents
             )
 
         for parent in [p for p in parents if p != Path(".")]:
-            parent_path = (
-                Path(output_root) / "api" / "contents" / parent
-            )
+            parent_path = contents_root / parent
             contents = (parent_path / parent.name).read_text()
             (parent_path / parent.name).unlink()
             (parent_path / "index.html").write_text(contents)
 
         for nb_name in nb_names:
             nb_file = "{}.ipynb".format(nb_name)
-            ipynb = Path(output_root) / "api" / "contents" / nb_file
+            ipynb = contents_root / nb_file
             contents = ipynb.read_text()
             ipynb.unlink()
             ipynb.mkdir()
@@ -282,16 +272,14 @@ class JyveExporter(HTMLExporter):
             (ipynb / "checkpoints").write_text("[]")
 
     def fake_apis(self, output_root):
-        api_root = Path(output_root) / "api"
+        api_root = output_root / "api"
         api_root.mkdir(exist_ok=True)
-
-        out = Path(output_root)
 
         for path, response in self.dummy_apis.items():
             the_json = json.dumps(response)
             if path.endswith("/"):
-                (out / path).mkdir(exist_ok=True)
-                out_path = out / path / "index.html"
+                (output_root / path).mkdir(exist_ok=True)
+                out_path = output_root / path / "index.html"
             else:
-                out_path = out / path
+                out_path = output_root / path
             out_path.write_text(the_json)

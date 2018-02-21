@@ -46,6 +46,11 @@ class JyveExporter(HTMLExporter):
         help="additional notebooks to load",
         config=True)
 
+    extra_contents = T.List(
+        [],
+        help="additional contents to include ",
+        config=True)
+
     dummy_apis = T.Dict({
         "api/sessions": [],
         "api/terminals": [],
@@ -101,12 +106,26 @@ class JyveExporter(HTMLExporter):
         "jyveOffline": True
     }, help="some reasonable fake values")
 
+    @property
+    def extra_files(self):
+        here = Path(".")
+        for nb in self.extra_notebooks:
+            yield here / nb
+        for pattern in self.extra_contents:
+            for match in here.glob(pattern):
+                yield match
+
     def from_notebook_node(self, nb, resources=None, **kw):
         url_root = "http://{}".format("localhost:{}".format(self.port))
         output_root = Path(resources["output_files_dir"])
         lab_path = self.lab_path()
         static_path = Path(notebook.__file__).parent / "static"
-        nb_names = [resources["metadata"]["name"]] + self.extra_notebooks
+        nb_names = [
+            resources["metadata"]["name"]
+        ] + [
+            str(ef)[:-6] for ef in self.extra_files
+            if ef.name.endswith('.ipynb')
+        ]
 
         urls = [
             "lab"

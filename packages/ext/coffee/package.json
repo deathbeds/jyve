@@ -4,7 +4,7 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@deathbeds/jyve-coffee-unsafe": "^0.2.0",
+    "@deathbeds/jyve-coffee-unsafe": "^0.3.0"
     "@jupyterlab/application": "^0.15.4",
     "tslib": "^1.8.1"
   },
@@ -72,5 +72,5 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.2.0"
+  "version": "0.3.0"
 }

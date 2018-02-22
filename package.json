@@ -3,7 +3,8 @@
   "bugs": {
     "url": "https://github.com/deathbeds/jyve/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+  },
   "description": "Jupyter Kernels in the Browser",
   "devDependencies": {
     "@types/node": "^9.4.2",
@@ -36,19 +37,19 @@
     "build": "jlpm build:core && jlpm build:js && jlpm build:coffee && jlpm build:typescript && jlpm build:brython && jlpm build:ext",
     "build:brython": "lerna run build --scope '@deathbeds/jyve-brython-unsafe'",
     "build:coffee": "lerna run build --scope '@deathbeds/jyve-coffee-unsafe'",
-    "build:typescript": "lerna run build --scope '@deathbeds/jyve-typescript-unsafe'",
     "build:core": "lerna run build --scope '@deathbeds/jyve'",
     "build:ext": "lerna run build --scope '@deathbeds/*-extension'",
     "build:js": "lerna run build --scope '@deathbeds/jyve-js-unsafe'",
+    "build:typescript": "lerna run build --scope '@deathbeds/jyve-typescript-unsafe'",
     "clean": "lerna run --parallel clean",
+    "lab:dupes": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm build --json > stats.json && webpack-stats-duplicates stats.json",
     "lab:link": "lerna run lab:link",
-    "lab:watch": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm watch",
     "lab:stats": "cd $CONDA_PREFIX/share/jupyter/lab/staging && ./node_modules/.bin/webpack --profile --json > stats.json",
     "lab:viz": "cd $CONDA_PREFIX/share/jupyter/lab/staging && cp stats.json build/ && webpack-bundle-analyzer build/stats.json -p 6767",
+    "lab:watch": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm watch",
     "publish:local": "lerna run --parallel publish:local",
     "serve": "verdaccio -c verdaccio/config.yaml",
-    "watch": "lerna run --parallel watch",
-    "lab:dupes": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm build --json > stats.json && webpack-stats-duplicates stats.json"
+    "watch": "lerna run --parallel watch"
   },
   "version": "0.2.0",
   "workspaces": [

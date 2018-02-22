@@ -15,6 +15,7 @@ else
 fi
 
 set -ex
+python setupy.develop
 
 jlpm bootstrap || jlpm bootstrap || jlpm bootstrap
 jupyter labextension list

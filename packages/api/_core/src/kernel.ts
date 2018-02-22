@@ -49,7 +49,6 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
       await JyveKernel.wait(0);
       let timeout = 0.5;
       while (!this._iframe.contentWindow) {
-        console.log('awaiting iframe', timeout);
         await JyveKernel.wait(timeout);
         timeout = timeout * 2;
       }

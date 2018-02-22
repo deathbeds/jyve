@@ -92,12 +92,14 @@ source activate jyve-dev
 ## Build Once
 ```bash
 jlpm build
-jupyter lab build
+jlpm lab:build
 ```
 
 ## Always Be Building
 ```bash
 jlpm build --watch
 # and in another terminal
-jupyter lab build --watch --debug --no-browser
+./scripts/watch.sh
+# and in another terminal
+jlpm lab:watch
 ```

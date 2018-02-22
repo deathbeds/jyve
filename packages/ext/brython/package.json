@@ -3,9 +3,6 @@
   "bugs": {
     "url": "https://github.com/deathbeds/jyve/issues"
   },
-  "peerDependencies": {
-    "@deathbeds/jyve": "^0.2.0"
-  },
   "dependencies": {
     "@deathbeds/jyve-brython-unsafe": "^0.2.0",
     "@jupyterlab/application": "^0.15.4",
@@ -19,19 +16,23 @@
   "jupyterlab": {
     "extension": true
   },
-  "keywords": [
-    "jupyter",
-    "jupyterlab",
-    "jupyterlab-extension",
-    "jyve"
-  ],
   "jyve": {
+    "help_links": [
+      {
+        "text": "Brython",
+        "url": "https://www.brython.info/"
+      }
+    ],
     "kernelspec": {
+      "arvg": [
+        "echo",
+        "jyve"
+      ],
       "display_name": "Brython (unsafe) — Jyve",
-      "name": "jyve-brython-unsafe",
       "language": "python",
-      "arvg": ["echo", "jyve"],
-      "resources": {}
+      "name": "jyve-brython-unsafe",
+      "resources": {
+      }
     },
     "language_info": {
       "codemirror_mode": {
@@ -44,17 +45,20 @@
       "nbconvert_exporter": "python",
       "pygments_lexer": "ipython3",
       "version": "ES2015"
-    },
-    "help_links": [
-      {
-        "text": "Brython",
-        "url": "https://www.brython.info/"
-      }
-    ]
+    }
   },
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jupyterlab-extension",
+    "jyve"
+  ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-brython-unsafe-extension",
+  "peerDependencies": {
+    "@deathbeds/jyve": "^0.2.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/deathbeds/jyve.git"
@@ -63,8 +67,8 @@
     "build": "tsc",
     "clean": "rimraf lib",
     "lab:link": "jupyter labextension link . --no-build",
-    "watch": "tsc --watch",
-    "publish:local": "npm publish --registry http://localhost:4873"
+    "publish:local": "npm publish --registry http://localhost:4873",
+    "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
   "version": "0.2.0"

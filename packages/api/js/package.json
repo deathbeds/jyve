@@ -3,9 +3,6 @@
   "bugs": {
     "url": "https://github.com/deathbeds/jyve/issues"
   },
-  "peerDependencies": {
-    "@deathbeds/jyve": "^0.2.0"
-  },
   "dependencies": {
     "@jupyterlab/application": "^0.15.4",
     "tslib": "^1.8.1"
@@ -15,34 +12,27 @@
     "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
   ],
   "homepage": "https://github.com/deathbeds/jyve",
-  "keywords": [
-    "jupyter",
-    "jupyterlab",
-    "jyve"
-  ],
-  "license": "BSD-3-Clause",
-  "main": "lib/index.js",
-  "name": "@deathbeds/jyve-js-unsafe",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/deathbeds/jyve.git"
-  },
-  "scripts": {
-    "build": "tsc",
-    "clean": "rimraf lib",
-    "lab:link": "jupyter labextension link . --no-build",
-    "watch": "tsc --watch",
-    "publish:local": "npm publish --registry http://localhost:4873"
-  },
-  "types": "lib/index.d.ts",
-  "version": "0.2.0",
   "jyve": {
+    "help_links": [
+      {
+        "text": "MDN Web Docs",
+        "url": "https://developer.mozilla.org"
+      },
+      {
+        "text": "Can I use ... ?",
+        "url": "https://caniuse.com"
+      }
+    ],
     "kernelspec": {
+      "arvg": [
+        "echo",
+        "jyve"
+      ],
       "display_name": "JS (unsafe) — Jyve",
-      "name": "jyve-js-unsafe",
       "language": "javascript",
-      "arvg": ["echo", "jyve"],
-      "resources": {}
+      "name": "jyve-js-unsafe",
+      "resources": {
+      }
     },
     "language_info": {
       "codemirror_mode": {
@@ -54,16 +44,30 @@
       "nbconvert_exporter": "javascript",
       "pygments_lexer": "javascript",
       "version": "ES2015"
-    },
-    "help_links": [
-      {
-        "text": "MDN Web Docs",
-        "url": "https://developer.mozilla.org"
-      },
-      {
-        "text": "Can I use ... ?",
-        "url": "https://caniuse.com"
-      }
-    ]
-  }
+    }
+  },
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jyve"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "lib/index.js",
+  "name": "@deathbeds/jyve-js-unsafe",
+  "peerDependencies": {
+    "@deathbeds/jyve": "^0.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deathbeds/jyve.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "lab:link": "jupyter labextension link . --no-build",
+    "publish:local": "npm publish --registry http://localhost:4873",
+    "watch": "tsc --watch"
+  },
+  "types": "lib/index.d.ts",
+  "version": "0.2.0"
 }

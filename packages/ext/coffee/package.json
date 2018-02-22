@@ -3,9 +3,6 @@
   "bugs": {
     "url": "https://github.com/deathbeds/jyve/issues"
   },
-  "peerDependencies": {
-    "@deathbeds/jyve": "^0.2.0"
-  },
   "dependencies": {
     "@deathbeds/jyve-coffee-unsafe": "^0.2.0",
     "@jupyterlab/application": "^0.15.4",
@@ -19,37 +16,23 @@
   "jupyterlab": {
     "extension": true
   },
-  "keywords": [
-    "coffee",
-    "coffeescript",
-    "jupyter",
-    "jupyterlab-extension",
-    "jupyterlab",
-    "jyve"
-  ],
-  "license": "BSD-3-Clause",
-  "main": "lib/index.js",
-  "name": "@deathbeds/jyve-coffee-unsafe-extension",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/deathbeds/jyve.git"
-  },
-  "scripts": {
-    "build": "tsc",
-    "clean": "rimraf lib",
-    "lab:link": "jupyter labextension link . --no-build",
-    "watch": "tsc --watch",
-    "publish:local": "npm publish --registry http://localhost:4873"
-  },
-  "types": "lib/index.d.ts",
-  "version": "0.2.0",
   "jyve": {
+    "help_links": [
+      {
+        "text": "CoffeeScript",
+        "url": "http://coffeescript.org/"
+      }
+    ],
     "kernelspec": {
+      "arvg": [
+        "echo",
+        "jyve"
+      ],
       "display_name": "CoffeeScript (unsafe) — Jyve",
-      "name": "jyve-coffee-unsafe",
       "language": "coffeescript",
-      "arvg": ["echo", "jyve"],
-      "resources": {}
+      "name": "jyve-coffee-unsafe",
+      "resources": {
+      }
     },
     "language_info": {
       "codemirror_mode": {
@@ -61,12 +44,33 @@
       "nbconvert_exporter": "coffeescript",
       "pygments_lexer": "coffeescript",
       "version": "2.2.1"
-    },
-    "help_links": [
-      {
-        "text": "CoffeeScript",
-        "url": "http://coffeescript.org/"
-      }
-    ]
-  }
+    }
+  },
+  "keywords": [
+    "coffee",
+    "coffeescript",
+    "jupyter",
+    "jupyterlab-extension",
+    "jupyterlab",
+    "jyve"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "lib/index.js",
+  "name": "@deathbeds/jyve-coffee-unsafe-extension",
+  "peerDependencies": {
+    "@deathbeds/jyve": "^0.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deathbeds/jyve.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "lab:link": "jupyter labextension link . --no-build",
+    "publish:local": "npm publish --registry http://localhost:4873",
+    "watch": "tsc --watch"
+  },
+  "types": "lib/index.d.ts",
+  "version": "0.2.0"
 }

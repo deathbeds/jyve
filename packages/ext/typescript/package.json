@@ -4,7 +4,7 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@deathbeds/jyve-typescript-unsafe": "^0.3.0"
+    "@deathbeds/jyve-typescript-unsafe": "^0.3.0",
     "@jupyterlab/application": "^0.15.4",
     "tslib": "^1.8.1"
   },

@@ -1,6 +1,19 @@
 #!/bin/bash
 # This is used by repo2docker _after_ environment.yml, but still during the
 # docker build, which is simpler than a dedicated Dockerfile
+echo "CONDA_PREFIX is $CONDA_PREFIX"
+
+if [ "${NB_UID}not-on-binder" = "not-on-binder" ]; then
+  echo "...and that's fine"
+else
+  if [ "${CONDA_PREFIX}no-conda-prefix" = "no-conda-prefix"]; then
+    echo "...and we set it to ${CONDA_DIR}"
+    export CONDA_PREFIX=$CONDA_DIR
+  else
+    echo "...and that's fine"
+  fi
+fi
+
 set -ex
 
 jlpm bootstrap || jlpm bootstrap || jlpm bootstrap
@@ -9,3 +22,4 @@ jupyter labextension list
 # this first build is usually broken in subtle ways
 jupyter lab build || echo "initial lab build failed, continuing anyway..."
 ./scripts/sync.sh
+jupyter lab build || echo "failed again, fix it in post..."

@@ -22,7 +22,7 @@ const extension: JupyterLabPlugin<core.IJyve> = {
       panel.id = `jyv-frame-${++nextFrameId}`;
       panel.title.label = opts.kernel.info.implementation;
       setTimeout(function() {
-        app.shell.addToMainArea(panel, {mode: 'split-right'});
+        app.shell.addToMainArea(panel);
       });
     });
 

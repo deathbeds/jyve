@@ -42,7 +42,17 @@ export function patchNewUntitled(
     try {
       return await _get.call(mgr, path, options);
     } catch (err) {
-      console.log(err);
+      console.log('failed naive request', err);
+    }
+
+    try {
+      let result: Contents.IModel = await _get.call(
+        mgr, `${path}/index.html`, options);
+      console.log('trying with index.html');
+      (result as any).path = path;
+      return result;
+    } catch (err) {
+      console.log('failed naive request', err);
       return jyveModel();
     }
   }

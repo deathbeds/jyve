@@ -77,7 +77,7 @@ class JyveExporter(HTMLExporter):
     jupyter_config_data = T.Dict({
         "buildAvailable": "False",
         "buildCheck": "False",
-        "token": "nope",
+        "token": "",
         "devMode": "False",
         "terminalsAvailable": "False",
         "ignorePlugins": "[]",

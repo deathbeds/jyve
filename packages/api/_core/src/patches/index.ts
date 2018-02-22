@@ -1,19 +1,18 @@
-import {patchGetSpecs} from './getSpecs';
-import {patchStartNew} from './startNew';
-import {patchListRunning} from './listRunning';
 import {patchCreateCheckpoint} from './createCheckpoint';
+import {patchGetSpecs} from './getSpecs';
+import {patchListRunning} from './listRunning';
 import {patchNewUntitled} from './newUntitled';
+import {patchStartNew} from './startNew';
 
 import {PageConfig} from '@jupyterlab/coreutils';
 
 let _patches = {
-  patchGetSpecs,
-  patchStartNew,
-  patchListRunning,
   patchCreateCheckpoint,
+  patchGetSpecs,
+  patchListRunning,
   patchNewUntitled,
+  patchStartNew,
 };
-
 
 if (PageConfig.getOption('jyveOffline')) {
   console.log('enabling extra patches');

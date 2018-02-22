@@ -21,7 +21,9 @@ const extension: JupyterLabPlugin<core.IJyve> = {
       panel.kernel = opts.kernel;
       panel.id = `jyv-frame-${++nextFrameId}`;
       panel.title.label = opts.kernel.info.implementation;
-      setTimeout(() => app.shell.addToMainArea(panel));
+      setTimeout(function() {
+        app.shell.addToMainArea(panel, {mode: 'split-right'});
+      });
     });
 
     return manager;

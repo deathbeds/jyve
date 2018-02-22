@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "@jupyterlab/application": "^0.15.4",
+    "@phosphor/widgets": "^1.5.0",
     "mock-socket": "^7.1.0",
     "tslib": "^1.8.1"
   },

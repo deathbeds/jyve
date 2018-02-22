@@ -23,5 +23,6 @@ jupyter labextension list
 # this first build is usually broken in subtle ways
 jupyter lab build || echo "initial lab build failed, continuing anyway..."
 ./scripts/sync.sh
-cd $CONDA_PREFIX/share/jupyter/lab/staging
-jlpm build
+
+# do a non-standard build so that our stuff "sticks"
+jlpm lab:build

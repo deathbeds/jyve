@@ -42,6 +42,7 @@
     "build:js": "lerna run build --scope '@deathbeds/jyve-js-unsafe'",
     "build:typescript": "lerna run build --scope '@deathbeds/jyve-typescript-unsafe'",
     "clean": "lerna run --parallel clean",
+    "lab:build": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm build",
     "lab:clean": "cd $CONDA_PREFIX/share/jupyter/lab/staging/build && rm `ls | grep -v index | grep -v error`",
     "lab:dupes": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm build --json > stats.json && webpack-stats-duplicates stats.json",
     "lab:link": "lerna run lab:link",

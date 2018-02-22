@@ -1,6 +1,6 @@
 # jyve
 
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/deathbeds/jyve/master?urlpath=lab/tree/notebooks/index.ipynb)
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/deathbeds/jyve/master?urlpath=lab/tree/index.ipynb)
 
 Experimental, unsafe Jupyter Kernels in the Browser.
 
@@ -10,7 +10,7 @@ Experimental, unsafe Jupyter Kernels in the Browser.
 - [Brython](./notebooks/Brython.ipynb)
 - [TypeScript](./notebooks/TypeScript.ipynb)
 
-These kernels create their own (presently unclosable #9) widget next to a
+These kernels create their own widget next to a
 Notebook (or Console). Restarting the kernel is equivalent to refreshing the
 page.
 
@@ -23,7 +23,8 @@ instance available. In particular, this allows you to do things like:
 JupyterLab.commands.execute('notebook:create-new');
 ```
 
-...to create a new notebook.
+...to create a new notebook, though you can do
+[just about anything](./notebooks/JupyterLab API.ipynb).
 
 
 ## Before

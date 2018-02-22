@@ -6,7 +6,6 @@ import {JupyterLab} from '@jupyterlab/application';
 import {nbformat} from '@jupyterlab/coreutils';
 import {Kernel, Session, KernelMessage} from '@jupyterlab/services';
 
-
 import {patches} from './patches';
 import {JyveSession} from './session';
 import {JyveKernel} from './kernel';
@@ -68,7 +67,15 @@ export class Jyve implements IJyve {
   startNew(
     options: Jyve.ISessionOptions
   ): Promise<Session.ISession> {
-    return JyveSession.startNew({...options, manager: this});
+    let session = JyveSession.startNew({...options, manager: this});
+    session.then((session) => {
+      const kernel = session.kernel as Jyve.IJyveKernel;
+      const path = session.path;
+      kernel.frameRequested.connect(() => {
+        this._frameRequested.emit({kernel, path});
+      });
+    });
+    return session;
   }
 
   async makeKernel(options: JyveKernel.IOptions, id: string): Promise<Jyve.IJyveKernel> {
@@ -76,11 +83,7 @@ export class Jyve implements IJyve {
 
     options.lab = this._lab;
 
-    const kernel = await factory(options, id);
-    kernel.frameRequested.connect(() => {
-      this._frameRequested.emit({kernel});
-    });
-    this._frameRequested.emit({kernel});
+    const kernel = await factory(options, id) as Jyve.IJyveKernel;
 
     return kernel;
   }
@@ -95,6 +98,7 @@ export namespace Jyve {
   }
   export interface IFrameOptions {
     kernel: IJyveKernel;
+    path?: string;
   }
   export interface IOptions {
     kernelSpec: Kernel.ISpecModel;
@@ -104,7 +108,7 @@ export namespace Jyve {
     manager?: IJyve;
   }
   export interface IJyveKernel extends Kernel.IKernel {
-    iframe(iframe?: HTMLIFrameElement): HTMLIFrameElement;
+    iframe(iframe?: HTMLIFrameElement): Promise<HTMLIFrameElement>;
     frameRequested: ISignal<IJyveKernel, Jyve.IFrameOptions>;
     fakeDisplayData(
       parent: KernelMessage.IMessage,

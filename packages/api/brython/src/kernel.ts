@@ -1,6 +1,7 @@
 import {Kernel, KernelMessage} from '@jupyterlab/services';
 
 import {JSUnsafeKernel} from '@deathbeds/jyve-js-unsafe';
+import {JyveKernel} from '@deathbeds/jyve/lib/kernel';
 
 const {jyve} = (require('../package.json') as any);
 
@@ -82,21 +83,13 @@ export class BrythonUnsafeKernel extends JSUnsafeKernel {
 }
 
 export namespace BrythonUnsafeKernel {
-  function wait(timeout: number) {
-    return new Promise(resolve => {
-      setTimeout(() => resolve('resolved'), timeout);
-    });
-  }
-
   export async function brython(window: any) {
     const document = window.document;
     if (window.__BRYTHON__) {
       return window.__BRYTHON__;
     }
 
-
     const brythonSrc = (await import('!!raw-loader!brython')) as string;
-    console.log('BRYTHON LOADAD');
     const brythonScript = document.createElement('script');
     brythonScript.textContent = brythonSrc;
     brythonScript.id = 'jyve-brython';
@@ -108,8 +101,10 @@ export namespace BrythonUnsafeKernel {
     brythonStdLibScript.id = 'jyve-brython-stdlib';
     document.body.appendChild(brythonStdLibScript);
 
+    let timeout = 0.5;
     while (!(window.__BRYTHON__ && window.__BRYTHON__.$meta_path)) {
-      await wait(100);
+      await JyveKernel.wait(timeout);
+      timeout = timeout * 2;
     }
 
     let brythonInstance = window.__BRYTHON__;

@@ -20,6 +20,7 @@ export class JyvePanel extends Widget {
   }
 
   protected onCloseRequest(msg: Message): void {
+    this._kernel.iframe(null);
     this.dispose();
   }
 

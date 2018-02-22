@@ -39,13 +39,21 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   }
 
 
-  iframe(iframe?: HTMLIFrameElement) {
-    if (iframe) {
+  async iframe(iframe?: HTMLIFrameElement) {
+    if (iframe !== void 0) {
       this._iframe = iframe;
     } else {
       if (this._iframe == null) {
         this._frameRequested.emit({kernel: this});
       }
+      await JyveKernel.wait(0);
+      let timeout = 0.5;
+      while (!this._iframe.contentWindow) {
+        console.log('awaiting iframe', timeout);
+        await JyveKernel.wait(timeout);
+        timeout = timeout * 2;
+      }
+
       return this._iframe;
     }
   }
@@ -298,5 +306,11 @@ export namespace JyveKernel {
       url = url + `&token=${encodeURIComponent(token)}`;
     }
     return url;
+  }
+
+  export function wait(timeout: number) {
+    return new Promise(resolve => {
+      setTimeout(() => resolve(void 0), timeout);
+    });
   }
 }

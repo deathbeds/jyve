@@ -8,8 +8,18 @@ import {JyveKernel} from './kernel';
 import {JyveSocket, JyveServer} from './socket';
 import {Jyve} from '.';
 
+const DEBUG = false;
 
-export class JyveSession extends DefaultSession {}
+export class JyveSession extends DefaultSession {
+  dispose(force=false) {
+    if (DEBUG) {
+      console.log('disposing', force, this);
+    }
+    if (force) {
+      super.dispose();
+    }
+  }
+}
 
 export
 namespace JyveSession {

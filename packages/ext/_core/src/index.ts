@@ -20,10 +20,10 @@ const extension: JupyterLabPlugin<core.IJyve> = {
       const panel = new JyvePanel();
       panel.kernel = opts.kernel;
       panel.id = `jyv-frame-${++nextFrameId}`;
-      panel.title.label = opts.kernel.info.implementation;
-      setTimeout(function() {
-        app.shell.addToMainArea(panel);
-      });
+      panel.title.label = opts.path
+        ? opts.path.split('/').slice(-1)[0]
+        : opts.kernel.info.implementation;
+      app.shell.addToMainArea(panel, {mode: 'split-right'});
     });
 
     return manager;

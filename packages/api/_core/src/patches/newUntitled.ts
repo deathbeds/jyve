@@ -1,8 +1,9 @@
 import {JupyterLab} from '@jupyterlab/application';
 import {Contents} from '@jupyterlab/services';
 
-
 import {IJyve} from '..';
+
+const DEBUG = false;
 
 let nextJyve = 1;
 
@@ -38,28 +39,35 @@ export function patchNewUntitled(
 
   async function get(path: string, options?: Contents.IFetchOptions,
   ): Promise<Contents.IModel> {
-    console.log('get[', path, ']', options);
     try {
       return await _get.call(mgr, path, options);
     } catch (err) {
-      console.log('failed naive request', err);
+      if (DEBUG) {
+        console.log('failed naive request', err);
+      }
     }
 
     try {
       let result: Contents.IModel = await _get.call(
         mgr, `${path}/index.html`, options);
-      console.log('trying with index.html');
+      if (DEBUG) {
+        console.log('trying with index.html');
+      }
       (result as any).path = path;
       return result;
     } catch (err) {
-      console.log('failed naive request', err);
+      if (DEBUG) {
+        console.log('failed naive request', err);
+      }
       return jyveModel();
     }
   }
 
   async function newUntitled(options: Contents.ICreateOptions
   ): Promise<Contents.IModel> {
-    console.log('newUntitled', options);
+    if (DEBUG) {
+      console.log('newUntitled', options);
+    }
     try {
       return await _newUntitled.call(mgr, options);
     } catch (err) {
@@ -68,18 +76,24 @@ export function patchNewUntitled(
   }
 
   async function save(path: string, options?: Partial<Contents.IModel>) {
-    console.log('save[', path, ']', options);
+    if (DEBUG) {
+      console.log('save[', path, ']', options);
+    }
     try {
       return await _save.call(mgr, options);
     } catch (err) {
-      console.log(path, options);
+      if (DEBUG) {
+        console.log(path, options);
+      }
       return jyveModel();
     }
   }
 
   async function listCheckpoints(path: string
   ): Promise<Contents.ICheckpointModel[]> {
-    console.log('listCheckpoints[', path, ']');
+    if (DEBUG) {
+      console.log('listCheckpoints[', path, ']');
+    }
     try {
       return await _listCheckpoints.call(mgr, path);
     } catch (err) {

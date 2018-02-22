@@ -15,7 +15,7 @@ else
 fi
 
 set -ex
-python setupy.develop
+pip install -e .
 
 jlpm bootstrap || jlpm bootstrap || jlpm bootstrap
 jupyter labextension list
@@ -23,4 +23,5 @@ jupyter labextension list
 # this first build is usually broken in subtle ways
 jupyter lab build || echo "initial lab build failed, continuing anyway..."
 ./scripts/sync.sh
-jupyter lab build || echo "failed again, fix it in post..."
+cd $CONDA_PREFIX/share/jupyter/lab/staging
+jlpm build

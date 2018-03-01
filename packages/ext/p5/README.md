@@ -1,6 +1,6 @@
 
-# @deathbeds/jyve-coffee-unsafe-extension
-> An extension for a totally unsafe browser js kernel
+# @deathbeds/jyve-p5-unsafe-extension
+> An extension for a totally unsafe browser p5 kernel
 
 ## Before
 ```bash
@@ -14,9 +14,9 @@ pip install jupyterlab
 
 ## Install
 ```bash
-jupyter labextension install @deathbeds/jyve-coffee-unsafe-extension
+jupyter labextension install @deathbeds/jyve-p5-unsafe-extension
 ```
 
 
 ## Development
-`@deathbeds/jyve-coffee-unsafe-extension` is built as part of [Jyve](https://github.com/deathbeds/jyve).
+`@deathbeds/jyve-p5-unsafe-extension` is built as part of [Jyve](https://github.com/deathbeds/jyve).

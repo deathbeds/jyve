@@ -9,6 +9,7 @@ Experimental, unsafe Jupyter Kernels in the Browser... from anywhere.
 - [CoffeeScript](./notebooks/CoffeeScript.ipynb)
 - [Brython](./notebooks/Brython.ipynb)
 - [TypeScript](./notebooks/TypeScript.ipynb)
+- [P5](./notebooks/P5.ipynb)
 
 ## Convenience wrappers
 - [PhosphorJS](./notebooks/Phosphor Playground.ipynb)
@@ -18,9 +19,8 @@ These kernels create their own widget next to a
 Notebook (or Console). Restarting the kernel is equivalent to refreshing the
 page.
 
-> 🤔 You can use []`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) or [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) for some semi-persistent data.
-
-For extra danger, these kernels also make the root `JupyterLab` application
+## The Big Security Hole
+For **extra danger**, these kernels also make the root `JupyterLab` application
 instance available. In particular, this allows you to do things like:
 
 ```JavaScript
@@ -33,7 +33,7 @@ JupyterLab.commands.execute('notebook:create-new');
 
 ## Before
 Install:
-* JupyterLab >=0.31.8 from [pip](https://pypi.io/project/jupyterlab) or
+* JupyterLab >=0.31.10 from [pip](https://pypi.io/project/jupyterlab) or
   [conda](https://anaconda.org/conda-forge/jupyterlab)
 
 ## Install
@@ -43,9 +43,10 @@ jupyter labextension install @deathbeds/jyve-extension
 # the base kernel
 jupyter labextension install @deathbeds/jyve-js-unsafe-extension
 # specific compile-to-js kernels (needs the js kernel)
-jupyter labextension install @deathbeds/jyve-coffee-unsafe-extension
-jupyter labextension install @deathbeds/jyve-typescript-unsafe-extension
 jupyter labextension install @deathbeds/jyve-brython-unsafe-extension
+jupyter labextension install @deathbeds/jyve-coffee-unsafe-extension
+jupyter labextension install @deathbeds/jyve-p5-unsafe-extension
+jupyter labextension install @deathbeds/jyve-typescript-unsafe-extension
 # extra packages, wrapped for convenience in jyve kernels
 jupyter labextension install @deathbeds/jyve-lyb-d3
 jupyter labextension install @deathbeds/jyve-lyb-phosphor
@@ -58,9 +59,11 @@ jupyter labextension install \
   @deathbeds/jyve-coffee-unsafe-extension \
   @deathbeds/jyve-extension \
   @deathbeds/jyve-js-unsafe-extension \
-  @deathbeds/jyve-typescript-unsafe-extension \
   @deathbeds/jyve-lyb-d3 \
-  @deathbeds/jyve-lyb-phosphor
+  @deathbeds/jyve-lyb-phosphor \
+  @deathbeds/jyve-p5-unsafe-extension \
+  @deathbeds/jyve-typescript-unsafe-extension \
+  && jupyter labextension list
 ```
 
 

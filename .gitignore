@@ -10,3 +10,4 @@ htpasswd
 verdaccio/packages/
 _scripts/
 __pycache__
+Untitled*.ipynb

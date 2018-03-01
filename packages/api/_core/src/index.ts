@@ -24,12 +24,15 @@ export interface IJyve {
   ready: Promise<void>;
   specs: Kernel.ISpecModels;
   register(options: Jyve.IOptions): Promise<void>;
+  lyb(name: string): Promise<any>;
+  lyb(name: string, nsHandler: (ns: any) => Promise<void>): void;
   startNew(
     options: Jyve.ISessionOptions
   ): Promise<Session.ISession>;
   makeKernel(options: Kernel.IOptions, id: string): Promise<Jyve.IJyveKernel>;
   version: string;
   frameRequested: ISignal<IJyve, Jyve.IFrameOptions>;
+  installLybs(ns: any): Promise<void>;
 }
 
 export class Jyve implements IJyve {
@@ -38,6 +41,7 @@ export class Jyve implements IJyve {
   private _factories = new Map<string, Promise<Jyve.IKernelFactory>>();
   private _ready = new PromiseDelegate<void>();
   private _frameRequested = new Signal<this, Jyve.IFrameOptions>(this);
+  private _lybs = new Map<string, (ns: any) => Promise<void>>();
 
   get version() { return version; }
   get specs() { return this._specs; }
@@ -57,6 +61,20 @@ export class Jyve implements IJyve {
     this._specs.kernelspecs[options.kernelSpec.name] = options.kernelSpec;
     this._factories.set(options.kernelSpec.name, options.newKernel);
     return await this._lab.serviceManager.sessions.refreshSpecs();
+  }
+
+  async lyb(name?: string, callback?: (ns: any) => Promise<any>) {
+    if (callback) {
+      this._lybs.set(name, callback);
+      return;
+    }
+    return this._lybs.get(name);
+  }
+
+  async installLybs(ns: any) {
+    for (let k of Array.from(this._lybs.keys())) {
+      await this._lybs.get(k)(ns);
+    }
   }
 
   patch() {

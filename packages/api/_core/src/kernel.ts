@@ -22,6 +22,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   private _iframe: HTMLIFrameElement;
   private _lab: JupyterLab;
   private _frameRequested = new Signal<this, Jyve.IFrameOptions>(this);
+  private _onRestart: (ns: any) => Promise<void>;
 
   display: Display;
 
@@ -29,6 +30,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     super(options, id);
     this.server = options.server;
     this._lab = options.lab;
+    this._onRestart = options.onRestart;
     this.server.on('message', async (msg: any) => await this._onMessage(msg));
     this.display = new Display(this);
     this.resetUserNS();
@@ -38,7 +40,6 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     return this._frameRequested;
   }
 
-
   async iframe(iframe?: HTMLIFrameElement) {
     if (iframe !== void 0) {
       this._iframe = iframe;
@@ -46,9 +47,8 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
       if (this._iframe == null) {
         this._frameRequested.emit({kernel: this});
       }
-      await JyveKernel.wait(0);
-      let timeout = 0.5;
-      while (!this._iframe.contentWindow) {
+      let timeout = 0.1;
+      while (!(this._iframe && this._iframe.contentWindow)) {
         await JyveKernel.wait(timeout);
         timeout = timeout * 2;
       }
@@ -61,6 +61,10 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     this.userNS = {
       JupyterLab: this._lab
     };
+
+    if (this._onRestart) {
+      this._onRestart(this.userNS);
+    }
   }
 
   sendJSON(data: any) {
@@ -98,6 +102,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   }
 
   async handleRestart() {
+    console.log('handling restart');
     this.resetUserNS();
     (await this.iframe()).src = 'about:blank';
 
@@ -287,6 +292,7 @@ export namespace JyveKernel {
   export interface IOptions extends Kernel.IOptions {
     server: JyveServer;
     lab?: JupyterLab;
+    onRestart?: (ns: any) => Promise<void>;
   }
   export function kernelURL(
     kernelId: string,

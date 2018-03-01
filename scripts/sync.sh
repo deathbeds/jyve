@@ -17,4 +17,6 @@ rsync -aqz --del $EXT/brython/ $DEATHBEDS/jyve-brython-unsafe-extension/
 rsync -aqz --del $API/typescript/ $DEATHBEDS/jyve-typescript-unsafe/
 rsync -aqz --del $EXT/typescript/ $DEATHBEDS/jyve-typescript-unsafe-extension/
 
+rsync -aqz --del $LYB/phosphor/ $DEATHBEDS/jyve-lyb-phosphor/
+
 rm -rf $DEATHBEDS/*/node_modules/@deathbeds

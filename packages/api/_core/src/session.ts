@@ -53,10 +53,15 @@ namespace JyveSession {
       kernel: kernelModel
     };
 
+    const onRestart = async (ns: any) => {
+      await options.manager.installLybs(ns);
+    };
+
     const kernelOptions: JyveKernel.IOptions = {
       name: options.kernelName,
       clientId: sessionId,
       server: new JyveServer(kernelURL),
+      onRestart,
       serverSettings
     };
 

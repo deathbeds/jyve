@@ -54,7 +54,7 @@
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-p5-unsafe",
   "peerDependencies": {
-    "@deathbeds/jyve": "^0.3.1"
+    "@deathbeds/jyve": "^0.4.0"
   },
   "repository": {
     "type": "git",
@@ -68,5 +68,5 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.3.1"
+  "version": "0.4.0"
 }

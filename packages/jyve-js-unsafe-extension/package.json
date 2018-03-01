@@ -4,7 +4,7 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@deathbeds/jyve-js-unsafe": "^0.3.1",
+    "@deathbeds/jyve-js-unsafe": "^0.4.0",
     "@jupyterlab/application": "^0.15.4",
     "tslib": "^1.8.1"
   },
@@ -60,7 +60,7 @@
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-js-unsafe-extension",
   "peerDependencies": {
-    "@deathbeds/jyve": "^0.3.1"
+    "@deathbeds/jyve": "^0.4.0"
   },
   "repository": {
     "type": "git",
@@ -74,5 +74,5 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.3.1"
+  "version": "0.4.0"
 }

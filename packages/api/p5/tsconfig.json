@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "lib": [
+      "ES5",
+      "ES2015.Promise",
+      "DOM",
+      "ES2015.Collection",
+      "ES2016",
+      "ES6"
+    ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noImplicitUseStrict": true,
+    "outDir": "./lib",
+"importHelpers": true,
+    "target": "ES5",
+    "types": [
+      "node"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "!!raw-loader!*": ["../../../node_modules/*"]
+    }
+  },
+  "include": [
+    "../_core/src/@types/**/*",
+    "./**/*",
+    "./src/**/*",
+    "./src/@types/**/*"
+  ]
+}

@@ -34,7 +34,7 @@
   },
   "scripts": {
     "bootstrap": "jlpm && jlpm lerna bootstrap && jlpm clean && jlpm build && jlpm lab:link",
-    "build": "jlpm build:core && jlpm build:js && jlpm build:coffee && jlpm build:typescript && jlpm build:brython && jlpm build:ext && jlpm build:lyb",
+    "build": "jlpm build:core && jlpm build:js && jlpm build:coffee && jlpm build:typescript && jlpm build:brython && jlpm build:p5 && jlpm build:ext && jlpm build:lyb",
     "build:brython": "lerna run build --scope '@deathbeds/jyve-brython-unsafe'",
     "build:coffee": "lerna run build --scope '@deathbeds/jyve-coffee-unsafe'",
     "build:core": "lerna run build --scope '@deathbeds/jyve'",
@@ -42,6 +42,7 @@
     "build:ext": "lerna run build --scope '@deathbeds/*-extension'",
     "build:js": "lerna run build --scope '@deathbeds/jyve-js-unsafe'",
     "build:lyb": "lerna run build --scope '@deathbeds/jyve-lyb-*'",
+    "build:p5": "lerna run build --scope '@deathbeds/jyve-p5-unsafe'",
     "build:typescript": "lerna run build --scope '@deathbeds/jyve-typescript-unsafe'",
     "clean": "lerna run --parallel clean",
     "lab:build": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm build",

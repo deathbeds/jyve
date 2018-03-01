@@ -27,7 +27,7 @@
     }
   },
   "include": [
-    "../_core/src/@types/**/*",
+    "../jyve/src/@types/**/*",
     "./**/*",
     "./src/**/*",
     "./src/@types/**/*"

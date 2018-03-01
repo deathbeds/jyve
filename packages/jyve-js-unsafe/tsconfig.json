@@ -23,6 +23,6 @@
   },
   "include": [
     "./src/**/*",
-    "../_core/src/@types/**/*"
+    "../jyve/src/@types/**/*"
   ]
 }

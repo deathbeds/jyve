@@ -1,6 +1,6 @@
 
-# @deathbeds/jyve-coffee-unsafe-extension
-> An extension for a totally unsafe browser js kernel
+# @deathbeds/jyve-lyb-phosphor
+> A JupyterLab extension for **totally unsafe** access to `phosphor` in Jyve Kernels.
 
 ## Before
 ```bash
@@ -14,9 +14,9 @@ pip install jupyterlab
 
 ## Install
 ```bash
-jupyter labextension install @deathbeds/jyve-coffee-unsafe-extension
+jupyter labextension install @deathbeds/jyve-lyb-phosphor
 ```
 
 
 ## Development
-`@deathbeds/jyve-coffee-unsafe-extension` is built as part of [Jyve](https://github.com/deathbeds/jyve).
+`@deathbeds/jyve-lyb-phosphor` is built as part of [Jyve](https://github.com/deathbeds/jyve).

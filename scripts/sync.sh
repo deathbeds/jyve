@@ -18,5 +18,6 @@ rsync -aqz --del $API/typescript/ $DEATHBEDS/jyve-typescript-unsafe/
 rsync -aqz --del $EXT/typescript/ $DEATHBEDS/jyve-typescript-unsafe-extension/
 
 rsync -aqz --del $LYB/phosphor/ $DEATHBEDS/jyve-lyb-phosphor/
+rsync -aqz --del $LYB/d3/ $DEATHBEDS/jyve-lyb-d3/
 
 rm -rf $DEATHBEDS/*/node_modules/@deathbeds

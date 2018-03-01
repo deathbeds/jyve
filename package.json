@@ -38,7 +38,7 @@
     "build:brython": "lerna run build --scope '@deathbeds/jyve-brython-unsafe'",
     "build:coffee": "lerna run build --scope '@deathbeds/jyve-coffee-unsafe'",
     "build:core": "lerna run build --scope '@deathbeds/jyve'",
-    "build:demo": "rm -rf index_files/* && jupyter nbconvert --to=jyve index.ipynb --JyveExporter.extra_contents='[\"notebooks/*.ipynb\"]' && rsync -aqz --del index_files demo",
+    "build:demo": "rm -rf index_files/* && jupyter nbconvert --to=jyve index.ipynb --JyveExporter.extra_contents='[\"notebooks/*.ipynb\"]' && rsync -aqz index_files/ _demo/",
     "build:ext": "lerna run build --scope '@deathbeds/*-extension'",
     "build:js": "lerna run build --scope '@deathbeds/jyve-js-unsafe'",
     "build:lyb": "lerna run build --scope '@deathbeds/jyve-lyb-*'",

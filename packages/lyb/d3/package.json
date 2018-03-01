@@ -3,11 +3,15 @@
   "bugs": {
     "url": "https://github.com/deathbeds/jyve/issues"
   },
+  "devDependencies" : {
+    "@types/d3": "^3"
+  },
   "dependencies": {
     "@jupyterlab/application": "^0.15.4",
+    "d3": "~3.5.17",
     "tslib": "^1.8.1"
   },
-  "description": "An unoffical namespace package for phosphor",
+  "description": "An unoffical namespace package for d3",
   "files": [
     "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
   ],
@@ -18,14 +22,13 @@
   "jyve": {
     "help_links": [
       {
-        "text": "PhosphorJS",
-        "url": "https://phosphorjs.github.io"
+        "text": "d3",
+        "url": "https://d3js.org"
       }
     ]
   },
   "keywords": [
-    "phosphor",
-    "phosphorjs",
+    "d3",
     "jupyter",
     "jupyterlab-extension",
     "jupyterlab",
@@ -33,7 +36,7 @@
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
-  "name": "@deathbeds/jyve-lyb-phosphor",
+  "name": "@deathbeds/jyve-lyb-d3",
   "peerDependencies": {
     "@deathbeds/jyve": "^0.3.1"
   },

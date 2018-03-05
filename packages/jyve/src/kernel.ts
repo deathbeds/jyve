@@ -23,6 +23,8 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   private _lab: JupyterLab;
   private _frameRequested = new Signal<this, Jyve.IFrameOptions>(this);
   private _onRestart: (ns: any) => Promise<void>;
+  private _wasLoaded = false;
+  _frameChanged = new Signal<JyveKernel, HTMLIFrameElement>(this);
 
   display: Display;
 
@@ -40,11 +42,17 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     return this._frameRequested;
   }
 
+  get frameChanged() {
+    return this. _frameChanged;
+  }
+
   async iframe(iframe?: HTMLIFrameElement) {
     if (iframe !== void 0) {
       this._iframe = iframe;
+      this._frameChanged.emit(this._iframe);
     } else {
       if (this._iframe == null) {
+        this._wasLoaded = false;
         this._frameRequested.emit({kernel: this});
       }
       let timeout = 0.1;
@@ -52,7 +60,10 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
         await JyveKernel.wait(timeout);
         timeout = timeout * 2;
       }
-
+      if (!this._wasLoaded) {
+        this._wasLoaded = true;
+        this._frameChanged.emit(this._iframe);
+      }
       return this._iframe;
     }
   }

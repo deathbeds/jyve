@@ -11,6 +11,15 @@ export class P5UnsafeKernel extends JSUnsafeKernel {
   protected kernelSpec = kernelSpec;
   protected _p5: any;
 
+  constructor(options: JyveKernel.IOptions, id: string) {
+    super(options, id);
+    this.frameChanged.connect(async (_, iframe) => {
+      if (iframe && iframe.contentWindow) {
+        await P5UnsafeKernel.p5(iframe.contentWindow);
+      }
+    });
+  }
+
   jyveInfo(): KernelMessage.IInfoReply {
     const jsInfo = super.jyveInfo();
     return {
@@ -19,21 +28,6 @@ export class P5UnsafeKernel extends JSUnsafeKernel {
       implementation: kernelSpec.name,
       language_info: jyve.language_info
     };
-  }
-
-  async p5() {
-    if (!this._p5) {
-      this._p5 = await P5UnsafeKernel.p5(
-        (await this.iframe()).contentWindow
-      );
-    }
-    return this._p5;
-  }
-
-  async transpile(code: string) {
-    const p5 = await this.p5();
-    console.log('p5 loaded', p5);
-    return code;
   }
 }
 
@@ -56,8 +50,6 @@ export namespace P5UnsafeKernel {
       timeout = timeout * 2;
     }
 
-    let p5Instance = window.p5;
-
-    return p5Instance;
+    return window.p5;
   }
 }

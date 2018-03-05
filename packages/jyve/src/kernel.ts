@@ -24,6 +24,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   private _frameRequested = new Signal<this, Jyve.IFrameOptions>(this);
   private _onRestart: (ns: any) => Promise<void>;
   private _wasLoaded = false;
+  private _frameCloseRequested = new Signal<this, void>(this);
   _frameChanged = new Signal<JyveKernel, HTMLIFrameElement>(this);
 
   display: Display;
@@ -42,21 +43,28 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     return this._frameRequested;
   }
 
+  get frameCloseRequested() {
+    return this._frameCloseRequested;
+  }
+
   get frameChanged() {
     return this. _frameChanged;
   }
 
   async iframe(iframe?: HTMLIFrameElement) {
     if (iframe !== void 0) {
+      console.log('setting frame', iframe);
       this._iframe = iframe;
       this._frameChanged.emit(this._iframe);
     } else {
+      console.log(this._iframe, this._wasLoaded);
       if (this._iframe == null) {
         this._wasLoaded = false;
         this._frameRequested.emit({kernel: this});
       }
       let timeout = 0.1;
       while (!(this._iframe && this._iframe.contentWindow)) {
+        console.log('waiting', timeout, 'for kernel');
         await JyveKernel.wait(timeout);
         timeout = timeout * 2;
       }
@@ -79,6 +87,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   }
 
   sendJSON(data: any) {
+    console.log('data', data);
     this.server.send(JSON.stringify(data));
   }
 
@@ -113,11 +122,8 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   }
 
   async handleRestart() {
-    console.log('handling restart');
     this.resetUserNS();
-    (await this.iframe()).src = 'about:blank';
-
-    return super.handleRestart();
+    this.frameCloseRequested.emit(void 0);
   }
 
   private async _onMessage(rawMsg: string) {

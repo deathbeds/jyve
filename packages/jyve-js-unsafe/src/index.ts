@@ -105,6 +105,10 @@ export class JSUnsafeKernel extends JyveKernel {
       this.userNS[k] = execNS[k];
     });
   }
+
+  async interrupt() {
+    ((await this.iframe()).contentWindow as any).eval('debugger');
+  }
 }
 
 export async function newKernel(options: JyveKernel.IOptions, id: string) {

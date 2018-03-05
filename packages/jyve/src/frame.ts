@@ -19,6 +19,11 @@ export class JyvePanel extends Widget {
     this.node.appendChild(this._iframe);
   }
 
+  dispose() {
+    this._kernel.iframe(null);
+    super.dispose();
+  }
+
   protected onCloseRequest(msg: Message): void {
     this._kernel.iframe(null);
     this.dispose();
@@ -29,6 +34,10 @@ export class JyvePanel extends Widget {
   get kernel() { return this._kernel; }
   set kernel(kernel) {
     this._kernel = kernel;
+    kernel.frameCloseRequested.connect(() => {
+      console.log('disposing iframe');
+      this.dispose();
+    });
     this._kernel.iframe(this._iframe);
   }
 }

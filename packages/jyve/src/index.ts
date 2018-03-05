@@ -128,6 +128,7 @@ export namespace Jyve {
   export interface IJyveKernel extends Kernel.IKernel {
     iframe(iframe?: HTMLIFrameElement): Promise<HTMLIFrameElement>;
     frameRequested: ISignal<IJyveKernel, Jyve.IFrameOptions>;
+    frameCloseRequested: ISignal<IJyveKernel, void>;
     fakeDisplayData(
       parent: KernelMessage.IMessage,
       data?: nbformat.IMimeBundle,

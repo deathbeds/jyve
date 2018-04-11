@@ -132,13 +132,29 @@ class JyveExporter(HTMLExporter):
         ] + [
             "api/contents/{}.ipynb".format(nb_name)
             for nb_name in nb_names
+        ] + [
+            "api/contents/{}".format(ef)
+            for ef in self.extra_files
+            if not ef.name.endswith(".ipynb")
         ] + self.extra_urls
 
         with TemporaryDirectory() as tmpdir:
             td = Path(tmpdir)
+            for ef in self.extra_files:
+                ef_path = td / ef
+                if ef.name.endswith(".ipynb"):
+                    continue
+                parent = ef_path.parent
+                if not parent.exists():
+                    urls += ["api/contents/{}".format(
+                        parent.relative_to(tmpdir)
+                    )]
+                parent.mkdir(exist_ok=True)
+                copy2(ef, str(ef_path))
             for i, nb_name in enumerate(nb_names):
                 nb_path = td / "{}.ipynb".format(nb_name)
                 if not i:
+                    # just handle the first one
                     nb_path.write_text(nbformat.writes(nb, 4))
                 else:
                     parent = nb_path.parent
@@ -152,7 +168,6 @@ class JyveExporter(HTMLExporter):
             lab = self.start_lab(url_root, tmpdir)
             for url in urls:
                 self.fetch_one(url_root, url, resources)
-
             lab.kill()
 
         self.copy_assets(output_root, lab_path, static_path)

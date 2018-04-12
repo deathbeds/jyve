@@ -139,40 +139,14 @@ class JyveExporter(HTMLExporter):
         ] + self.extra_urls
 
         with TemporaryDirectory() as tmpdir:
-            td = Path(tmpdir)
-            for ef in self.extra_files:
-                ef_path = td / ef
-                if ef.name.endswith(".ipynb"):
-                    continue
-                parent = ef_path.parent
-                if not parent.exists():
-                    urls += ["api/contents/{}".format(
-                        parent.relative_to(tmpdir)
-                    )]
-                parent.mkdir(exist_ok=True)
-                copy2(ef, str(ef_path))
-            for i, nb_name in enumerate(nb_names):
-                nb_path = td / "{}.ipynb".format(nb_name)
-                if not i:
-                    # just handle the first one
-                    nb_path.write_text(nbformat.writes(nb, 4))
-                else:
-                    parent = nb_path.parent
-                    if not parent.exists():
-                        urls += ["api/contents/{}".format(
-                            parent.relative_to(tmpdir)
-                        )]
-                    parent.mkdir(exist_ok=True)
-                    copy2("{}.ipynb".format(nb_name), str(nb_path))
-
-            lab = self.start_lab(url_root, tmpdir)
-            for url in urls:
-                self.fetch_one(url_root, url, resources)
-            lab.kill()
+            urls += list(self.prepare_contents(tmpdir))
+            urls += list(self.prepare_notebooks(tmpdir, nb, nb_names))
+            self.fetch_all(tmpdir, url_root, urls, resources)
 
         self.copy_assets(output_root, lab_path, static_path)
         self.fix_urls(output_root, nb_names)
         self.fake_apis(output_root)
+        self.fake_home(output_root)
 
         langinfo = nb.metadata.get('language_info', {})
         lexer = langinfo.get('pygments_lexer', langinfo.get('name', None))
@@ -181,6 +155,39 @@ class JyveExporter(HTMLExporter):
 
         return super(HTMLExporter, self).from_notebook_node(
             nb, resources, **kw)
+
+    def prepare_notebooks(self, tmpdir, nb, nb_names):
+        td = Path(tmpdir)
+        for i, nb_name in enumerate(nb_names):
+            nb_path = td / "{}.ipynb".format(nb_name)
+            if i == 0:
+                # just handle the first one
+                yield from self.ensure_parent(tmpdir, nb_path)
+                nb_path.write_text(nbformat.writes(nb, 4))
+            else:
+                yield from self.ensure_parent(tmpdir, nb_path)
+                copy2("{}.ipynb".format(nb_name), str(nb_path))
+
+    def prepare_contents(self, tmpdir):
+        td = Path(tmpdir)
+        for ef in self.extra_files:
+            ef_path = td / ef
+            if ef.name.endswith(".ipynb"):
+                continue
+            yield from self.ensure_parent(tmpdir, ef)
+            copy2(ef, str(ef_path))
+
+    def ensure_parent(self, tmpdir, path):
+        parent = path.parent
+        if not parent.exists():
+            yield "api/contents/{}".format(parent.relative_to(tmpdir))
+            parent.mkdir()
+
+    def fetch_all(self, tmpdir, url_root, urls, resources):
+        lab = self.start_lab(url_root, tmpdir)
+        for url in urls:
+            self.fetch_one(url_root, url, resources)
+        lab.kill()
 
     def lab_path(self):
         return Path(
@@ -319,3 +326,9 @@ class JyveExporter(HTMLExporter):
             else:
                 out_path = output_root / path
             out_path.write_text(the_json)
+
+    def fake_home(self, output_root):
+        index = Path(output_root) / "index.html"
+        index.write_text(
+            """<!DOCTYPE html>\n"""
+            """<meta http-equiv="refresh" content="0; URL=./lab" />""")

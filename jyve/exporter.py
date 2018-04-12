@@ -20,6 +20,8 @@ import traitlets as T
 from nbconvert.filters.highlight import Highlight2HTML
 from nbconvert.exporters import HTMLExporter
 
+import jupyterlab
+
 
 class JyveExporter(HTMLExporter):
     """ Export a single notebook as a snapshot of a working JupyterLab
@@ -30,6 +32,7 @@ class JyveExporter(HTMLExporter):
                       help="temporary token")
     extra_urls = T.List(
         [
+            "favicon.ico",
             "api/contents/",
             "lab/api/settings/@jupyterlab/apputils-extension:themes",
             "lab/api/settings/@jupyterlab/codemirror-extension:commands",
@@ -87,7 +90,7 @@ class JyveExporter(HTMLExporter):
         "appName": "JupyterLab Beta",
         "appNamespace": "jupyterlab",
         "appSettingsDir": "~/jyve/settings",
-        "appVersion": "0.31.8",
+        "appVersion": jupyterlab.__version__,
         "cacheFiles": "True",
         "pageUrl": "./lab",
         "publicUrl": "../lab/static/",

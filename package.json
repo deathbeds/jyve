@@ -51,7 +51,7 @@
     "lab:link": "lerna run lab:link",
     "lab:stats": "cd $CONDA_PREFIX/share/jupyter/lab/staging && ./node_modules/.bin/webpack --profile --json > stats.json",
     "lab:viz": "cd $CONDA_PREFIX/share/jupyter/lab/staging && cp stats.json build/ && webpack-bundle-analyzer build/stats.json -p 6767",
-    "lab:watch": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm watch",
+    "lab:watch": "cd $CONDA_PREFIX/share/jupyter/lab/staging && rm -rf ../static && jlpm watch",
     "publish:local": "lerna run --parallel publish:local",
     "serve": "verdaccio -c verdaccio/config.yaml",
     "watch": "lerna run --parallel watch"

@@ -4,9 +4,9 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.15.4",
+    "@jupyterlab/application": "^0.16.0",
     "p5": "^0.6.0",
-    "tslib": "^1.8.1"
+    "tslib": "^1.9.0"
   },
   "description": "A totally unsafe browser p5 kernel",
   "files": [

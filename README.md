@@ -122,7 +122,7 @@ jlpm lab:build
 
 ## Always Be Building
 ```bash
-jlpm build --watch
+jlpm watch
 # and in another terminal
 ./scripts/watch.sh
 # and in another terminal

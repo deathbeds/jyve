@@ -4,9 +4,9 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.15.4",
-    "coffeescript": "^2.2.1",
-    "tslib": "^1.8.1"
+    "@jupyterlab/application": "^0.16.0",
+    "coffeescript": "^2.2.4",
+    "tslib": "^1.9.0"
   },
   "description": "A totally unsafe browser coffeescript kernel",
   "files": [

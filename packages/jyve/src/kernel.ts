@@ -87,7 +87,6 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   }
 
   sendJSON(data: any) {
-    console.log('data', data);
     this.server.send(JSON.stringify(data));
   }
 

@@ -115,7 +115,13 @@ class JyveExporter(HTMLExporter):
             for match in here.glob(pattern):
                 yield match
 
+    def from_file(self, file_path, resources=None):
+        self._ipynb_file = file_path.name
+        return super(JyveExporter, self).from_file(file_path, resources)
+
     def from_notebook_node(self, nb, resources=None, **kw):
+        if not hasattr(self, "_ipynb_file"):
+            self._ipynb_file = None
         url_root = "http://{}".format("localhost:{}".format(self.port))
         output_root = Path(resources["output_files_dir"])
         lab_path = self.lab_path()

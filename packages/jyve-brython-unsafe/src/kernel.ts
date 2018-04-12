@@ -67,7 +67,9 @@ export class BrythonUnsafeKernel extends JSUnsafeKernel {
 
   async transpile(code: string) {
     const brython = await this.brython();
-    const obj = brython.py2js(code, '__main__', '__main__', '__builtins__');
+    // for https://github.com/brython-dev/brython/issues/803
+    const obj = brython.py2js(code, '__main__', '__main__',
+                              brython.builtins_scope);
     const src = obj.to_js();
 
     return `

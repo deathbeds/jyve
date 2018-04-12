@@ -57,7 +57,6 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
       this._iframe = iframe;
       this._frameChanged.emit(this._iframe);
     } else {
-      console.log(this._iframe, this._wasLoaded);
       if (this._iframe == null) {
         this._wasLoaded = false;
         this._frameRequested.emit({kernel: this});

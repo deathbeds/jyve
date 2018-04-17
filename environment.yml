@@ -7,7 +7,7 @@ channels:
   - defaults
 
 dependencies:
-  - jupyterlab >=0.32,<0.32.1
+  - jupyterlab >=0.32,<0.33
   - nodejs >=8.9.3
   - python >=3.6,<3.7
   - wget

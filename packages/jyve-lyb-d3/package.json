@@ -7,7 +7,7 @@
     "@types/d3": "^3"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.16.0",
+    "@jupyterlab/application": "^0.16.2",
     "d3": "~3.5.17",
     "tslib": "^1.9.0"
   },

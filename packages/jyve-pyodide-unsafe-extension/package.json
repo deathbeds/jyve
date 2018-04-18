@@ -1,0 +1,75 @@
+{
+  "author": "Dead Pixels Collective",
+  "bugs": {
+    "url": "https://github.com/deathbeds/jyve/issues"
+  },
+  "dependencies": {
+    "@deathbeds/jyve-pyodide-unsafe": "^0.4.0",
+    "@jupyterlab/application": "^0.16.2",
+    "tslib": "^1.9.0"
+  },
+  "description": "An extension for a totally unsafe browser pyodide kernel",
+  "files": [
+    "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
+  ],
+  "homepage": "https://github.com/deathbeds/jyve",
+  "jupyterlab": {
+    "extension": true
+  },
+  "jyve": {
+    "help_links": [
+      {
+        "text": "Pyodide",
+        "url": "https://github.com/iodide-project/pyodide"
+      }
+    ],
+    "kernelspec": {
+      "arvg": [
+        "echo",
+        "jyve"
+      ],
+      "display_name": "Pyodide (unsafe) — Jyve",
+      "language": "python",
+      "name": "jyve-pyodide-unsafe",
+      "resources": {
+      }
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "python",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "python3",
+      "version": "ES2015"
+    }
+  },
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jupyterlab-extension",
+    "jyve"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "lib/index.js",
+  "name": "@deathbeds/jyve-pyodide-unsafe-extension",
+  "peerDependencies": {
+    "@deathbeds/jyve": "^0.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deathbeds/jyve.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "lab:link": "jupyter labextension link . --no-build",
+    "publish:local": "npm publish --registry http://localhost:4873",
+    "watch": "tsc --watch"
+  },
+  "types": "lib/index.d.ts",
+  "version": "0.4.0"
+}

@@ -10,6 +10,7 @@ Experimental, unsafe Jupyter Kernels in the Browser... from anywhere.
 - [Brython](./notebooks/Brython.ipynb)
 - [TypeScript](./notebooks/TypeScript.ipynb)
 - [P5](./notebooks/P5.ipynb)
+- [Pyodide](./notebooks/Pyodide.ipynb)
 
 ## Convenience wrappers
 - [PhosphorJS](./notebooks/Phosphor Playground.ipynb)
@@ -47,6 +48,7 @@ jupyter labextension install @deathbeds/jyve-brython-unsafe-extension
 jupyter labextension install @deathbeds/jyve-coffee-unsafe-extension
 jupyter labextension install @deathbeds/jyve-p5-unsafe-extension
 jupyter labextension install @deathbeds/jyve-typescript-unsafe-extension
+jupyter labextension install @deathbeds/jyve-pyodide-unsafe-extension
 # extra packages, wrapped for convenience in jyve kernels
 jupyter labextension install @deathbeds/jyve-lyb-d3
 jupyter labextension install @deathbeds/jyve-lyb-phosphor
@@ -63,6 +65,7 @@ jupyter labextension install \
   @deathbeds/jyve-lyb-phosphor \
   @deathbeds/jyve-p5-unsafe-extension \
   @deathbeds/jyve-typescript-unsafe-extension \
+  @deathbeds/jyve-pyodide-unsafe-extension \
   && jupyter labextension list
 ```
 

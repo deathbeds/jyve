@@ -75,7 +75,7 @@ export class PyodideUnsafeKernel extends JSUnsafeKernel {
 
 function bootstrap_pyodide(window: any) {
   let baseURL = "http://iodide-project.github.io/pyodide-demo/";
-  let wasmURL = `${baseURL}pyodide.asm.wasm?x=${Date.now()}`;
+  let wasmURL = "https://cdn.rawgit.com/iodide-project/pyodide-demo/a39e3f3e80a438a07e6a8028fa4745768c16cbc2/pyodide.asm.wasm";
   let wasmXHR = new XMLHttpRequest();
   wasmXHR.open('GET', wasmURL, true);
   wasmXHR.responseType = 'arraybuffer';

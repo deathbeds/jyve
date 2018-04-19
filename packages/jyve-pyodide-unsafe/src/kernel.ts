@@ -110,8 +110,15 @@ export namespace PyodideUnsafeKernel {
     bootstrap_pyodide(window);
 
     let timeout = 0.5;
-    while (!(window.pyodide && window.pyodide.runPython)) {
+    let count = 30 / timeout;
+    while (!(window.pyodide && window.pyodide.runPython) && count > 0) {
       await JyveKernel.wait(timeout);
+      count--;
+    }
+
+    if (count <= 0) {
+      // TODO: Is there a way to popup an error modal here?
+      alert("Pyodide failed to load.");
     }
 
     let pyodideInstance = window.pyodide;

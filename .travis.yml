@@ -28,8 +28,8 @@ before_install:
   - tar -xaf $HOME/.cache/stuff/${GECKODRIVER_DIST} -C $CONDA_DIR/bin/
 
 install:
-  - conda env update -n root --file environment.yml
-  - bash postBuild
+  - conda env update -n base --file environment.yml
+  - source activate base && bash postBuild
 
 script:
    - ls

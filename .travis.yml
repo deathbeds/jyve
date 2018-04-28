@@ -29,7 +29,7 @@ before_install:
   - wget --continue https://github.com/mozilla/geckodriver/releases/download/v${GECKODRIVER_VERSION}/${GECKODRIVER_DIST}
   - bash $HOME/.cache/stuff/${MINICONDA_DIST} -b -p $CONDA_DIR
   - mkdir -p $HOME/.cache/conda
-  - rsync -av $HOME/.cache/conda/*.tar.bz2 $CONDA_DIR/pkgs/
+  - rsync -av $HOME/.cache/conda/ $CONDA_DIR/pkgs/
 
 install:
   - conda env update -n jyve-dev --file $TRAVIS_BUILD_DIR/environment.yml

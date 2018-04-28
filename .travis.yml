@@ -29,7 +29,7 @@ before_install:
 install:
   - conda env update -n jyve-dev --file $TRAVIS_BUILD_DIR/environment.yml
   - tar -xaf $HOME/.cache/stuff/${GECKODRIVER_DIST} -C $CONDA_DIR/envs/jyve-dev
-  - source activate jyve-dev && bash postBuild
+  - source activate jyve-dev && cd $TRAVIS_BUILD_DIR && bash postBuild
 
 script:
    - ls

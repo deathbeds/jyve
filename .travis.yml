@@ -41,11 +41,3 @@ script:
 
 before_cache:
   - rsync -av $CONDA_DIR/pkgs/*.tar.bz2 $HOME/.cache/conda/
-
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
-  on:
-    branch: travis
-  verbose: true

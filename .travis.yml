@@ -14,6 +14,7 @@ env:
     - GECKODRIVER_DIST=geckodriver-v0.20.0-linux64.tar.gz
     - MINICONDA_DIST=Miniconda3-4.4.10-Linux-x86_64.sh
     - CONDA_DIR=$HOME/miniconda3
+    - PATH=$CONDA_DIR/bin:$PATH
 
 cache:
   directories:
@@ -21,14 +22,14 @@ cache:
 
 before_install:
   - mkdir -p $HOME/.cache/stuff
-  - cd $HOME/.cache/stuff && wget -N https://repo.continuum.io/miniconda/${MINICONDA_DIST}
-  - cd $HOME/.cache/stuff && wget -N https://github.com/mozilla/geckodriver/releases/download/v${GECKODRIVER_VERSION}/${GECKODRIVER_DIST}
+  - cd $HOME/.cache/stuff && wget --no-verbose -N https://repo.continuum.io/miniconda/${MINICONDA_DIST}
+  - cd $HOME/.cache/stuff && wget --no-verbose -N https://github.com/mozilla/geckodriver/releases/download/v${GECKODRIVER_VERSION}/${GECKODRIVER_DIST}
   - bash $HOME/.cache/stuff/${MINICONDA_DIST} -b -p $CONDA_DIR
   - tar -xaf $HOME/.cache/stuff/${GECKODRIVER_DIST} -C $CONDA_DIR/bin/
 
 install:
-  - $CONDA_DIR/bin/conda env update -n root $TRAVIS_BUILD_DIR/environment.yml
-  - $CONDA_DIR/bin/activate -n root && bash $TRAVIS_BUILD_DIR/postBuild
+  - conda env update -n root --file environment.yml
+  - bash postBuild
 
 script:
    - ls

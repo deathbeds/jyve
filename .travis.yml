@@ -27,7 +27,7 @@ before_install:
   - bash $HOME/.cache/stuff/${MINICONDA_DIST} -b -p $CONDA_DIR
 
 install:
-  - conda env update
+  - conda env update -n jyve-dev --file $TRAVIS_BUILD_DIR/environment.yml
   - tar -xaf $HOME/.cache/stuff/${GECKODRIVER_DIST} -C $CONDA_DIR/envs/jyve-dev
   - source activate jyve-dev && bash postBuild
 

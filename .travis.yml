@@ -37,8 +37,7 @@ install:
   - source activate jyve-dev && geckodriver --version && cd $TRAVIS_BUILD_DIR && bash postBuild
 
 script:
-   - ls
-   - echo hooray
+   - jlpm test
 
 before_cache:
   - rsync -av $CONDA_DIR/pkgs/*.tar.bz2 $HOME/.cache/conda/

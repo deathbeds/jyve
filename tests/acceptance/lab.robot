@@ -22,5 +22,5 @@ The Jyve Kyrnels Have Entered The Building
   Page Should Contain                       JS (unsafe)
   Page Should Contain                       P5 (unsafe)
   Page Should Contain                       TypeScript (unsafe)
-  Capture Page Screenshot   lab.png
+  Capture Page Screenshot   00_kyrnels.png
   [Teardown]    Close Browser

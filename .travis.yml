@@ -24,8 +24,9 @@ cache:
 
 before_install:
   - mkdir -p $HOME/.cache/stuff
-  - cd $HOME/.cache/stuff && wget --no-verbose -N https://repo.continuum.io/miniconda/${MINICONDA_DIST}
-  - cd $HOME/.cache/stuff && wget --no-verbose -N https://github.com/mozilla/geckodriver/releases/download/v${GECKODRIVER_VERSION}/${GECKODRIVER_DIST}
+  - cd $HOME/.cache/stuff
+  - wget --no-verbose --continue https://repo.continuum.io/miniconda/${MINICONDA_DIST}
+  - wget --continue https://github.com/mozilla/geckodriver/releases/download/v${GECKODRIVER_VERSION}/${GECKODRIVER_DIST}
   - bash $HOME/.cache/stuff/${MINICONDA_DIST} -b -p $CONDA_DIR
   - mkdir -p $HOME/.cache/conda
   - cp -$HOME/.cache/conda/*.tar.bz2 $CONDA_DIR/pkgs/

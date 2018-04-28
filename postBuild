@@ -15,13 +15,16 @@ else
 fi
 
 set -ex
-pip install -e .
+python -m pip install -e . --ignore-installed --no-dependencies
 
-jlpm bootstrap || jlpm bootstrap || jlpm bootstrap
+jlpm bootstrap \
+  || jlpm bootstrap \
+  || jlpm bootstrap
 jupyter labextension list
 
 # this first build is usually broken in subtle ways
-jupyter lab build || echo "initial lab build failed, continuing anyway..."
+jupyter lab build --dev \
+  || echo "initial lab build failed, continuing anyway..."
 ./scripts/sync.sh
 
 # do a non-standard build so that our stuff "sticks"

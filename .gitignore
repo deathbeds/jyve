@@ -13,3 +13,4 @@ __pycache__
 Untitled*.ipynb
 _demo
 demo/
+.testoutput/

@@ -25,11 +25,11 @@ before_install:
   - cd $HOME/.cache/stuff && wget --no-verbose -N https://repo.continuum.io/miniconda/${MINICONDA_DIST}
   - cd $HOME/.cache/stuff && wget --no-verbose -N https://github.com/mozilla/geckodriver/releases/download/v${GECKODRIVER_VERSION}/${GECKODRIVER_DIST}
   - bash $HOME/.cache/stuff/${MINICONDA_DIST} -b -p $CONDA_DIR
-  - tar -xaf $HOME/.cache/stuff/${GECKODRIVER_DIST} -C $CONDA_DIR/bin/
 
 install:
-  - conda env update -n base --file environment.yml
-  - source activate base && bash postBuild
+  - conda env update
+  - tar -xaf $HOME/.cache/stuff/${GECKODRIVER_DIST} -C $CONDA_DIR/envs/jyve-dev
+  - source activate jyve-dev && bash postBuild
 
 script:
    - ls

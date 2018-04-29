@@ -8,6 +8,11 @@ sudo: false
 addons:
   firefox: latest
 
+branches:
+  only:
+    - master
+    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+
 env:
   global:
     - GECKODRIVER_VERSION=0.20.0
@@ -41,3 +46,14 @@ script:
 
 before_cache:
   - rsync -av $CONDA_DIR/pkgs/*.tar.bz2 $HOME/.cache/conda/
+
+before_deploy:
+  - cp -r .testoutput/* demo/
+
+deploy:
+  provider: pages
+  local-dir: demo
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  on:
+    branch: master

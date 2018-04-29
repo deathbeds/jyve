@@ -1,8 +1,16 @@
 # jyve
 
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/deathbeds/jyve/master?urlpath=lab/tree/index.ipynb)
+[![Build Status][travis-badge]][travis] [![Binder][binder-badge]][binder] [![npm-version][]][npm-search]
 
-Experimental, unsafe Jupyter Kernels in the Browser... from anywhere.
+Experimental, unsafe Jupyter Kernels in the Browser... from anywhere. Try the [demo][].
+
+[demo]: https://deathbeds.github.io/jyve
+[travis]: https://travis-ci.org/deathbeds/jyve
+[travis-badge]: https://travis-ci.org/deathbeds/jyve.svg?branch=master
+[binder]: https://mybinder.org/v2/gh/deathbeds/jyve/master?urlpath=lab/tree/index.ipynb
+[binder-badge]: https://mybinder.org/badge.svg
+[npm-version]: https://badge.fury.io/js/%40deathbeds%2Fjyve.svg
+[npm-search]: https://www.npmjs.com/search?q=jyve%20keywords%3Ajupyterlab-extension
 
 ## IFrame-backed kernels
 - [JS](./notebooks/JavaScript.ipynb)

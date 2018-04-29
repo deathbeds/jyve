@@ -54,6 +54,7 @@
     "lab:watch": "cd $CONDA_PREFIX/share/jupyter/lab/staging && rm -rf ../static && jlpm watch",
     "publish:local": "lerna run --parallel publish:local",
     "serve": "verdaccio -c verdaccio/config.yaml",
+    "test": "python -m robot -d .testoutput tests/acceptance",
     "watch": "lerna run --parallel watch"
   },
   "version": "0.2.0",

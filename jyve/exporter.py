@@ -241,7 +241,8 @@ class JyveExporter(HTMLExporter):
     def copy_assets(self, output_root, lab_path, static_path):
         out_static = output_root / "lab" / "static"
         lab_static = lab_path / "static"
-        rmtree(str(out_static))
+        if out_static.exists():
+            rmtree(out_static)
         copytree(str(lab_static), str(out_static))
 
         themes_out = output_root / "lab" / "api" / "themes"

@@ -11,3 +11,4 @@ dependencies:
   - nodejs >=8.9.3
   - python >=3.6,<3.7
   - wget
+  - robotframework-seleniumlibrary

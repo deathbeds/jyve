@@ -1,22 +1,22 @@
-import {Widget} from '@phosphor/widgets';
 import {Message} from '@phosphor/messaging';
+
+import {IFrame} from '@jupyterlab/apputils';
+
 import {Jyve} from '.';
 
 const FRAME_ICON_CLASS = 'jyv-FrameIcon';
 const FRAME_CLASS = 'jyv-Frame';
 
-export class JyvePanel extends Widget {
+export class JyvePanel extends IFrame {
   private _iframe: HTMLIFrameElement;
   private _kernel: Jyve.IJyveKernel;
 
-  constructor(options?: Widget.IOptions) {
-    super(options);
+  constructor() {
+    super();
     this.addClass(FRAME_CLASS);
     this.title.closable = true;
     this.title.icon = FRAME_ICON_CLASS;
-
-    this._iframe = document.createElement('iframe');
-    this.node.appendChild(this._iframe);
+    this._iframe = this.node.querySelector('iframe');
   }
 
   dispose() {
@@ -34,10 +34,7 @@ export class JyvePanel extends Widget {
   get kernel() { return this._kernel; }
   set kernel(kernel) {
     this._kernel = kernel;
-    kernel.frameCloseRequested.connect(() => {
-      console.log('disposing iframe');
-      this.dispose();
-    });
+    kernel.frameCloseRequested.connect(() => this.dispose());
     this._kernel.iframe(this._iframe);
   }
 }

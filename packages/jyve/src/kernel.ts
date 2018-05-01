@@ -53,7 +53,6 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
 
   async iframe(iframe?: HTMLIFrameElement) {
     if (iframe !== void 0) {
-      console.log('setting frame', iframe);
       this._iframe = iframe;
       this._frameChanged.emit(this._iframe);
     } else {

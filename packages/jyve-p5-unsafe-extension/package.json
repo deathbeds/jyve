@@ -24,15 +24,11 @@
       }
     ],
     "kernelspec": {
-      "arvg": [
-        "echo",
-        "jyve"
-      ],
+      "arvg": ["echo", "jyve"],
       "display_name": "P5 (unsafe) — Jyve",
       "language": "processing",
       "name": "jyve-p5-unsafe",
-      "resources": {
-      }
+      "resources": {}
     },
     "language_info": {
       "codemirror_mode": {

@@ -8,7 +8,8 @@ import {jyve, kernelSpec} from '.';
 
 export interface IFiles {
   [fileName: string]: {
-    file: ts.IScriptSnapshot; ver: number
+    file: ts.IScriptSnapshot;
+    ver: number;
   };
 }
 
@@ -18,13 +19,27 @@ export interface IFiles {
 export class JyveHost implements ts.LanguageServiceHost {
   files: IFiles = {};
 
-  log(..._: any[]) { console.log(..._); }
-  trace(..._: any[]) { console['trace'](..._); }
-  error(..._: any[]) { console.error(..._); }
-  getCompilationSettings() { return ts.getDefaultCompilerOptions(); }
-  getScriptIsOpen(_: any) { return true; }
-  getCurrentDirectory() { return ''; }
-  getDefaultLibFileName(_: any) { return 'lib'; }
+  log(..._: any[]) {
+    console.log(..._);
+  }
+  trace(..._: any[]) {
+    console['trace'](..._);
+  }
+  error(..._: any[]) {
+    console.error(..._);
+  }
+  getCompilationSettings() {
+    return ts.getDefaultCompilerOptions();
+  }
+  getScriptIsOpen(_: any) {
+    return true;
+  }
+  getCurrentDirectory() {
+    return '';
+  }
+  getDefaultLibFileName(_: any) {
+    return 'lib';
+  }
   getScriptVersion(fn: string) {
     return this.files[fn] ? `${this.files[fn].ver}` : '';
   }
@@ -50,7 +65,7 @@ export class JyveHost implements ts.LanguageServiceHost {
       this.files[fileName].ver++;
       this.files[fileName].file = snap;
     } else {
-      this.files[fileName] = { ver: 1, file: snap };
+      this.files[fileName] = {ver: 1, file: snap};
     }
   }
 }
@@ -66,8 +81,8 @@ export class TypeScriptUnsafeKernel extends JSUnsafeKernel {
   constructor(options?: JyveKernel.IOptions, id?: string) {
     super(options, id);
     this._service = ts.createLanguageService(
-      this._host = new JyveHost(),
-      this._registry = ts.createDocumentRegistry()
+      (this._host = new JyveHost()),
+      (this._registry = ts.createDocumentRegistry())
     );
   }
 
@@ -83,7 +98,7 @@ export class TypeScriptUnsafeKernel extends JSUnsafeKernel {
       ...jsInfo,
       help_links: [...jsInfo.help_links, ...jyve.help_links],
       implementation: kernelSpec.name,
-      language_info: jyve.language_info
+      language_info: jyve.language_info,
     };
   }
 

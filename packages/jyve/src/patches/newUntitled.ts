@@ -13,23 +13,19 @@ function jyveModel() {
     path: `Jyve${nextJyve++}.ipynb`,
     type: 'notebook',
     writable: true,
-    created: (new Date()).toISOString(),
-    last_modified: (new Date()).toISOString(),
+    created: new Date().toISOString(),
+    last_modified: new Date().toISOString(),
     mimetype: 'text/plain',
     content: {
       metadata: {},
-      cells: []
+      cells: [],
     },
-    format: 'json'
+    format: 'json',
   };
   return model;
 }
 
-
-export function patchNewUntitled(
-  app: JupyterLab,
-  jyve: IJyve
-) {
+export function patchNewUntitled(app: JupyterLab, jyve: IJyve) {
   const mgr = app.serviceManager.contents;
 
   const _newUntitled = mgr.newUntitled;
@@ -37,7 +33,9 @@ export function patchNewUntitled(
   const _save = mgr.save;
   const _listCheckpoints = mgr.listCheckpoints;
 
-  async function get(path: string, options?: Contents.IFetchOptions,
+  async function get(
+    path: string,
+    options?: Contents.IFetchOptions
   ): Promise<Contents.IModel> {
     try {
       return await _get.call(mgr, path, options);
@@ -48,8 +46,7 @@ export function patchNewUntitled(
     }
 
     try {
-      let result: Contents.IModel = await _get.call(
-        mgr, `${path}/index.html`, options);
+      let result: Contents.IModel = await _get.call(mgr, `${path}/index.html`, options);
       if (DEBUG) {
         console.log('trying with index.html');
       }
@@ -63,7 +60,8 @@ export function patchNewUntitled(
     }
   }
 
-  async function newUntitled(options: Contents.ICreateOptions
+  async function newUntitled(
+    options: Contents.ICreateOptions
   ): Promise<Contents.IModel> {
     if (DEBUG) {
       console.log('newUntitled', options);
@@ -89,8 +87,7 @@ export function patchNewUntitled(
     }
   }
 
-  async function listCheckpoints(path: string
-  ): Promise<Contents.ICheckpointModel[]> {
+  async function listCheckpoints(path: string): Promise<Contents.ICheckpointModel[]> {
     if (DEBUG) {
       console.log('listCheckpoints[', path, ']');
     }

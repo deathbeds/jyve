@@ -3,7 +3,7 @@
   "bugs": {
     "url": "https://github.com/deathbeds/jyve/issues"
   },
-  "devDependencies" : {
+  "devDependencies": {
     "@types/d3": "^3"
   },
   "dependencies": {
@@ -27,13 +27,7 @@
       }
     ]
   },
-  "keywords": [
-    "d3",
-    "jupyter",
-    "jupyterlab-extension",
-    "jupyterlab",
-    "jyve"
-  ],
+  "keywords": ["d3", "jupyter", "jupyterlab-extension", "jupyterlab", "jyve"],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-lyb-d3",

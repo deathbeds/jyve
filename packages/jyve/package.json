@@ -40,11 +40,7 @@
       "version": "ES2015"
     }
   },
-  "keywords": [
-    "jupyter",
-    "jupyterlab",
-    "jyve"
-  ],
+  "keywords": ["jupyter", "jupyterlab", "jyve"],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve",

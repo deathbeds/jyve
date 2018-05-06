@@ -14,22 +14,20 @@ if (DEBUG) {
 export class Display {
   private _kernel: Jyve.IJyveKernel;
 
-  constructor (kernel: Jyve.IJyveKernel) {
+  constructor(kernel: Jyve.IJyveKernel) {
     this._kernel = kernel;
   }
 
   messageContext(parent: KernelMessage.IMessage) {
-    const display = (
-      data: nbformat.IMimeBundle,
-      metadata?: nbformat.OutputMetadata
-    ) => this.display(parent, data, metadata);
+    const display = (data: nbformat.IMimeBundle, metadata?: nbformat.OutputMetadata) =>
+      this.display(parent, data, metadata);
 
     return {
       display,
     };
   }
 
-  display (
+  display(
     parent: KernelMessage.IMessage,
     data: nbformat.IMimeBundle,
     metadata?: nbformat.OutputMetadata

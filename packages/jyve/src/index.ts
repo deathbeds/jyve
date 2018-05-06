@@ -10,7 +10,8 @@ import {patches} from './patches';
 import {JyveSession} from './session';
 import {JyveKernel} from './kernel';
 
-const {version} = (require('../package.json') as any);
+// tslint:disable-next-line
+const {version} = require('../package.json') as any;
 
 /* tslint:disable */
 /**

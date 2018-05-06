@@ -1,3 +1,5 @@
-.jp-Launcher-cardContainer .jp-LauncherCard[title$=" — Jyve"][title^="CoffeeScript"]  .jp-LauncherCard-noKernelIcon{
-  background-image: url("./coffeescript.svg");
+.jp-Launcher-cardContainer
+  .jp-LauncherCard[title$=' — Jyve'][title^='CoffeeScript']
+  .jp-LauncherCard-noKernelIcon {
+  background-image: url('./coffeescript.svg');
 }

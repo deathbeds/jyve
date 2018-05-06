@@ -21,15 +21,11 @@
       }
     ],
     "kernelspec": {
-      "arvg": [
-        "echo",
-        "jyve"
-      ],
+      "arvg": ["echo", "jyve"],
       "display_name": "P5 (unsafe) — Jyve",
       "language": "processing",
       "name": "jyve-p5-unsafe",
-      "resources": {
-      }
+      "resources": {}
     },
     "language_info": {
       "codemirror_mode": {
@@ -43,13 +39,7 @@
       "version": "2.2.1"
     }
   },
-  "keywords": [
-    "p5",
-    "processing",
-    "jupyter",
-    "jupyterlab",
-    "jyve"
-  ],
+  "keywords": ["p5", "processing", "jupyter", "jupyterlab", "jyve"],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-p5-unsafe",

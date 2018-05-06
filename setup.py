@@ -10,16 +10,16 @@ with open(os.path.join(name, "_version.py")) as fp:
 
 
 setup_args = dict(
-    name='jyve',
+    name="jyve",
     version=__version__,
-    description='Jyve for JupyterLab',
-    url='http://github.com/deathbeds/jyve',
-    author='Dead Pixel Collective',
-    license='BSD-3-Clause',
-    packages=['jyve'],
-    setup_requires=['nbconvert', 'jupyterlab'],
+    description="Jyve for JupyterLab",
+    url="http://github.com/deathbeds/jyve",
+    author="Dead Pixel Collective",
+    license="BSD-3-Clause",
+    packages=["jyve"],
+    setup_requires=["nbconvert", "jupyterlab"],
     zip_safe=False,
-    entry_points={'nbconvert.exporters': ['jyve = jyve.exporter:JyveExporter']}
+    entry_points={"nbconvert.exporters": ["jyve = jyve.exporter:JyveExporter"]},
 )
 
 if __name__ == "__main__":

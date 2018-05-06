@@ -27,7 +27,7 @@ const extension: JupyterLabPlugin<core.IJyve> = {
     });
 
     return manager;
-  }
+  },
 };
 
 export default extension;

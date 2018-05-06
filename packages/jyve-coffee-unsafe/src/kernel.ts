@@ -2,10 +2,10 @@ import {Kernel, KernelMessage} from '@jupyterlab/services';
 
 import {JSUnsafeKernel} from '@deathbeds/jyve-js-unsafe';
 
-const {jyve} = (require('../package.json') as any);
+// tslint:disable-next-line
+const {jyve} = require('../package.json') as any;
 
 export const kernelSpec: Kernel.ISpecModel = jyve.kernelspec;
-
 
 export class CoffeeUnsafeKernel extends JSUnsafeKernel {
   protected kernelSpec = kernelSpec;
@@ -16,7 +16,7 @@ export class CoffeeUnsafeKernel extends JSUnsafeKernel {
       ...jsInfo,
       help_links: [...jsInfo.help_links, ...jyve.help_links],
       implementation: kernelSpec.name,
-      language_info: jyve.language_info
+      language_info: jyve.language_info,
     };
   }
 

@@ -3,7 +3,8 @@ import {Kernel, KernelMessage} from '@jupyterlab/services';
 import {JSUnsafeKernel} from '@deathbeds/jyve-js-unsafe';
 import {JyveKernel} from '@deathbeds/jyve/lib/kernel';
 
-const {jyve} = (require('../package.json') as any);
+// tslint:disable-next-line
+const {jyve} = require('../package.json') as any;
 
 export const kernelSpec: Kernel.ISpecModel = jyve.kernelspec;
 
@@ -26,7 +27,7 @@ export class P5UnsafeKernel extends JSUnsafeKernel {
       ...jsInfo,
       help_links: [...jsInfo.help_links, ...jyve.help_links],
       implementation: kernelSpec.name,
-      language_info: jyve.language_info
+      language_info: jyve.language_info,
     };
   }
 }
@@ -45,7 +46,7 @@ export namespace P5UnsafeKernel {
     document.body.appendChild(p5Script);
 
     let timeout = 0.5;
-    while (!(window.p5)) {
+    while (!window.p5) {
       await JyveKernel.wait(timeout);
       timeout = timeout * 2;
     }

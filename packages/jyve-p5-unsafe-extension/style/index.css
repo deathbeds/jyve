@@ -1,3 +1,5 @@
-.jp-Launcher-cardContainer .jp-LauncherCard[title$=" — Jyve"][title^="P5"]  .jp-LauncherCard-noKernelIcon{
-  background-image: url("./p5.svg");
+.jp-Launcher-cardContainer
+  .jp-LauncherCard[title$=' — Jyve'][title^='P5']
+  .jp-LauncherCard-noKernelIcon {
+  background-image: url('./p5.svg');
 }

@@ -1,7 +1,6 @@
 language: c
 
-os:
-  - linux
+os: linux
 
 sudo: false
 
@@ -15,9 +14,11 @@ branches:
 
 env:
   global:
-    - GECKODRIVER_VERSION=0.20.0
+    - GECKODRIVER_VERSION=0.20.1
     - GECKODRIVER_DIST=geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz
+    - GECKODIRVER_SOURCE=https://github.com/mozilla/geckodriver/releases/download
     - MINICONDA_DIST=Miniconda3-4.5.1-Linux-x86_64.sh
+    - MINICONDA_SOURCE=https://repo.continuum.io/miniconda
     - CONDA_DIR=$HOME/miniconda3
     - PATH=$CONDA_DIR/bin:$PATH
 
@@ -27,31 +28,12 @@ cache:
     - $HOME/.cache/yarn
     - $HOME/.cache/conda
 
-before_install:
-  - mkdir -p $HOME/.cache/stuff
-  - cd $HOME/.cache/stuff
-  - wget --no-verbose --continue https://repo.continuum.io/miniconda/${MINICONDA_DIST}
-  - wget --no-verbose --continue https://github.com/mozilla/geckodriver/releases/download/v${GECKODRIVER_VERSION}/${GECKODRIVER_DIST}
-  - bash $HOME/.cache/stuff/${MINICONDA_DIST} -b -p $CONDA_DIR
-  - mkdir -p $HOME/.cache/conda
-  - rsync -av $HOME/.cache/conda/ $CONDA_DIR/pkgs/
-
-install:
-  - conda env update -n jyve-dev --file $TRAVIS_BUILD_DIR/environment.yml
-  - tar -xaf $HOME/.cache/stuff/${GECKODRIVER_DIST} -C $CONDA_DIR/envs/jyve-dev/bin
-  - source activate jyve-dev && geckodriver --version && cd $TRAVIS_BUILD_DIR && bash postBuild
-
-script:
-  - jlpm test
-
-after_failure:
-  - cat .testoutput/output.xml
-
-before_cache:
-  - rsync -av $CONDA_DIR/pkgs/*.tar.bz2 $HOME/.cache/conda/
-
-before_deploy:
-  - cp -r .testoutput/* demo/
+before_install: ./scripts/travis/before_install.sh
+install: ./scripts/travis/install.sh
+script: ./scripts/travis/test.sh
+after_failure: ./scripts/travis/after_failure.sh
+before_cache: ./scripts/travis/before_cache.sh
+before_deploy: ./scripts/travis/before_deploy.sh
 
 deploy:
   provider: pages

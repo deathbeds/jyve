@@ -24,15 +24,11 @@
       }
     ],
     "kernelspec": {
-      "arvg": [
-        "echo",
-        "jyve"
-      ],
+      "arvg": ["echo", "jyve"],
       "display_name": "Brython (unsafe) — Jyve",
       "language": "python",
       "name": "jyve-brython-unsafe",
-      "resources": {
-      }
+      "resources": {}
     },
     "language_info": {
       "codemirror_mode": {
@@ -47,12 +43,7 @@
       "version": "ES2015"
     }
   },
-  "keywords": [
-    "jupyter",
-    "jupyterlab",
-    "jupyterlab-extension",
-    "jyve"
-  ],
+  "keywords": ["jupyter", "jupyterlab", "jupyterlab-extension", "jyve"],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-brython-unsafe-extension",

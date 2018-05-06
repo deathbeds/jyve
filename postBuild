@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This is used by repo2docker _after_ environment.yml, but still during the
 # docker build, which is simpler than a dedicated Dockerfile
 echo "CONDA_PREFIX is $CONDA_PREFIX"

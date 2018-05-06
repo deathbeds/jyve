@@ -1,3 +1,5 @@
-.jp-Launcher-cardContainer .jp-LauncherCard[title$=" — Jyve"][title^="TypeScript"]  .jp-LauncherCard-noKernelIcon{
+.jp-Launcher-cardContainer
+  .jp-LauncherCard[title$=" — Jyve"][title^="TypeScript"]
+  .jp-LauncherCard-noKernelIcon {
   background-image: url("./typescript.svg");
 }

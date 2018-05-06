@@ -1,13 +1,8 @@
 import {JupyterLab} from '@jupyterlab/application';
 
-
 import {IJyve} from '..';
 
-
-export function patchCreateCheckpoint(
-  app: JupyterLab,
-  jyve: IJyve
-) {
+export function patchCreateCheckpoint(app: JupyterLab, jyve: IJyve) {
   const mgr = app.serviceManager.contents;
   const _createCheckpoint = mgr.createCheckpoint;
 

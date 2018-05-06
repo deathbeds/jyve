@@ -2,11 +2,10 @@ import {Kernel, KernelMessage} from '@jupyterlab/services';
 
 import {JyveKernel} from '@deathbeds/jyve/lib/kernel';
 
-const {jyve} = (require('../package.json') as any);
-
+// tslint:disable-next-line
+const {jyve} = require('../package.json') as any;
 
 export const kernelSpec: Kernel.ISpecModel = jyve.kernelspec;
-
 
 export class JSUnsafeKernel extends JyveKernel {
   protected kernelSpec = kernelSpec;
@@ -35,15 +34,15 @@ export class JSUnsafeKernel extends JyveKernel {
   }
 
   async execute(code: string, userNS: any) {
-    const _window = ((await this.iframe()).contentWindow as any);
+    const _window = (await this.iframe()).contentWindow as any;
     return new Promise(function(resolve) {
       /* tslint:disable */
-      ;(function(){
+      (function() {
         Object.keys(userNS).map((k) => {
           _window[k] = userNS[k];
         });
         resolve(_window.eval(code));
-      }).call(userNS);
+      }.call(userNS));
       /* tslint:enable */
     });
   }
@@ -51,12 +50,12 @@ export class JSUnsafeKernel extends JyveKernel {
   async execNS(msg: KernelMessage.IMessage) {
     return {
       ...this.userNS,
-      display: this.display.messageContext(msg)
+      display: this.display.messageContext(msg),
     };
   }
 
   async executeWithEval(msg: KernelMessage.IMessage) {
-    const {code} = (msg.content as any);
+    const {code} = msg.content as any;
     let result: any;
 
     const execNS = await this.execNS(msg);
@@ -67,9 +66,11 @@ export class JSUnsafeKernel extends JyveKernel {
       if (result == null) {
         result = '';
       }
-      this.sendJSON(this.fakeExecuteResult(msg, {
-        'text/plain': `${result}`
-      }));
+      this.sendJSON(
+        this.fakeExecuteResult(msg, {
+          'text/plain': `${result}`,
+        })
+      );
       this.sendJSON(this.fakeExecuteReply(msg));
       this.sendJSON(this.fakeStatusReply(msg, 'idle'));
     } catch (err) {
@@ -78,9 +79,11 @@ export class JSUnsafeKernel extends JyveKernel {
       console.groupEnd();
 
       this.sendJSON(this.fakeStatusReply(msg, 'idle'));
-      this.sendJSON(this.fakeExecuteResult(msg, {
-        'text/plain': `${err}`
-      }));
+      this.sendJSON(
+        this.fakeExecuteResult(msg, {
+          'text/plain': `${err}`,
+        })
+      );
 
       const ename = err.name;
       const evalue = err.message;
@@ -94,7 +97,7 @@ export class JSUnsafeKernel extends JyveKernel {
         ename,
         evalue,
         traceback,
-        ...errReply.content
+        ...errReply.content,
       };
       this.sendJSON(errReply);
     }

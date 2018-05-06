@@ -10,7 +10,8 @@ import {Jyve} from '.';
 import {Display} from './display';
 
 
-const {jyve, name, version} = (require('../package.json') as any);
+// tslint:disable-next-line
+const {jyve, name, version} = require('../package.json') as any;
 
 const KERNEL_SERVICE_URL = 'api/kernels';
 

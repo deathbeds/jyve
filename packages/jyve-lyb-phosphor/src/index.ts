@@ -19,28 +19,26 @@ import * as widgets from '@phosphor/widgets';
 
 import '../style/index.css';
 
+/* tslint:disable */
 const CSS = [
-  (require('!!raw-loader!@phosphor/dragdrop/style/index.css') as any),
-
-  (require('!!raw-loader!@phosphor/widgets/style/widget.css') as any),
-  (require('!!raw-loader!@phosphor/widgets/style/commandpalette.css') as any),
-  (require('!!raw-loader!@phosphor/widgets/style/dockpanel.css') as any),
-  (require('!!raw-loader!@phosphor/widgets/style/menu.css') as any),
-  (require('!!raw-loader!@phosphor/widgets/style/menubar.css') as any),
-  (require('!!raw-loader!@phosphor/widgets/style/scrollbar.css') as any),
-  (require('!!raw-loader!@phosphor/widgets/style/splitpanel.css') as any),
-  (require('!!raw-loader!@phosphor/widgets/style/tabbar.css') as any),
-  (require('!!raw-loader!@phosphor/widgets/style/tabpanel.css') as any),
+  require('!!raw-loader!@phosphor/dragdrop/style/index.css') as any,
+  require('!!raw-loader!@phosphor/widgets/style/widget.css') as any,
+  require('!!raw-loader!@phosphor/widgets/style/commandpalette.css') as any,
+  require('!!raw-loader!@phosphor/widgets/style/dockpanel.css') as any,
+  require('!!raw-loader!@phosphor/widgets/style/menu.css') as any,
+  require('!!raw-loader!@phosphor/widgets/style/menubar.css') as any,
+  require('!!raw-loader!@phosphor/widgets/style/scrollbar.css') as any,
+  require('!!raw-loader!@phosphor/widgets/style/splitpanel.css') as any,
+  require('!!raw-loader!@phosphor/widgets/style/tabbar.css') as any,
+  require('!!raw-loader!@phosphor/widgets/style/tabpanel.css') as any,
 ];
-
+/* tslint:enable */
 
 const extension: JupyterLabPlugin<void> = {
   id,
   autoStart: true,
   requires: [IJyve],
-  activate: (
-    app: JupyterLab, jyve: IJyve
-  ) => {
+  activate: (app: JupyterLab, jyve: IJyve) => {
     jyve.lyb('phosphor', async function(ns: any) {
       ns['phosphor'] = {
         algorithm,
@@ -60,7 +58,7 @@ const extension: JupyterLabPlugin<void> = {
         CSS,
       };
     });
-  }
+  },
 };
 
 export default extension;

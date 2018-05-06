@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 . ./scripts/env.sh
 echo "Performing initial sync..."
 . ./scripts/sync.sh

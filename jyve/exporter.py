@@ -28,8 +28,9 @@ class JyveExporter(HTMLExporter):
         environment
     """
     port = T.Integer(9999, help="port for temporary server")
-    token = T.Unicode(binascii.b2a_hex(os.urandom(15)).decode('utf-8'),
-                      help="temporary token")
+    token = T.Unicode(
+        binascii.b2a_hex(os.urandom(15)).decode("utf-8"), help="temporary token"
+    )
     extra_urls = T.List(
         [
             "favicon.ico",
@@ -42,72 +43,76 @@ class JyveExporter(HTMLExporter):
             "lab/api/settings/@jupyterlab/shortcuts-extension:plugin",
         ],
         help="additional notebook urls to cache",
-        config=True)
+        config=True,
+    )
 
-    extra_notebooks = T.List(
-        [],
-        help="additional notebooks to load",
-        config=True)
+    extra_notebooks = T.List([], help="additional notebooks to load", config=True)
 
-    extra_contents = T.List(
-        [],
-        help="additional contents to include ",
-        config=True)
+    extra_contents = T.List([], help="additional contents to include ", config=True)
 
-    dummy_apis = T.Dict({
-        "api/sessions": [],
-        "api/terminals": [],
-        "api/kernelspecs": {
-            "default": "python3",
-            "kernelspecs": {
-                "python3": {
-                    "name": "python3",
-                    "spec": {
-                        "argv": ["echo", "jyve"],
-                        "env": {},
-                        "display_name": "Python 3",
-                        "language": "python",
-                        "interrupt_mode": "signal",
-                        "metadata": {}
-                    },
-                    "resources": {
-                        "logo-64x64": "/kernelspecs/python3/logo-64x64.png",
-                        "logo-32x32": "/kernelspecs/python3/logo-32x32.png"}}}
+    dummy_apis = T.Dict(
+        {
+            "api/sessions": [],
+            "api/terminals": [],
+            "api/kernelspecs": {
+                "default": "python3",
+                "kernelspecs": {
+                    "python3": {
+                        "name": "python3",
+                        "spec": {
+                            "argv": ["echo", "jyve"],
+                            "env": {},
+                            "display_name": "Python 3",
+                            "language": "python",
+                            "interrupt_mode": "signal",
+                            "metadata": {},
                         },
-        "lab/api/build": {"status": "stable", "message": "have fun!"},
-    }, help="easier than coding around it")
+                        "resources": {
+                            "logo-64x64": "/kernelspecs/python3/logo-64x64.png",
+                            "logo-32x32": "/kernelspecs/python3/logo-32x32.png",
+                        },
+                    }
+                },
+            },
+            "lab/api/build": {"status": "stable", "message": "have fun!"},
+        },
+        help="easier than coding around it",
+    )
 
-    jupyter_config_data = T.Dict({
-        "buildAvailable": "False",
-        "buildCheck": "False",
-        "token": "",
-        "devMode": "False",
-        "terminalsAvailable": "False",
-        "ignorePlugins": "[]",
-        "serverRoot": "~/jyve",
-        "mathjaxConfig": "TeX-AMS-MML_HTMLorMML-full,Safe",
-        "mathjaxUrl": "../static/components/MathJax/MathJax.js",
-        "appName": "JupyterLab Beta",
-        "appNamespace": "jupyterlab",
-        "appSettingsDir": "~/jyve/settings",
-        "appVersion": jupyterlab.__version__,
-        "cacheFiles": "True",
-        "pageUrl": "./lab",
-        "publicUrl": "../lab/static/",
-        "schemasDir": "~/jyve/schemas/",
-        "settingsUrl": "../lab/api/settings/",
-        "staticDir": "~/jyve/static",
-        "templatesDir": "~/jyve/templates",
-        "themesDir": "~/jyve/themes/",
-        "themesUrl": "../lab/api/themes/",
-        "treeUrl": "../lab/tree/",
-        "userSettingsDir": "~/jyve/lab/user-settings",
-        "workspacesDir": "~/jyve/lab/workspaces",
-        "workspacesUrl": "../lab/workspaces/",
-        "baseUrl": "../",
-        "wsUrl": "",
-        "jyveOffline": True
-    }, help="some reasonable fake values")
+    jupyter_config_data = T.Dict(
+        {
+            "buildAvailable": "False",
+            "buildCheck": "False",
+            "token": "",
+            "devMode": "False",
+            "terminalsAvailable": "False",
+            "ignorePlugins": "[]",
+            "serverRoot": "~/jyve",
+            "mathjaxConfig": "TeX-AMS-MML_HTMLorMML-full,Safe",
+            "mathjaxUrl": "../static/components/MathJax/MathJax.js",
+            "appName": "JupyterLab Beta",
+            "appNamespace": "jupyterlab",
+            "appSettingsDir": "~/jyve/settings",
+            "appVersion": jupyterlab.__version__,
+            "cacheFiles": "True",
+            "pageUrl": "./lab",
+            "publicUrl": "../lab/static/",
+            "schemasDir": "~/jyve/schemas/",
+            "settingsUrl": "../lab/api/settings/",
+            "staticDir": "~/jyve/static",
+            "templatesDir": "~/jyve/templates",
+            "themesDir": "~/jyve/themes/",
+            "themesUrl": "../lab/api/themes/",
+            "treeUrl": "../lab/tree/",
+            "userSettingsDir": "~/jyve/lab/user-settings",
+            "workspacesDir": "~/jyve/lab/workspaces",
+            "workspacesUrl": "../lab/workspaces/",
+            "baseUrl": "../",
+            "wsUrl": "",
+            "jyveOffline": True,
+        },
+        help="some reasonable fake values",
+    )
 
     @property
     def extra_files(self):
@@ -129,18 +134,12 @@ class JyveExporter(HTMLExporter):
         output_root = Path(resources["output_files_dir"])
         lab_path = self.lab_path()
         static_path = Path(notebook.__file__).parent / "static"
-        nb_names = [
-            resources["metadata"]["name"]
-        ] + [
-            str(ef)[:-6] for ef in self.extra_files
-            if ef.name.endswith('.ipynb')
+        nb_names = [resources["metadata"]["name"]] + [
+            str(ef)[:-6] for ef in self.extra_files if ef.name.endswith(".ipynb")
         ]
 
-        urls = [
-            "lab"
-        ] + [
-            "api/contents/{}.ipynb".format(nb_name)
-            for nb_name in nb_names
+        urls = ["lab"] + [
+            "api/contents/{}.ipynb".format(nb_name) for nb_name in nb_names
         ] + [
             "api/contents/{}".format(ef)
             for ef in self.extra_files
@@ -157,13 +156,13 @@ class JyveExporter(HTMLExporter):
         self.fake_apis(output_root)
         self.fake_home(output_root)
 
-        langinfo = nb.metadata.get('language_info', {})
-        lexer = langinfo.get('pygments_lexer', langinfo.get('name', None))
-        self.register_filter('highlight_code',
-                             Highlight2HTML(pygments_lexer=lexer, parent=self))
+        langinfo = nb.metadata.get("language_info", {})
+        lexer = langinfo.get("pygments_lexer", langinfo.get("name", None))
+        self.register_filter(
+            "highlight_code", Highlight2HTML(pygments_lexer=lexer, parent=self)
+        )
 
-        return super(HTMLExporter, self).from_notebook_node(
-            nb, resources, **kw)
+        return super(HTMLExporter, self).from_notebook_node(nb, resources, **kw)
 
     def prepare_notebooks(self, tmpdir, nb, nb_names):
         td = Path(tmpdir)
@@ -200,17 +199,25 @@ class JyveExporter(HTMLExporter):
 
     def lab_path(self):
         return Path(
-            subprocess.check_output(["jupyter-lab", "paths"])
-            .decode("utf-8")
-            .split("\n")[0]
-            .split(" directory: ")[1].strip())
+            subprocess.check_output(["jupyter-lab", "paths"]).decode("utf-8").split(
+                "\n"
+            )[
+                0
+            ].split(
+                " directory: "
+            )[
+                1
+            ].strip()
+        )
 
     def lab_args(self):
-        return ["jupyter-lab",
-                "--no-browser",
-                "--NotebookApp.token='{}'".format(self.token),
-                "--NotebookApp.password=''",
-                "--port={}".format(self.port)]
+        return [
+            "jupyter-lab",
+            "--no-browser",
+            "--NotebookApp.token='{}'".format(self.token),
+            "--NotebookApp.password=''",
+            "--port={}".format(self.port),
+        ]
 
     def start_lab(self, url_root, cwd):
         # start a lab server
@@ -219,21 +226,26 @@ class JyveExporter(HTMLExporter):
 
         while timeout:
             try:
-                HTTPClient().fetch("{}?token={}".format(url_root, self.token),
-                                   method="GET")
+                HTTPClient().fetch(
+                    "{}?token={}".format(url_root, self.token), method="GET"
+                )
                 return lab
             except Exception:
                 timeout -= 1
                 time.sleep(0.5)
 
     def fetch_one(self, url_root, url, resources):
-        mirror_args = ["wget",
-                       "--page-requisites",
-                       "--convert-links",
-                       "-nH",
-                       "-e", "robots=off",
-                       "-P", resources["output_files_dir"],
-                       "{}/{}?token={}".format(url_root, url, self.token)]
+        mirror_args = [
+            "wget",
+            "--page-requisites",
+            "--convert-links",
+            "-nH",
+            "-e",
+            "robots=off",
+            "-P",
+            resources["output_files_dir"],
+            "{}/{}?token={}".format(url_root, url, self.token),
+        ]
         # scrape the hell out of it
         mirror = subprocess.Popen(mirror_args)
         mirror.wait()
@@ -254,9 +266,7 @@ class JyveExporter(HTMLExporter):
             css = urls.read_text()
             url_frag = urls.parent.relative_to(output_root)
             css = re.sub(
-                r"""(url\(['"])(images|icons)""",
-                r"\1../{}/\2".format(url_frag),
-                css
+                r"""(url\(['"])(images|icons)""", r"\1../{}/\2".format(url_frag), css
             )
             urls.write_text(css)
 
@@ -265,8 +275,9 @@ class JyveExporter(HTMLExporter):
         if components.exists():
             rmtree(components)
         components.mkdir(exist_ok=True)
-        copytree(str(static_path / "components" / "MathJax"),
-                 str(components / "MathJax"))
+        copytree(
+            str(static_path / "components" / "MathJax"), str(components / "MathJax")
+        )
 
         [jsmap.unlink() for jsmap in output_root.rglob("*.js.map")]
         [jsmap.unlink() for jsmap in output_root.rglob("stats.json")]
@@ -280,10 +291,10 @@ class JyveExporter(HTMLExporter):
 
         new_idx = re.sub(
             '(<script.*?id="jupyter-config-data".*?>).*?(</script>)',
-            '\\1\n{}\n</script>'.format(
-                json.dumps(self.jupyter_config_data, indent=2)),
+            "\\1\n{}\n</script>".format(json.dumps(self.jupyter_config_data, indent=2)),
             index.read_text(),
-            flags=re.M | re.S)
+            flags=re.M | re.S,
+        )
 
         new_idx = re.sub(r'src="lab', 'src="../lab', new_idx)
 
@@ -341,4 +352,5 @@ class JyveExporter(HTMLExporter):
         index = Path(output_root) / "index.html"
         index.write_text(
             """<!DOCTYPE html>\n"""
-            """<meta http-equiv="refresh" content="0; URL=./lab" />""")
+            """<meta http-equiv="refresh" content="0; URL=./lab" />"""
+        )

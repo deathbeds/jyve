@@ -15,7 +15,9 @@
   border: 0;
 }
 
-.jp-Launcher-cardContainer .jp-LauncherCard[title$=" — Jyve"] .jp-LauncherCard-noKernelIcon{
+.jp-Launcher-cardContainer
+  .jp-LauncherCard[title$=" — Jyve"]
+  .jp-LauncherCard-noKernelIcon {
   color: transparent;
   background-size: contain;
   background-position: left top;

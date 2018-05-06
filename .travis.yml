@@ -16,7 +16,7 @@ env:
   global:
     - GECKODRIVER_VERSION=0.20.1
     - GECKODRIVER_DIST=geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz
-    - GECKODIRVER_SOURCE=https://github.com/mozilla/geckodriver/releases/download
+    - GECKODRIVER_SOURCE=https://github.com/mozilla/geckodriver/releases/download
     - MINICONDA_DIST=Miniconda3-4.5.1-Linux-x86_64.sh
     - MINICONDA_SOURCE=https://repo.continuum.io/miniconda
     - CONDA_DIR=$HOME/miniconda3

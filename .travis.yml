@@ -17,7 +17,7 @@ env:
   global:
     - GECKODRIVER_VERSION=0.20.0
     - GECKODRIVER_DIST=geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz
-    - MINICONDA_DIST=Miniconda3-4.4.10-Linux-x86_64.sh
+    - MINICONDA_DIST=Miniconda3-4.5.1-Linux-x86_64.sh
     - CONDA_DIR=$HOME/miniconda3
     - PATH=$CONDA_DIR/bin:$PATH
 
@@ -42,7 +42,10 @@ install:
   - source activate jyve-dev && geckodriver --version && cd $TRAVIS_BUILD_DIR && bash postBuild
 
 script:
-   - jlpm test
+  - jlpm test
+
+after_failure:
+  - cat .testoutput/output.xml
 
 before_cache:
   - rsync -av $CONDA_DIR/pkgs/*.tar.bz2 $HOME/.cache/conda/

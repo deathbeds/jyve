@@ -34,7 +34,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     this.server = options.server;
     this._lab = options.lab;
     this._onRestart = options.onRestart;
-    this.server.on('message', async (msg: any) => await this._onMessage(msg));
+    this.server.on('message', (msg: string) => this._onMessage(msg));
     this.display = new Display(this);
     this.resetUserNS();
   }
@@ -62,7 +62,6 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
       }
       let timeout = 0.1;
       while (!(this._iframe && this._iframe.contentWindow)) {
-        console.log('waiting', timeout, 'for kernel');
         await JyveKernel.wait(timeout);
         timeout = timeout * 2;
       }
@@ -123,15 +122,24 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     this.frameCloseRequested.emit(void 0);
   }
 
-  private async _onMessage(rawMsg: string) {
+  private _onMessage(rawMsg: string): void {
     const msg = JSON.parse(rawMsg) as KernelMessage.IMessage;
     this.sendJSON(this.fakeStatusReply(msg, 'busy'));
-    const handled = await this.onMessage(msg);
-    if (!handled) {
-      console.groupCollapsed(`unhandled ${msg.header.msg_type}`);
-      console.log(JSON.stringify(msg, null, 2));
-      console.groupEnd();
-    }
+
+    setTimeout(async () => {
+      try {
+        const handled = await this.onMessage(msg);
+        if (!handled) {
+          console.groupCollapsed(`unhandled ${msg.header.msg_type}`);
+          console.log(JSON.stringify(msg, null, 2));
+          console.groupEnd();
+          this.sendJSON(this.fakeStatusReply(msg, 'idle'));
+        }
+      } catch (err) {
+        console.error(err);
+        this.sendJSON(this.fakeStatusReply(msg, 'idle'));
+      }
+    }, 0);
   }
 
   async getSpec() {
@@ -190,9 +198,9 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     status: Kernel.Status='idle'
   ): KernelMessage.IMessage {
     const header = this.fakeHeader('status');
-    return {
+    const reply = {
       header,
-      parent_header: header,
+      parent_header: parent ? parent.header : null,
       metadata: {},
       content: {
         execution_state: status
@@ -200,6 +208,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
       buffers: [] as ArrayBuffer[],
       channel: 'iopub' as KernelMessage.Channel
     };
+    return reply;
   }
 
   fakeExecuteReply(

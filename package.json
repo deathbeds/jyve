@@ -33,7 +33,7 @@
     "url": "https://github.com/deathbeds/jyve.git"
   },
   "scripts": {
-    "bootstrap": "jlpm && jlpm lerna bootstrap && jlpm clean && jlpm build && jlpm lab:link",
+    "bootstrap": "jlpm --no-optional && jlpm clean && jlpm lerna bootstrap && jlpm build && jlpm lab:link",
     "build": "jlpm build:core && jlpm build:js && jlpm build:coffee && jlpm build:typescript && jlpm build:brython && jlpm build:p5 && jlpm build:ext && jlpm build:lyb",
     "build:brython": "lerna run build --scope '@deathbeds/jyve-brython-unsafe'",
     "build:coffee": "lerna run build --scope '@deathbeds/jyve-coffee-unsafe'",
@@ -46,8 +46,8 @@
     "build:typescript": "lerna run build --scope '@deathbeds/jyve-typescript-unsafe'",
     "clean": "lerna run --parallel clean",
     "lab:build": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm build",
-    "lab:clean": "cd $CONDA_PREFIX/share/jupyter/lab/staging/build && rm `ls | grep -v index | grep -v error`",
     "lab:dupes": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm build --json > stats.json && webpack-stats-duplicates stats.json",
+    "lab:clean": "cd $CONDA_PREFIX/share/jupyter/lab/staging/build && rm `ls | grep -v index | grep -v error`",
     "lab:link": "lerna run lab:link",
     "lab:stats": "cd $CONDA_PREFIX/share/jupyter/lab/staging && ./node_modules/.bin/webpack --profile --json > stats.json",
     "lab:viz": "cd $CONDA_PREFIX/share/jupyter/lab/staging && cp stats.json build/ && webpack-bundle-analyzer build/stats.json -p 6767",

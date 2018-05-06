@@ -9,6 +9,8 @@ ${BUSY_PROMPT}    In [*]:
 *** Keywords ***
 Add and Run Cell
   [Arguments]   ${code}
+  Click Element             css:.jp-NotebookPanel-toolbar .jp-AddIcon
+  Sleep  0.1s
   Click Element             css:${CELL_CSS}
   Execute JavaScript
     ...    document.querySelector("${CELL_CSS}").CodeMirror.setValue(`${code}`)

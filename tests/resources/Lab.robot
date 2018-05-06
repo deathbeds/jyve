@@ -4,7 +4,7 @@ Library  SeleniumLibrary
 
 
 *** Variables ***
-${CELL_CSS}  .jp-Notebook .jp-InputArea-editor .CodeMirror
+${CELL_CSS}  .jp-Notebook .jp-Cell:last-of-type .jp-InputArea-editor .CodeMirror
 
 ${TOKEN}      hopelesslyinsecure
 ${LAB_CMD}    jupyter-lab --no-browser --NotebookApp.token=${TOKEN} --port 18888

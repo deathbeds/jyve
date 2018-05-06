@@ -1,9 +1,9 @@
-.jp-Launcher-cardContainer .jp-LauncherCard[title$=' — Jyve'][title^='JS'] {
+.jp-Launcher-cardContainer .jp-LauncherCard[title$=" — Jyve"][title^="JS"] {
   background-image: none;
 }
 
 .jp-Launcher-cardContainer
-  .jp-LauncherCard[title$=' — Jyve'][title^='JS']
+  .jp-LauncherCard[title$=" — Jyve"][title^="JS"]
   .jp-LauncherCard-noKernelIcon {
-  background-image: url('./js.svg');
+  background-image: url("./js.svg");
 }

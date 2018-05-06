@@ -3,20 +3,20 @@
   --jyv-kernel-icon-size: var(--jp-private-launcher-large-icon-size);
   --jyv-kernel-border-radius: 0;
   --jyv-color-brand1: #f7df1e;
-  --jyv-icon-frame: url('./filter-frames.svg');
+  --jyv-icon-frame: url("./filter-frames.svg");
 }
 
-.jp-Launcher-cardContainer .jp-LauncherCard[title$=' — Jyve'] {
+.jp-Launcher-cardContainer .jp-LauncherCard[title$=" — Jyve"] {
   border-radius: var(--jyv-kernel-border-radius);
   background-size: calc(var(--jyv-phi) * 1rem);
   background-position: right 1rem top 2.35rem;
   background-repeat: no-repeat;
-  background-image: url('./js.svg');
+  background-image: url("./js.svg");
   border: 0;
 }
 
 .jp-Launcher-cardContainer
-  .jp-LauncherCard[title$=' — Jyve']
+  .jp-LauncherCard[title$=" — Jyve"]
   .jp-LauncherCard-noKernelIcon {
   color: transparent;
   background-size: contain;

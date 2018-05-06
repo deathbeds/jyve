@@ -10,4 +10,4 @@ overrides:
       trailingComma: es5
   - files: "*.css"
     options:
-      singleQuote: true
+      singleQuote: false

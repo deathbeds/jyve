@@ -20,5 +20,4 @@ python -m pip install -e . --ignore-installed --no-dependencies
 jlpm bootstrap
 jupyter labextension list
 
-# this first build is usually broken in subtle ways
-jupyter lab build --dev
+jupyter lab build

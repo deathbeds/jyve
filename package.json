@@ -30,8 +30,7 @@
   "scripts": {
     "bootstrap":
       "jlpm --no-optional && jlpm clean && jlpm lint && jlpm lerna bootstrap && jlpm build && jlpm lab:link",
-    "build":
-      "jlpm build:core && jlpm build:js && jlpm build:kyrnel && jlpm build:lyb",
+    "build": "jlpm build:core && jlpm build:js && jlpm build:kyrnel && jlpm build:lyb",
     "build:core": "lerna run build --scope '@deathbeds/jyve'",
     "build:demo":
       "rm -rf index_files/* && jupyter nbconvert --to=jyve index.ipynb --JyveExporter.extra_contents='[\"notebooks/*.ipynb\"]' && rsync -aqz index_files/ _demo/",

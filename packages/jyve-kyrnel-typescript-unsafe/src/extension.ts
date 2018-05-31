@@ -4,7 +4,7 @@ import {IJyve} from '@deathbeds/jyve';
 // tslint:disable-next-line
 const pkg = require('../package.json') as any;
 
-const id = '@deathbeds/jyve-typescript-unsafe';
+const id = '@deathbeds/jyve-kyrnel-typescript-unsafe';
 
 import '../style/index.css';
 

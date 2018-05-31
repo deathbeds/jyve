@@ -27,7 +27,7 @@
       "arvg": ["echo", "jyve"],
       "display_name": "TypeScript (unsafe) — Jyve",
       "language": "typescript",
-      "name": "jyve-typescript-unsafe",
+      "name": "jyve-kyrnel-typescript-unsafe",
       "resources": {}
     },
     "language_info": {
@@ -45,7 +45,7 @@
   "keywords": ["typescript", "jupyter", "jupyterlab", "jyve"],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
-  "name": "@deathbeds/jyve-typescript-unsafe",
+  "name": "@deathbeds/jyve-kyrnel-typescript-unsafe",
   "peerDependencies": {
     "@deathbeds/jyve": "^0.4.0"
   },

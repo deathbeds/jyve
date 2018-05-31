@@ -12,7 +12,6 @@
     "rimraf": "^2.6.1",
     "tslint": "^5.10.0",
     "typescript": "^2.8.3",
-    "verdaccio": "^2.7.4",
     "webpack-bundle-analyzer": "^2.10.0",
     "webpack-stats-duplicates": "^2.1.0"
   },
@@ -31,22 +30,14 @@
   "scripts": {
     "bootstrap":
       "jlpm --no-optional && jlpm clean && jlpm lint && jlpm lerna bootstrap && jlpm build && jlpm lab:link",
-    "build":
-      "jlpm build:core && jlpm build:js && jlpm build:coffee && jlpm build:typescript && jlpm build:brython && jlpm build:p5 && jlpm build:ext && jlpm build:lyb",
-    "build:brython": "lerna run build --scope '@deathbeds/jyve-brython-unsafe'",
-    "build:coffee": "lerna run build --scope '@deathbeds/jyve-coffee-unsafe'",
+    "build": "jlpm build:core && jlpm build:js && jlpm build:kyrnel && jlpm build:lyb",
     "build:core": "lerna run build --scope '@deathbeds/jyve'",
     "build:demo":
-      "rm -rf index_files/* && jupyter nbconvert --to=jyve index.ipynb --JyveExporter.extra_contents='[\"notebooks/*.ipynb\"]' && rsync -aqz index_files/ _demo/",
-    "build:ext": "lerna run build --scope '@deathbeds/*-extension'",
-    "build:js": "lerna run build --scope '@deathbeds/jyve-js-unsafe'",
+      "rm -rf index_files/* && jupyter nbconvert --to=jyve index.ipynb --JyveExporter.extra_contents='[\"notebooks/*.ipynb\"]' && cp -r index_files/* _demo/",
+    "build:js": "lerna run build --scope '@deathbeds/jyve-kyrnel-js-unsafe'",
     "build:lyb": "lerna run build --scope '@deathbeds/jyve-lyb-*'",
-    "build:p5": "lerna run build --scope '@deathbeds/jyve-p5-unsafe'",
-    "build:typescript": "lerna run build --scope '@deathbeds/jyve-typescript-unsafe'",
+    "build:kyrnel": "lerna run build --scope '@deathbeds/jyve-kyrnel-*'",
     "clean": "lerna run --parallel clean",
-    "lab:build": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm build",
-    "lab:clean":
-      "cd $CONDA_PREFIX/share/jupyter/lab/staging/build && rm `ls | grep -v index | grep -v error`",
     "lab:dupes":
       "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm build --json > stats.json && webpack-stats-duplicates stats.json",
     "lab:link": "lerna run lab:link",
@@ -54,8 +45,6 @@
       "cd $CONDA_PREFIX/share/jupyter/lab/staging && ./node_modules/.bin/webpack --profile --json > stats.json",
     "lab:viz":
       "cd $CONDA_PREFIX/share/jupyter/lab/staging && cp stats.json build/ && webpack-bundle-analyzer build/stats.json -p 6767",
-    "lab:watch":
-      "cd $CONDA_PREFIX/share/jupyter/lab/staging && rm -rf ../static && jlpm watch",
     "lint":
       "jlpm lint:prettier && jlpm lint:black && jlpm lint:flake8 && jlpm lint:tslint",
     "lint:beautysh": "beautysh -i 2 -f scripts/**/*.sh postBuild",
@@ -64,8 +53,6 @@
     "lint:prettier":
       "prettier --write *.json *.md && lerna exec -- prettier --write --config=../../.prettierrc ./src/**/*.ts ./style/**/*.css ./*.json ./*.md",
     "lint:tslint": "lerna exec -- tslint -c ../../tslint.json --fix ./src/**/*.ts",
-    "publish:local": "lerna run --parallel publish:local",
-    "serve": "verdaccio -c verdaccio/config.yaml",
     "test": "python -m robot -d .testoutput tests/acceptance",
     "watch": "lerna run --parallel watch"
   },

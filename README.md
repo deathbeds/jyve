@@ -2,7 +2,7 @@
 
 [![Build Status][travis-badge]][travis] [![Binder][binder-badge]][binder] [![npm-version][]][npm-search]
 
-Experimental, unsafe Jupyter Kernels in the Browser... from anywhere. Try the [demo][].
+Experimental, unsafe, interactive Jupyter Kernel-like things in your browser. Try the [demo][].
 
 [demo]: https://deathbeds.github.io/jyve
 [travis]: https://travis-ci.org/deathbeds/jyve
@@ -52,38 +52,38 @@ Install:
 
 ```bash
 # the core manager, required but doesn't do anything by itself
-jupyter labextension install @deathbeds/jyve-extension
+jupyter labextension install @deathbeds/jyve
 # the base kernel
-jupyter labextension install @deathbeds/jyve-js-unsafe-extension
+jupyter labextension install @deathbeds/jyve-kyrnel-js-unsafe
 # specific compile-to-js kernels (needs the js kernel)
-jupyter labextension install @deathbeds/jyve-brython-unsafe-extension
-jupyter labextension install @deathbeds/jyve-coffee-unsafe-extension
-jupyter labextension install @deathbeds/jyve-p5-unsafe-extension
-jupyter labextension install @deathbeds/jyve-typescript-unsafe-extension
+jupyter labextension install @deathbeds/jyve-kyrnel-brython-unsafe
+jupyter labextension install @deathbeds/jyve-kyrnel-coffee-unsafe
+jupyter labextension install @deathbeds/jyve-kyrnel-p5-unsafe
+jupyter labextension install @deathbeds/jyve-kyrnel-typescript-unsafe
 # extra packages, wrapped for convenience in jyve kernels
 jupyter labextension install @deathbeds/jyve-lyb-d3
 jupyter labextension install @deathbeds/jyve-lyb-phosphor
 ```
 
-Or, since hey, **this is Jyve**:
+Or, since hey, **This is Jyve**:
 
 ```bash
 jupyter labextension install \
-  @deathbeds/jyve-brython-unsafe-extension \
-  @deathbeds/jyve-coffee-unsafe-extension \
-  @deathbeds/jyve-extension \
-  @deathbeds/jyve-js-unsafe-extension \
-  @deathbeds/jyve-lyb-d3 \
-  @deathbeds/jyve-lyb-phosphor \
-  @deathbeds/jyve-p5-unsafe-extension \
-  @deathbeds/jyve-typescript-unsafe-extension \
+    @deathbeds/jyve \
+    @deathbeds/jyve-kyrnel-brython-unsafe \
+    @deathbeds/jyve-kyrnel-coffee-unsafe \
+    @deathbeds/jyve-kyrnel-js-unsafe \
+    @deathbeds/jyve-kyrnel-p5-unsafe \
+    @deathbeds/jyve-kyrnel-typescript-unsafe \
+    @deathbeds/jyve-lyb-d3 \
+    @deathbeds/jyve-lyb-phosphor \
   && jupyter labextension list
 ```
 
 ## Motivation
 
-JupyterLab currently **disables execution of arbitrary JavaScript** in output
-cells, Markdown documents and other places. This is a Good Thing,
+JupyterLab currently **disables or limits the scope of of arbitrary JavaScript**
+in output cells, Markdown documents and other places. This is a Good Thing,
 and will help keep safe people who are primarily interested in learning and
 doing science, research, and analysis and don't want to be bothered with
 **cross-site scripting**, **click-jacking**, **privilege escalation** and the
@@ -97,15 +97,20 @@ nasty warning in JupyterLab. However, this immediately exposed you to a
 relatively high likelihood of breaking other extensions, or even core behavior
 itself.
 
-**Jyve** fits somewhere between the two. A Jyve **Kyrnel** runs in JupyterLab
-and has **full, unsafe access** to the full capability of your browser,
-including:
+**Jyve** fits somewhere between the two.
+
+## Kyrnels
+
+A Jyve **Kyrnel** runs in JupyterLab and has **full, unsafe access** to the
+many of the capabilities of your browser, including:
 
 * its own dedicated DOM in an `iframe`
 * the JupyterLab `Application` instance, including
   * commands
   * the application shell
   * so much more...
+* debugging with in-browser (or remote) tools
+* `localStorage`, `IndexedDB` and other storage mechanisms
 
 Because it's _almost_ a real Jupyter Kernel, a Jyve Kyrnel can be used by tools
 like the JupyterLab Notebook and the JupyterLab Console. But, because of its
@@ -115,6 +120,16 @@ relationship to JupyterLab and the browser, it can:
 * integrate with the excellent local browser debugger tools
 * run JupyterLab commands
 * add new phosphor Widgets to the application shell
+
+## Lybs
+
+JupyterLab, while very customizable, is still delivered as a series of
+intentionally-unpredictable files which bundle many megabytes of JS, CSS, JSON
+and other artifacts.
+
+To make it easier to learn about key libraries inside JupyterLab (or
+even external to it), a Jyve Lyb wraps up a library and makes it usable
+directly inside every kyrnel.
 
 ## Development
 
@@ -136,7 +151,7 @@ source activate jyve-dev
 
 ```bash
 jlpm build
-jlpm lab:build
+jupyter lab build
 ```
 
 ## Always Be Building
@@ -144,7 +159,5 @@ jlpm lab:build
 ```bash
 jlpm watch
 # and in another terminal
-./scripts/watch.sh
-# and in another terminal
-jlpm lab:watch
+jupyter lab --watch
 ```

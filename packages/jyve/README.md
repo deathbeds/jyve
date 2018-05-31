@@ -2,7 +2,24 @@
 
 > Jupyter Kernels in the Browser
 
-This is an API package, and is only needed for development of `@deathbeds/jyve-extension`
+## Before
+
+```bash
+conda install -c conda-forge jupyterlab nodejs
+```
+
+or
+
+```
+# get nodejs somehow ¯\_(ツ)_/¯
+pip install jupyterlab
+```
+
+## Install
+
+```bash
+jupyter labextension install @deathbeds/jyve
+```
 
 ## Development
 

@@ -14,15 +14,22 @@
     "noEmitOnError": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
+    "noImplicitUseStrict": true,
     "outDir": "./lib",
 "importHelpers": true,
     "target": "ES5",
     "types": [
       "node"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "!!raw-loader!*": ["../../../node_modules/*"]
+    }
   },
   "include": [
-    "src/**/*",
-    "src/@types/**/*"
+    "../jyve/src/@types/**/*",
+    "./**/*",
+    "./src/**/*",
+    "./src/@types/**/*"
   ]
 }

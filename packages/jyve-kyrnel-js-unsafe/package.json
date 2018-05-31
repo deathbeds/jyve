@@ -5,18 +5,16 @@
   },
   "dependencies": {
     "@jupyterlab/application": "^0.16.2",
-    "@phosphor/widgets": "^1.5.0",
-    "mock-socket": "^7.1.0",
     "tslib": "^1.9.0"
   },
-  "devDependencies": {
-    "@types/socket.io": "^1.4.31"
-  },
-  "description": "Jupyter Kernels in the Browser",
+  "description": "A totally unsafe browser js kernel",
   "files": [
     "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
   ],
   "homepage": "https://github.com/deathbeds/jyve",
+  "jupyterlab": {
+    "extension": "lib/extension.js"
+  },
   "jyve": {
     "help_links": [
       {
@@ -28,6 +26,13 @@
         "url": "https://caniuse.com"
       }
     ],
+    "kernelspec": {
+      "arvg": ["echo", "jyve"],
+      "display_name": "JS (unsafe) — Jyve",
+      "language": "javascript",
+      "name": "jyve-kyrnel-js-unsafe",
+      "resources": {}
+    },
     "language_info": {
       "codemirror_mode": {
         "name": "javascript"
@@ -40,13 +45,13 @@
       "version": "ES2015"
     }
   },
-  "jupyterlab": {
-    "extension": "lib/extension.js"
-  },
-  "keywords": ["jupyter", "jupyterlab", "jupyterlab-extension", "jyve"],
+  "keywords": ["jupyter", "jupyterlab", "jyve"],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
-  "name": "@deathbeds/jyve",
+  "name": "@deathbeds/jyve-kyrnel-js-unsafe",
+  "peerDependencies": {
+    "@deathbeds/jyve": "^0.4.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/deathbeds/jyve.git"

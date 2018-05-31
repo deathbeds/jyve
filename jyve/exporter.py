@@ -138,13 +138,16 @@ class JyveExporter(HTMLExporter):
             str(ef)[:-6] for ef in self.extra_files if ef.name.endswith(".ipynb")
         ]
 
-        urls = ["lab"] + [
-            "api/contents/{}.ipynb".format(nb_name) for nb_name in nb_names
-        ] + [
-            "api/contents/{}".format(ef)
-            for ef in self.extra_files
-            if not ef.name.endswith(".ipynb")
-        ] + self.extra_urls
+        urls = (
+            ["lab"]
+            + ["api/contents/{}.ipynb".format(nb_name) for nb_name in nb_names]
+            + [
+                "api/contents/{}".format(ef)
+                for ef in self.extra_files
+                if not ef.name.endswith(".ipynb")
+            ]
+            + self.extra_urls
+        )
 
         with TemporaryDirectory() as tmpdir:
             urls += list(self.prepare_contents(tmpdir))
@@ -199,15 +202,11 @@ class JyveExporter(HTMLExporter):
 
     def lab_path(self):
         return Path(
-            subprocess.check_output(["jupyter-lab", "paths"]).decode("utf-8").split(
-                "\n"
-            )[
-                0
-            ].split(
-                " directory: "
-            )[
-                1
-            ].strip()
+            subprocess.check_output(["jupyter-lab", "paths"])
+            .decode("utf-8")
+            .split("\n")[0]
+            .split(" directory: ")[1]
+            .strip()
         )
 
     def lab_args(self):

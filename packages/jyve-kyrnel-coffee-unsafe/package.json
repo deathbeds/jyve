@@ -5,48 +5,50 @@
   },
   "dependencies": {
     "@jupyterlab/application": "^0.16.2",
-    "@phosphor/widgets": "^1.5.0",
-    "mock-socket": "^7.1.0",
+    "coffeescript": "^2.2.4",
     "tslib": "^1.9.0"
   },
-  "devDependencies": {
-    "@types/socket.io": "^1.4.31"
-  },
-  "description": "Jupyter Kernels in the Browser",
+  "description": "A totally unsafe browser coffeescript kernel",
   "files": [
     "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
   ],
   "homepage": "https://github.com/deathbeds/jyve",
-  "jyve": {
-    "help_links": [
-      {
-        "text": "MDN Web Docs",
-        "url": "https://developer.mozilla.org"
-      },
-      {
-        "text": "Can I use ... ?",
-        "url": "https://caniuse.com"
-      }
-    ],
-    "language_info": {
-      "codemirror_mode": {
-        "name": "javascript"
-      },
-      "file_extension": ".js",
-      "mimetype": "text/javascript",
-      "name": "javascript",
-      "nbconvert_exporter": "javascript",
-      "pygments_lexer": "javascript",
-      "version": "ES2015"
-    }
-  },
   "jupyterlab": {
     "extension": "lib/extension.js"
   },
-  "keywords": ["jupyter", "jupyterlab", "jupyterlab-extension", "jyve"],
+  "jyve": {
+    "help_links": [
+      {
+        "text": "CoffeeScript",
+        "url": "http://coffeescript.org/"
+      }
+    ],
+    "kernelspec": {
+      "arvg": ["echo", "jyve"],
+      "display_name": "CoffeeScript (unsafe) — Jyve",
+      "language": "coffeescript",
+      "name": "jyve-kyrnel-coffee-unsafe",
+      "resources": {}
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "coffeescript"
+      },
+      "file_extension": ".coffee",
+      "mimetype": "text/coffeescript",
+      "name": "coffeescript",
+      "nbconvert_exporter": "coffeescript",
+      "pygments_lexer": "coffeescript",
+      "version": "2.2.1"
+    }
+  },
+  "keywords": ["coffeescript", "jupyter", "jupyterlab", "jyve"],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
-  "name": "@deathbeds/jyve",
+  "name": "@deathbeds/jyve-kyrnel-coffee-unsafe",
+  "peerDependencies": {
+    "@deathbeds/jyve": "^0.4.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/deathbeds/jyve.git"

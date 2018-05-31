@@ -52,14 +52,14 @@ Install:
 
 ```bash
 # the core manager, required but doesn't do anything by itself
-jupyter labextension install @deathbeds/jyve-extension
+jupyter labextension install @deathbeds/jyve
 # the base kernel
-jupyter labextension install @deathbeds/jyve-js-unsafe-extension
+jupyter labextension install @deathbeds/jyve-kyrnel-js-unsafe
 # specific compile-to-js kernels (needs the js kernel)
-jupyter labextension install @deathbeds/jyve-brython-unsafe-extension
-jupyter labextension install @deathbeds/jyve-coffee-unsafe-extension
-jupyter labextension install @deathbeds/jyve-p5-unsafe-extension
-jupyter labextension install @deathbeds/jyve-typescript-unsafe-extension
+jupyter labextension install @deathbeds/jyve-kyrnel-brython-unsafe
+jupyter labextension install @deathbeds/jyve-kyrnel-coffee-unsafe
+jupyter labextension install @deathbeds/jyve-kyrnel-p5-unsafe
+jupyter labextension install @deathbeds/jyve-typescript-unsafe
 # extra packages, wrapped for convenience in jyve kernels
 jupyter labextension install @deathbeds/jyve-lyb-d3
 jupyter labextension install @deathbeds/jyve-lyb-phosphor
@@ -69,14 +69,14 @@ Or, since hey, **this is Jyve**:
 
 ```bash
 jupyter labextension install \
-  @deathbeds/jyve-brython-unsafe-extension \
-  @deathbeds/jyve-coffee-unsafe-extension \
-  @deathbeds/jyve-extension \
-  @deathbeds/jyve-js-unsafe-extension \
+  @deathbeds/jyve-kyrnel-brython-unsafe \
+  @deathbeds/jyve-kyrnel-coffee-unsafe \
+  @deathbeds/jyve \
+  @deathbeds/jyve-kyrnel-js-unsafe \
   @deathbeds/jyve-lyb-d3 \
   @deathbeds/jyve-lyb-phosphor \
-  @deathbeds/jyve-p5-unsafe-extension \
-  @deathbeds/jyve-typescript-unsafe-extension \
+  @deathbeds/jyve-kyrnel-p5-unsafe \
+  @deathbeds/jyve-typescript-unsafe \
   && jupyter labextension list
 ```
 

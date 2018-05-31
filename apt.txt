@@ -1,2 +1,0 @@
-inotify-tools
-rsync

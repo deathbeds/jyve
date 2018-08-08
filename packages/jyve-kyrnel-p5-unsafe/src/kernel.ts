@@ -39,7 +39,7 @@ export namespace P5UnsafeKernel {
       return window.p5;
     }
 
-    const p5Src = (await import('!!raw-loader!p5/lib/p5.js')) as string;
+    const p5Src = require('!!raw-loader!p5/lib/p5.js') as string;
     const p5Script = document.createElement('script');
     p5Script.textContent = p5Src;
     p5Script.id = 'jyve-kyrnel-p5';

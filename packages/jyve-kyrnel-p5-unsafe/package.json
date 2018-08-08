@@ -5,8 +5,10 @@
   },
   "dependencies": {
     "@jupyterlab/application": "^0.17.0",
-    "p5": "^0.6.0",
-    "tslib": "^1.9.0"
+    "p5": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/webpack-env": "~1.13.6"
   },
   "description": "A totally unsafe browser p5 kernel",
   "files": [
@@ -24,7 +26,10 @@
       }
     ],
     "kernelspec": {
-      "arvg": ["echo", "jyve"],
+      "arvg": [
+        "echo",
+        "jyve"
+      ],
       "display_name": "P5 (unsafe) — Jyve",
       "language": "processing",
       "name": "jyve-kyrnel-p5-unsafe",
@@ -42,7 +47,13 @@
       "version": "2.2.1"
     }
   },
-  "keywords": ["p5", "processing", "jupyter", "jupyterlab", "jyve"],
+  "keywords": [
+    "p5",
+    "processing",
+    "jupyter",
+    "jupyterlab",
+    "jyve"
+  ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-kyrnel-p5-unsafe",

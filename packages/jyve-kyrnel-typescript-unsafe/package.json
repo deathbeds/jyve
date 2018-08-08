@@ -5,7 +5,6 @@
   },
   "dependencies": {
     "@jupyterlab/application": "^0.17.0",
-    "tslib": "^1.9.0",
     "typescript": "~2.9.1"
   },
   "description": "A totally unsafe browser TypeScript kernel",
@@ -24,7 +23,10 @@
       }
     ],
     "kernelspec": {
-      "arvg": ["echo", "jyve"],
+      "arvg": [
+        "echo",
+        "jyve"
+      ],
       "display_name": "TypeScript (unsafe) — Jyve",
       "language": "typescript",
       "name": "jyve-kyrnel-typescript-unsafe",
@@ -42,7 +44,12 @@
       "version": "2.2.1"
     }
   },
-  "keywords": ["typescript", "jupyter", "jupyterlab", "jyve"],
+  "keywords": [
+    "typescript",
+    "jupyter",
+    "jupyterlab",
+    "jyve"
+  ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-kyrnel-typescript-unsafe",

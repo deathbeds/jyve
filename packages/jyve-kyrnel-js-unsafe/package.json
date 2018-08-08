@@ -4,8 +4,7 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.17.0",
-    "tslib": "^1.9.0"
+    "@jupyterlab/application": "^0.17.0"
   },
   "description": "A totally unsafe browser js kernel",
   "files": [
@@ -27,7 +26,10 @@
       }
     ],
     "kernelspec": {
-      "arvg": ["echo", "jyve"],
+      "arvg": [
+        "echo",
+        "jyve"
+      ],
       "display_name": "JS (unsafe) — Jyve",
       "language": "javascript",
       "name": "jyve-kyrnel-js-unsafe",
@@ -45,7 +47,11 @@
       "version": "ES2015"
     }
   },
-  "keywords": ["jupyter", "jupyterlab", "jyve"],
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jyve"
+  ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-kyrnel-js-unsafe",

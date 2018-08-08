@@ -10,10 +10,10 @@ dependencies:
   - black
   - flake8
   - geckodriver
-  - jupyterlab >=0.32.1,<0.33
-  - nodejs >=8.9.3,<10
+  - jupyterlab >=0.33,<0.34
+  - nodejs >=8.9.3,<9
   - python >=3.6,<3.7
   - robotframework-seleniumlibrary
   - wget
   - pip:
-    - beautysh
+      - beautysh

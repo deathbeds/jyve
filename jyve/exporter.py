@@ -27,6 +27,7 @@ class JyveExporter(HTMLExporter):
     """ Export a single notebook as a snapshot of a working JupyterLab
         environment
     """
+
     port = T.Integer(9999, help="port for temporary server")
     token = T.Unicode(
         binascii.b2a_hex(os.urandom(15)).decode("utf-8"), help="temporary token"

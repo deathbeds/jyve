@@ -6,8 +6,7 @@
   "dependencies": {
     "@jupyterlab/application": "^0.17.0",
     "brython": "^3.5.0",
-    "raw-loader": "~0.5.1",
-    "tslib": "^1.9.0"
+    "raw-loader": "~0.5.1"
   },
   "description": "A totally unsafe browser brython kernel",
   "files": [
@@ -25,7 +24,10 @@
       }
     ],
     "kernelspec": {
-      "arvg": ["echo", "jyve"],
+      "arvg": [
+        "echo",
+        "jyve"
+      ],
       "display_name": "Brython (unsafe) — Jyve",
       "language": "python",
       "name": "jyve-kyrnel-brython-unsafe",
@@ -44,7 +46,11 @@
       "version": "ES2015"
     }
   },
-  "keywords": ["jupyter", "jupyterlab", "jyve"],
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jyve"
+  ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-kyrnel-brython-unsafe",

@@ -5,8 +5,7 @@
   },
   "dependencies": {
     "@jupyterlab/application": "^0.17.0",
-    "coffeescript": "^2.2.4",
-    "tslib": "^1.9.0"
+    "coffeescript": "^2.2.4"
   },
   "description": "A totally unsafe browser coffeescript kernel",
   "files": [
@@ -24,7 +23,10 @@
       }
     ],
     "kernelspec": {
-      "arvg": ["echo", "jyve"],
+      "arvg": [
+        "echo",
+        "jyve"
+      ],
       "display_name": "CoffeeScript (unsafe) — Jyve",
       "language": "coffeescript",
       "name": "jyve-kyrnel-coffee-unsafe",
@@ -42,7 +44,12 @@
       "version": "2.2.1"
     }
   },
-  "keywords": ["coffeescript", "jupyter", "jupyterlab", "jyve"],
+  "keywords": [
+    "coffeescript",
+    "jupyter",
+    "jupyterlab",
+    "jyve"
+  ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-kyrnel-coffee-unsafe",

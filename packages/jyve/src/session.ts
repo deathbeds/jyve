@@ -1,7 +1,7 @@
 import {DefaultSession} from '@jupyterlab/services/lib/session/default';
 import {Session, Kernel, ServerConnection} from '@jupyterlab/services';
 
-import {uuid} from '@jupyterlab/coreutils';
+import {UUID} from '@phosphor/coreutils';
 
 
 import {JyveKernel} from './kernel';
@@ -29,8 +29,8 @@ namespace JyveSession {
   export async function startNew(
     options: Jyve.ISessionOptions
   ): Promise<Session.ISession> {
-    const kernelId = uuid();
-    const sessionId = uuid();
+    const kernelId = UUID.uuid4();
+    const sessionId = UUID.uuid4();
 
     const serverSettings = {
       ...options.serverSettings || ServerConnection.makeSettings(),

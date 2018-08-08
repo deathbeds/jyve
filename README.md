@@ -14,16 +14,16 @@ Experimental, unsafe, interactive Jupyter Kernel-like things in your browser. Tr
 
 ## IFrame-backed kernels
 
-* [JS](./notebooks/JavaScript.ipynb)
-* [CoffeeScript](./notebooks/CoffeeScript.ipynb)
-* [Brython](./notebooks/Brython.ipynb)
-* [TypeScript](./notebooks/TypeScript.ipynb)
-* [P5](./notebooks/P5.ipynb)
+- [JS](./notebooks/JavaScript.ipynb)
+- [CoffeeScript](./notebooks/CoffeeScript.ipynb)
+- [Brython](./notebooks/Brython.ipynb)
+- [TypeScript](./notebooks/TypeScript.ipynb)
+- [P5](./notebooks/P5.ipynb)
 
 ## Convenience wrappers
 
-* [PhosphorJS](./notebooks/Phosphor Playground.ipynb)
-* [d3](./notebooks/d3 Playground.ipynb)
+- [PhosphorJS](./notebooks/Phosphor Playground.ipynb)
+- [d3](./notebooks/d3 Playground.ipynb)
 
 These kernels create their own widget next to a
 Notebook (or Console). Restarting the kernel is equivalent to refreshing the
@@ -45,7 +45,7 @@ JupyterLab.commands.execute('notebook:create-new');
 
 Install:
 
-* JupyterLab >=0.31.10 from [pip](https://pypi.io/project/jupyterlab) or
+- JupyterLab >=0.31.10 from [pip](https://pypi.io/project/jupyterlab) or
   [conda](https://anaconda.org/conda-forge/jupyterlab)
 
 ## Install
@@ -104,22 +104,22 @@ itself.
 A Jyve **Kyrnel** runs in JupyterLab and has **full, unsafe access** to the
 many of the capabilities of your browser, including:
 
-* its own dedicated DOM in an `iframe`
-* the JupyterLab `Application` instance, including
-  * commands
-  * the application shell
-  * so much more...
-* debugging with in-browser (or remote) tools
-* `localStorage`, `IndexedDB` and other storage mechanisms
+- its own dedicated DOM in an `iframe`
+- the JupyterLab `Application` instance, including
+  - commands
+  - the application shell
+  - so much more...
+- debugging with in-browser (or remote) tools
+- `localStorage`, `IndexedDB` and other storage mechanisms
 
 Because it's _almost_ a real Jupyter Kernel, a Jyve Kyrnel can be used by tools
 like the JupyterLab Notebook and the JupyterLab Console. But, because of its
 relationship to JupyterLab and the browser, it can:
 
-* load arbitrary code and data from anywhere on the internet
-* integrate with the excellent local browser debugger tools
-* run JupyterLab commands
-* add new phosphor Widgets to the application shell
+- load arbitrary code and data from anywhere on the internet
+- integrate with the excellent local browser debugger tools
+- run JupyterLab commands
+- add new phosphor Widgets to the application shell
 
 ## Lybs
 
@@ -137,7 +137,7 @@ directly inside every kyrnel.
 
 Install:
 
-* [conda](https://conda.io/docs/user-guide/install/download.html)
+- [conda](https://conda.io/docs/user-guide/install/download.html)
 
 ### Setup
 

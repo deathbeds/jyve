@@ -1,25 +1,7 @@
 {
+  "extends": "../../tsconfigbase",
   "compilerOptions": {
-    "declaration": true,
-    "lib": [
-      "ES5",
-      "ES2015.Promise",
-      "DOM",
-      "ES2015.Collection",
-      "ES2016",
-      "ES6"
-    ],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "noEmitOnError": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "outDir": "./lib",
-"importHelpers": true,
-    "target": "ES5",
-    "types": [
-      "node"
-    ]
+    "outDir": "./lib"
   },
   "include": [
     "src/**/*",

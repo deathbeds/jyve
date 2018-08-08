@@ -8,18 +8,23 @@
   "devDependencies": {
     "@types/node": "^9.4.2",
     "lerna": "^2.11.0",
-    "prettier": "1.12.1",
+    "prettier": "1.14.0",
     "rimraf": "^2.6.1",
     "tslint": "^5.10.0",
-    "typescript": "^2.8.3",
+    "typescript": "^2.9.2",
     "webpack-bundle-analyzer": "^2.10.0",
-    "webpack-stats-duplicates": "^2.1.0"
+    "webpack-stats-duplicates": "^2.1.0",
+    "@types/webpack-env": "~1.13.6"
   },
   "files": [
     "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
   ],
   "homepage": "https://github.com/deathbeds/jyve",
-  "keywords": ["extension", "jupyter", "jupyterlab"],
+  "keywords": [
+    "extension",
+    "jupyter",
+    "jupyterlab"
+  ],
   "license": "BSD-3-Clause",
   "name": "_Jyve",
   "private": true,
@@ -28,34 +33,29 @@
     "url": "https://github.com/deathbeds/jyve.git"
   },
   "scripts": {
-    "bootstrap":
-      "jlpm --no-optional && jlpm clean && jlpm lint && jlpm lerna bootstrap && jlpm build && jlpm lab:link",
+    "bootstrap": "jlpm --no-optional && jlpm clean && jlpm lint && jlpm lerna bootstrap && jlpm build && jlpm lab:link",
     "build": "jlpm build:core && jlpm build:js && jlpm build:kyrnel && jlpm build:lyb",
     "build:core": "lerna run build --scope '@deathbeds/jyve'",
-    "build:demo":
-      "rm -rf index_files/* && jupyter nbconvert --to=jyve index.ipynb --JyveExporter.extra_contents='[\"notebooks/*.ipynb\"]' && cp -r index_files/* _demo/",
+    "build:demo": "rm -rf index_files/* && jupyter nbconvert --to=jyve index.ipynb --JyveExporter.extra_contents='[\"notebooks/*.ipynb\"]' && cp -r index_files/* _demo/",
     "build:js": "lerna run build --scope '@deathbeds/jyve-kyrnel-js-unsafe'",
     "build:lyb": "lerna run build --scope '@deathbeds/jyve-lyb-*'",
     "build:kyrnel": "lerna run build --scope '@deathbeds/jyve-kyrnel-*'",
     "clean": "lerna run --parallel clean",
-    "lab:dupes":
-      "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm build --json > stats.json && webpack-stats-duplicates stats.json",
+    "lab:dupes": "cd $CONDA_PREFIX/share/jupyter/lab/staging && jlpm build --json > stats.json && webpack-stats-duplicates stats.json",
     "lab:link": "lerna run lab:link",
-    "lab:stats":
-      "cd $CONDA_PREFIX/share/jupyter/lab/staging && ./node_modules/.bin/webpack --profile --json > stats.json",
-    "lab:viz":
-      "cd $CONDA_PREFIX/share/jupyter/lab/staging && cp stats.json build/ && webpack-bundle-analyzer build/stats.json -p 6767",
-    "lint":
-      "jlpm lint:prettier && jlpm lint:black && jlpm lint:flake8 && jlpm lint:tslint",
+    "lab:stats": "cd $CONDA_PREFIX/share/jupyter/lab/staging && ./node_modules/.bin/webpack --profile --json > stats.json",
+    "lab:viz": "cd $CONDA_PREFIX/share/jupyter/lab/staging && cp stats.json build/ && webpack-bundle-analyzer build/stats.json -p 6767",
+    "lint": "jlpm lint:prettier && jlpm lint:black && jlpm lint:flake8 && jlpm lint:tslint",
     "lint:beautysh": "beautysh -i 2 -f scripts/**/*.sh postBuild",
     "lint:black": "black jyve setup.py",
     "lint:flake8": "flake8 jyve setup.py",
-    "lint:prettier":
-      "prettier --write *.json *.md && lerna exec -- prettier --write --config=../../.prettierrc ./src/**/*.ts ./style/**/*.css ./*.json ./*.md",
+    "lint:prettier": "prettier --write *.json *.md *.yml && lerna exec -- prettier --write --config=../../.prettierrc ./src/**/*.ts ./style/**/*.css ./*.json ./*.md",
     "lint:tslint": "lerna exec -- tslint -c ../../tslint.json --fix ./src/**/*.ts",
     "test": "python -m robot -d .testoutput tests/acceptance",
     "watch": "lerna run --parallel watch"
   },
   "version": "0.2.0",
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ]
 }

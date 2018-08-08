@@ -8,8 +8,7 @@
   },
   "dependencies": {
     "@jupyterlab/application": "^0.17.0",
-    "d3": "4",
-    "tslib": "^1.9.0"
+    "d3": "4"
   },
   "description": "An unoffical namespace package for d3",
   "files": [
@@ -27,7 +26,13 @@
       }
     ]
   },
-  "keywords": ["d3", "jupyter", "jupyterlab-extension", "jupyterlab", "jyve"],
+  "keywords": [
+    "d3",
+    "jupyter",
+    "jupyterlab-extension",
+    "jupyterlab",
+    "jyve"
+  ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-lyb-d3",

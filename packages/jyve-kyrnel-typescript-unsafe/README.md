@@ -1,8 +1,27 @@
-# @deathbeds/jyve-kyrnel-typescript-unsafe
+# @deathbeds/jyve-kyrnel-p5-unsafe
 
-> A totally unsafe browser TypeScript kernel
+> [TypeScript][typescript] kernel for JupyterLab
 
-This is an API package, and is only needed for development of `@deathbeds/jyve-kyrnel-typescript-unsafe`
+[typescript]: https://www.typescriptlang.org
+
+## Before
+
+```bash
+conda install -c conda-forge jupyterlab nodejs=8
+```
+
+or
+
+```
+# get nodejs somehow ¯\_(ツ)_/¯
+pip install jupyterlab
+```
+
+## Install
+
+```bash
+jupyter labextension install @deathbeds/jyve-kyrnel-typescript-unsafe
+```
 
 ## Development
 

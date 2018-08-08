@@ -1,11 +1,13 @@
 # @deathbeds/jyve-lyb-d3
 
-> A JupyterLab extension for **totally unsafe** access to `d3` in Jyve Kernels.
+> A JupyterLab extension for **totally unsafe** access to [d3][] in Jyve Kernels.
+
+[d3]: https://d3js.org
 
 ## Before
 
 ```bash
-conda install -c conda-forge jupyterlab nodejs
+conda install -c conda-forge jupyterlab nodejs=8
 ```
 
 or

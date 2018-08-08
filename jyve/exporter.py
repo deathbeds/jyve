@@ -239,6 +239,7 @@ class JyveExporter(HTMLExporter):
             "wget",
             "--page-requisites",
             "--convert-links",
+            "--quiet",
             "-nH",
             "-e",
             "robots=off",
@@ -274,7 +275,7 @@ class JyveExporter(HTMLExporter):
         components = output_root / "static" / "components"
         if components.exists():
             rmtree(components)
-        components.mkdir(exist_ok=True)
+        components.mkdir(exist_ok=True, parents=True)
         copytree(
             str(static_path / "components" / "MathJax"), str(components / "MathJax")
         )

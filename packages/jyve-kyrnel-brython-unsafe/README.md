@@ -1,9 +1,28 @@
-# @deathbeds/jyve-kyrnel-js-unsafe
+# @deathbeds/jyve-kyrnel-brython-unsafe
 
-> A totally unsafe browser js kernel
+> A [Brython][] kernel for JupyterLab
 
-This is an API package, and is only needed for development of `@deathbeds/jyve-kyrnel-js-unsafe`
+[brython]: https://brython.info
+
+## Before
+
+```bash
+conda install -c conda-forge jupyterlab nodejs=8
+```
+
+or
+
+```
+# get nodejs somehow ¯\_(ツ)_/¯
+pip install jupyterlab
+```
+
+## Install
+
+```bash
+jupyter labextension install @deathbeds/jyve-kyrnel-brython-unsafe
+```
 
 ## Development
 
-`@deathbeds/jyve-kyrnel-js-unsafe` is built as part of [Jyve](https://github.com/deathbeds/jyve).
+`@deathbeds/jyve-kyrnel-brython-unsafe` is built as part of [Jyve](https://github.com/deathbeds/jyve).

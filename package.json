@@ -36,7 +36,7 @@
     "bootstrap": "jlpm --no-optional && jlpm clean && jlpm lint && jlpm lerna bootstrap && jlpm build && jlpm lab:link",
     "build": "jlpm build:core && jlpm build:js && jlpm build:kyrnel && jlpm build:lyb",
     "build:core": "lerna run build --scope '@deathbeds/jyve'",
-    "build:demo": "rm -rf index_files/* && jupyter nbconvert --to=jyve index.ipynb --JyveExporter.extra_contents='[\"notebooks/*.ipynb\"]' && cp -r index_files/* _demo/",
+    "build:demo": "mkdir -p index_files _demo && rm -rf index_files/* && jupyter nbconvert --to=jyve index.ipynb --JyveExporter.extra_contents='[\"notebooks/*.ipynb\"]' && cp -r index_files/* _demo/",
     "build:js": "lerna run build --scope '@deathbeds/jyve-kyrnel-js-unsafe'",
     "build:lyb": "lerna run build --scope '@deathbeds/jyve-lyb-*'",
     "build:kyrnel": "lerna run build --scope '@deathbeds/jyve-kyrnel-*'",

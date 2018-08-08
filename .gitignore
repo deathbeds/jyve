@@ -5,8 +5,10 @@ _scripts/
 .htpasswd
 .ipynb_checkpoints
 .testoutput/
+*_files/
 *.bundle.*
 *.egg-info/
+*.html
 *.log
 *.tar.gz
 demo/

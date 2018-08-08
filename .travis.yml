@@ -23,7 +23,6 @@ before_install: ./scripts/travis/before_install.sh
 install: ./scripts/travis/install.sh
 script: ./scripts/travis/test.sh
 after_failure: ./scripts/travis/after_failure.sh
-before_cache: ./scripts/travis/before_cache.sh
 before_deploy: ./scripts/travis/before_deploy.sh
 
 deploy:

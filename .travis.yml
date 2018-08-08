@@ -14,19 +14,10 @@ branches:
 
 env:
   global:
-    - GECKODRIVER_VERSION=0.20.1
-    - GECKODRIVER_DIST=geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz
-    - GECKODRIVER_SOURCE=https://github.com/mozilla/geckodriver/releases/download
-    - MINICONDA_DIST=Miniconda3-4.5.1-Linux-x86_64.sh
+    - MINICONDA_DIST=Miniconda3-4.5.4-Linux-x86_64.sh
     - MINICONDA_SOURCE=https://repo.continuum.io/miniconda
     - CONDA_DIR=$HOME/miniconda3
     - PATH=$CONDA_DIR/bin:$PATH
-
-cache:
-  directories:
-    - $HOME/.cache/stuff
-    - $HOME/.cache/yarn
-    - $HOME/.cache/conda
 
 before_install: ./scripts/travis/before_install.sh
 install: ./scripts/travis/install.sh

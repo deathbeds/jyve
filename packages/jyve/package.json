@@ -59,7 +59,6 @@
     "build": "tsc",
     "clean": "rimraf lib",
     "lab:link": "jupyter labextension link . --no-build",
-    "publish:local": "npm publish --registry http://localhost:4873",
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",

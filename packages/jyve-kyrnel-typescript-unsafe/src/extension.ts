@@ -1,12 +1,11 @@
 import {JupyterLab, JupyterLabPlugin} from '@jupyterlab/application';
 import {IJyve} from '@deathbeds/jyve';
+import '../style/index.css';
 
 // tslint:disable-next-line
 const pkg = require('../package.json') as any;
 
-const id = '@deathbeds/jyve-kyrnel-typescript-unsafe';
-
-import '../style/index.css';
+const id = pkg.name;
 
 const extension: JupyterLabPlugin<void> = {
   id,

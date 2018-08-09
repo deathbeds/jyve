@@ -1,4 +1,5 @@
 import {JupyterLab, JupyterLabPlugin} from '@jupyterlab/application';
+import { MainAreaWidget } from '@jupyterlab/apputils';
 
 import * as core from '.';
 import {JyvePanel} from './frame';
@@ -23,7 +24,10 @@ const extension: JupyterLabPlugin<core.IJyve> = {
       panel.title.label = opts.path
         ? opts.path.split('/').slice(-1)[0]
         : opts.kernel.info.implementation;
-      app.shell.addToMainArea(panel, {mode: 'split-right'});
+
+      let main = new MainAreaWidget({content: panel});
+
+      app.shell.addToMainArea(main, {mode: 'split-right'});
     });
 
     return manager;

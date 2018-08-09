@@ -4,6 +4,9 @@ import {JSUnsafeKernel} from '@deathbeds/jyve-kyrnel-js-unsafe';
 import {JyveKernel} from '@deathbeds/jyve/lib/kernel';
 
 // tslint:disable-next-line
+/// <reference path="../../../node_modules/@types/webpack-env/index.d.ts"/>
+
+// tslint:disable-next-line
 const {jyve} = require('../package.json') as any;
 
 export const kernelSpec: Kernel.ISpecModel = jyve.kernelspec;
@@ -94,13 +97,15 @@ export namespace BrythonUnsafeKernel {
       return window.__BRYTHON__;
     }
 
-    const brythonSrc = (await import('!!raw-loader!brython')) as string;
+    // const brythonSrc = (await import('!!raw-loader!brython')) as string;
+    const brythonSrc = require('!!raw-loader!brython');
     const brythonScript = document.createElement('script');
     brythonScript.textContent = brythonSrc;
     brythonScript.id = 'jyve-kyrnel-brython';
     document.body.appendChild(brythonScript);
 
-    const brythonStdLibSrc = (await import('!!raw-loader!brython/brython_stdlib.js')) as string;
+    // const brythonStdLibSrc = (await import('!!raw-loader!brython/brython_stdlib.js')) as string;
+    const brythonStdLibSrc = require('!!raw-loader!brython/brython_stdlib.js');
     const brythonStdLibScript = document.createElement('script');
     brythonStdLibScript.textContent = brythonStdLibSrc;
     brythonStdLibScript.id = 'jyve-kyrnel-brython-stdlib';

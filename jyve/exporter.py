@@ -27,6 +27,7 @@ class JyveExporter(HTMLExporter):
     """ Export a single notebook as a snapshot of a working JupyterLab
         environment
     """
+
     port = T.Integer(9999, help="port for temporary server")
     token = T.Unicode(
         binascii.b2a_hex(os.urandom(15)).decode("utf-8"), help="temporary token"
@@ -238,6 +239,7 @@ class JyveExporter(HTMLExporter):
             "wget",
             "--page-requisites",
             "--convert-links",
+            "--quiet",
             "-nH",
             "-e",
             "robots=off",
@@ -273,7 +275,7 @@ class JyveExporter(HTMLExporter):
         components = output_root / "static" / "components"
         if components.exists():
             rmtree(components)
-        components.mkdir(exist_ok=True)
+        components.mkdir(exist_ok=True, parents=True)
         copytree(
             str(static_path / "components" / "MathJax"), str(components / "MathJax")
         )

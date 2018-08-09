@@ -5,7 +5,7 @@
 ## Before
 
 ```bash
-conda install -c conda-forge jupyterlab nodejs
+conda install -c conda-forge jupyterlab nodejs=8
 ```
 
 or

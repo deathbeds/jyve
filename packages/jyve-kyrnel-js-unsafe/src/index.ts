@@ -8,7 +8,7 @@ const {jyve} = require('../package.json') as any;
 export const kernelSpec: Kernel.ISpecModel = jyve.kernelspec;
 
 export class JSUnsafeKernel extends JyveKernel {
-  protected kernelSpec = kernelSpec;
+  protected kernelspec = kernelSpec;
 
   jyveInfo() {
     return {...super.jyveInfo(), implementation: kernelSpec.name};

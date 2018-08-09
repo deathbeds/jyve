@@ -4,9 +4,8 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.16.2",
-    "tslib": "^1.9.0",
-    "typescript": "~2.8.1"
+    "@jupyterlab/application": "^0.17.0",
+    "typescript": "~2.9.1"
   },
   "description": "A totally unsafe browser TypeScript kernel",
   "files": [
@@ -24,7 +23,10 @@
       }
     ],
     "kernelspec": {
-      "arvg": ["echo", "jyve"],
+      "arvg": [
+        "echo",
+        "jyve"
+      ],
       "display_name": "TypeScript (unsafe) — Jyve",
       "language": "typescript",
       "name": "jyve-kyrnel-typescript-unsafe",
@@ -42,12 +44,17 @@
       "version": "2.2.1"
     }
   },
-  "keywords": ["typescript", "jupyter", "jupyterlab", "jyve"],
+  "keywords": [
+    "typescript",
+    "jupyter",
+    "jupyterlab",
+    "jyve"
+  ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-kyrnel-typescript-unsafe",
   "peerDependencies": {
-    "@deathbeds/jyve": "^0.4.0"
+    "@deathbeds/jyve": "^0.5.0"
   },
   "repository": {
     "type": "git",
@@ -61,5 +68,5 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.4.0"
+  "version": "0.5.0"
 }

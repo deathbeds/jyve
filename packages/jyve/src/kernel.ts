@@ -1,8 +1,9 @@
+import {UUID} from '@phosphor/coreutils';
 import {JupyterLab} from '@jupyterlab/application';
 import {URLExt} from '@jupyterlab/coreutils';
 import {DefaultKernel} from '@jupyterlab/services/lib/kernel/default';
 import {Kernel, ServerConnection, KernelMessage} from '@jupyterlab/services';
-import {uuid, nbformat} from '@jupyterlab/coreutils';
+import {nbformat} from '@jupyterlab/coreutils';
 import {JyveServer, JyveRequest, jyveFetch} from './socket';
 import {ISignal, Signal} from '@phosphor/signaling';
 
@@ -169,7 +170,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   }
 
   fakeHeader(msgType: string) {
-    const msgId = uuid();
+    const msgId = UUID.uuid4();
     return {
       version: '5.3',
       date: (new Date()).toISOString(),

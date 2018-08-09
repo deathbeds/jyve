@@ -1,11 +1,13 @@
 # @deathbeds/jyve-lyb-phosphor
 
-> A JupyterLab extension for **totally unsafe** access to `phosphor` in Jyve Kernels.
+> A JupyterLab extension for **totally unsafe** access to [phosphor][] in Jyve Kernels.
+
+[phosphor]: https://phosphorjs.github.io
 
 ## Before
 
 ```bash
-conda install -c conda-forge jupyterlab nodejs
+conda install -c conda-forge jupyterlab nodejs=8
 ```
 
 or

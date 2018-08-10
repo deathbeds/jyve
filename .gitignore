@@ -4,6 +4,7 @@ _notebooks/
 _scripts/
 .htpasswd
 .ipynb_checkpoints
+.projectignore
 .testoutput/
 *_files/
 *.bundle.*
@@ -11,6 +12,7 @@ _scripts/
 *.html
 *.log
 *.tar.gz
+anaconda-project.yml
 demo/
 envs/
 htpasswd

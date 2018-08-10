@@ -1,0 +1,3 @@
+[submodule "vendor/pyodide-demo"]
+	path = vendor/pyodide-demo
+	url = https://github.com/iodide-project/pyodide-demo.git

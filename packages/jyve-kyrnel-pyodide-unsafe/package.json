@@ -49,7 +49,7 @@
     }
   },
   "pyodide": {
-    "baseURL": "https://cdn.rawgit.com/iodide-project/pyodide-demo/2c065cfe1daffb62633cc194939ea113299837ee/"
+    "baseURL": "/files/vendor/pyodide-demo/"
   },
   "keywords": [
     "jupyter",

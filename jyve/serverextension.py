@@ -43,7 +43,5 @@ class JyveServerExtension(LoggingConfigurable):
         return self.warn(f"mimetypes is no longer safe")
 
     def patch_nbconvert(self):
-        exporter_map.update(
-            jyve=JyveExporter,
-        )
+        exporter_map.update(jyve=JyveExporter)
         return self.warn(f"nbconvert is no longer safe")

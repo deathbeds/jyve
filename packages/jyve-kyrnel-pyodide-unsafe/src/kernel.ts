@@ -28,13 +28,13 @@ export class PyodideUnsafeKernel extends JSUnsafeKernel {
     };
   }
 
-  async pyodide(): Promise<IPyodide> {
+  async pyodide(): Promise<void> {
     if (!this._pyodide) {
       let window = (await this.iframe()).contentWindow as IPyodideWindow;
-      await PyodideUnsafeKernel.pyodide(window);
+      await getPyodide(window);
+      console.log('we have pyodide in kernel');
       this._pyodide = window.pyodide;
     }
-    return this._pyodide;
   }
 
   resetUserNS() {
@@ -44,12 +44,10 @@ export class PyodideUnsafeKernel extends JSUnsafeKernel {
   }
 
   async execNS(parent: KernelMessage.IMessage) {
-    const k = this;
-
     let execNS = await super.execNS(parent);
     console.log('waiting for pyodide in execNS');
     try {
-      this.pyodide();
+      await this.pyodide();
     } catch (err) {
       console.error('EXECNS ERROR', err);
       return;
@@ -62,9 +60,11 @@ export class PyodideUnsafeKernel extends JSUnsafeKernel {
       __PYODIDE__: this._pyodide,
     };
 
+    // TODO: rich display, type inspection
     this._pyodide.write = (data: any) => {
-      k.sendJSON(
-        k.fakeDisplayData(parent, {
+      console.log('displaying', data);
+      this.sendJSON(
+        this.fakeDisplayData(parent, {
           'text/plain': `${data}`,
         })
       );
@@ -102,13 +102,14 @@ export namespace PyodideUnsafeKernel {
 
     console.log('promising in namespace function');
     return new Promise((resolve) => {
-      getPyodide(window, () => {
-        console.log('resolving in kernel');
-        setTimeout(function() {
-          console.log('still here', window.pyodide);
-        }, 100);
-        resolve();
-      });
+      getPyodide(window);
+      const interval = setInterval(() => {
+        console.log('pyodide loaded', !!window.pyodide);
+        if (window.pyodide) {
+          clearInterval(interval);
+          resolve();
+        }
+      }, 1000);
     });
   }
 }

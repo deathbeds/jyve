@@ -36,7 +36,9 @@ class JyveServerExtension(LoggingConfigurable):
             if name[-5:] == ".wasm":
                 self.warn(f"Saying {name} is some wasm")
                 return (WASM_MIME, None)
-            return _guess(name, strict)
+            guess = _guess(name, strict)
+            self.warn(f"guessed {name} {guess}")
+            return guess
 
         mimetypes.guess_type = guess_type
 

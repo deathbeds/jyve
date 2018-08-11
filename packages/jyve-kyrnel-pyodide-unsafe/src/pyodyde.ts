@@ -170,34 +170,38 @@ export function getPyodide(
     const postRunPromise = new Promise((resolve) => {
       Module.postRun = () => {
         delete window.Module;
-        console.log('fetching packages');
-        fetch(`${baseURL}packages.json`)
-          .then((response) => response.json())
-          .then((json) => {
-            console.log('received json');
-            window.pyodide.packages = json;
-            fixRecursionLimit(window.pyodide);
-            resolve();
-          });
+        window.pyodide.packages = {dependencies: {}};
+        fixRecursionLimit(window.pyodide);
+        resolve();
+        //
+        // console.log('fetching packages');
+        // fetch(`${baseURL}packages.json`)
+        //   .then((response) => response.json())
+        //   .then((json) => {
+        //     console.log('received json');
+        //     window.pyodide.packages = json;
+        //     fixRecursionLimit(window.pyodide);
+        //     resolve();
+        //   });
       };
     });
 
-    const dataLoadPromise = new Promise((resolve) => {
-      console.log('configuring monitorRunDependencies');
-      Module.monitorRunDependencies = (n: number) => {
-        console.log('monitorRunDependencies', n);
-        if (n === 0) {
-          delete Module.monitorRunDependencies;
-          console.log('resolving monitorRunDependencies');
-          resolve();
-        }
-      };
-    });
+    // const dataLoadPromise = new Promise((resolve) => {
+    //   console.log('configuring monitorRunDependencies');
+    //   Module.monitorRunDependencies = (n: number) => {
+    //     console.log('monitorRunDependencies', n);
+    //     if (n === 0) {
+    //       delete Module.monitorRunDependencies;
+    //       console.log('resolving monitorRunDependencies');
+    //       resolve();
+    //     }
+    //   };
+    // });
 
-    Promise.all([postRunPromise, dataLoadPromise])
+    Promise.all([postRunPromise /*, dataLoadPromise */])
       .then(() => {
         console.log('resolving the big Promise');
-        callback();
+        // callback();
         resolve();
       })
       .catch((err) => {

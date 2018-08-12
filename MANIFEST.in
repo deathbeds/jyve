@@ -1,0 +1,2 @@
+recursive-include jyve/vendor/pyodide-demo pyodide.asm*
+include README.md LICENSE

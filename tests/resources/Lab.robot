@@ -22,8 +22,8 @@ ${DOCK}           //div[@id='jp-main-dock-panel']
 *** Keywords ***
 Wait for Splash Screen
     [Documentation]    Wait for the JupyterLab splash animation to run its course
-    Wait Until Page Contains Element    ${SPLASH_ID}
-    Wait Until Page Does Not Contain Element    ${SPLASH_ID}
+    Run Keyword and Ignore Error  Wait Until Page Contains Element    ${SPLASH_ID}
+    Run Keyword and Ignore Error  Wait Until Page Does Not Contain Element    ${SPLASH_ID}
     Sleep    0.1s
 
 Launch a new
@@ -58,6 +58,7 @@ Open JupyterLab with
     Open Browser    ${LAB_URL}    ${browser}
     Wait for Splash Screen
     Sleep    1s
+    Execute Javascript    window.alert = window.onbeforeunload = function() {};
 
 Execute JupyterLab Command
     [Arguments]    ${command}

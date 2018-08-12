@@ -5,7 +5,7 @@ import {Kernel, KernelMessage} from '@jupyterlab/services';
 
 import {JSUnsafeKernel} from '@deathbeds/jyve-kyrnel-js-unsafe';
 
-import {getPyodide, IPyodide, IPyodideWindow} from './pyodyde';
+import {getPyodide, IPyodideWindow} from './pyodyde';
 
 // tslint:disable-next-line
 const pkg = require('../package.json') as any;
@@ -16,7 +16,6 @@ export const kernelSpec: Kernel.ISpecModel = pkg.jyve.kernelspec;
 
 export class PyodideUnsafeKernel extends JSUnsafeKernel {
   protected kernelSpec = kernelSpec;
-  protected _pyodide: IPyodide;
 
   jyveInfo(): KernelMessage.IInfoReply {
     const jsInfo = super.jyveInfo();
@@ -28,22 +27,25 @@ export class PyodideUnsafeKernel extends JSUnsafeKernel {
     };
   }
 
+  async pyodideWindow() {
+    return (await this.iframe()).contentWindow as IPyodideWindow;
+  }
+
   async pyodide(): Promise<void> {
-    if (!this._pyodide) {
-      let window = (await this.iframe()).contentWindow as IPyodideWindow;
+    let window = await this.pyodideWindow();
+    if (!window.pyodide) {
       await getPyodide(window);
       console.log('we have pyodide in kernel');
-      this._pyodide = window.pyodide;
     }
   }
 
   resetUserNS() {
     // TODO: Clear the namespace on the Python side
     this.userNS = {};
-    this._pyodide = null;
   }
 
   async execNS(parent: KernelMessage.IMessage) {
+    let window = await this.pyodideWindow();
     let execNS = await super.execNS(parent);
     console.log('waiting for pyodide in execNS');
     try {
@@ -57,11 +59,11 @@ export class PyodideUnsafeKernel extends JSUnsafeKernel {
 
     execNS = {
       ...execNS,
-      __PYODIDE__: this._pyodide,
+      __PYODIDE__: window.pyodide,
     };
 
     // TODO: rich display, type inspection
-    this._pyodide.write = (data: any) => {
+    window.pyodide.write = (data: any) => {
       console.log('displaying', data);
       this.sendJSON(
         this.fakeDisplayData(parent, {
@@ -70,7 +72,7 @@ export class PyodideUnsafeKernel extends JSUnsafeKernel {
       );
     };
 
-    this._pyodide.runPython(
+    window.pyodide.runPython(
       'from js import window as _window\n' +
         'import sys\n' +
         'sys.stdout.write = _window.pyodide.write\n' +
@@ -87,29 +89,5 @@ export class PyodideUnsafeKernel extends JSUnsafeKernel {
     const src = JSON.stringify(code);
 
     return `__PYODIDE__.runPython(${src});`;
-  }
-}
-
-export namespace PyodideUnsafeKernel {
-  export function pyodide(window: IPyodideWindow): Promise<any> {
-    if (window.pyodide) {
-      if (typeof window.pyodide === 'function') {
-        throw Error(`Shouldn't be here`);
-      }
-      console.log('namespace had some pyodide', window.pyodide);
-      return;
-    }
-
-    console.log('promising in namespace function');
-    return new Promise((resolve) => {
-      getPyodide(window);
-      const interval = setInterval(() => {
-        console.log('pyodide loaded', !!window.pyodide);
-        if (window.pyodide) {
-          clearInterval(interval);
-          resolve();
-        }
-      }, 1000);
-    });
   }
 }

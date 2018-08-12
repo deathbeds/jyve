@@ -48,9 +48,6 @@
       "version": "ES2015"
     }
   },
-  "pyodide": {
-    "baseURL": "/files/vendor/pyodide-demo/"
-  },
   "keywords": [
     "jupyter",
     "jupyterlab",

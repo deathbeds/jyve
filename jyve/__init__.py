@@ -8,5 +8,6 @@ def load_jupyter_server_extension(nb_server_app):
         JyveServerExtension(nb_server_app)
         .patch_wasm()
         .patch_nbconvert()
+        .add_vendor_route()
         .warn("jyve activated")
     )

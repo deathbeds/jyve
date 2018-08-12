@@ -1,6 +1,5 @@
-// tslint:disable-next-line
-const pkg = require('../package.json') as any;
-const {baseURL} = pkg.pyodide;
+// FIXME: need to pull this off the app
+const baseURL = '/jyve/vendor/pyodide-demo/';
 
 interface IPyodideWasm {
   noImageDecoding: boolean;
@@ -33,10 +32,7 @@ const DEBUG = false;
 /**
  * The main bootstrap script for loading pyodide.
  */
-export function getPyodide(
-  window: IPyodideWindow,
-  callback?: () => void
-): Promise<any> {
+export function getPyodide(window: IPyodideWindow): Promise<any> {
   return new Promise<any>((resolve, reject) => {
     const document = window.document;
 

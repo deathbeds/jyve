@@ -1,7 +1,11 @@
 import mimetypes
+from pathlib import Path
 
 from traitlets.config import LoggingConfigurable
 from nbconvert.exporters.export import exporter_map
+from notebook.utils import url_path_join as ujoin
+from notebook.base.handlers import FileFindHandler
+
 
 from .exporter import JyveExporter
 
@@ -37,7 +41,7 @@ class JyveServerExtension(LoggingConfigurable):
                 self.warn(f"Saying {name} is some wasm")
                 return (WASM_MIME, None)
             guess = _guess(name, strict)
-            self.warn(f"guessed {name} {guess}")
+            # self.warn(f"guessed {name} {guess}")
             return guess
 
         mimetypes.guess_type = guess_type
@@ -47,3 +51,18 @@ class JyveServerExtension(LoggingConfigurable):
     def patch_nbconvert(self):
         exporter_map.update(jyve=JyveExporter)
         return self.warn(f"nbconvert is no longer safe")
+
+    def add_vendor_route(self):
+        app = self._app.web_app
+        ns = ujoin(app.settings["base_url"], "/jyve")
+        app.add_handlers(
+            ".*$",
+            [
+                (
+                    ujoin(ns, "vendor", "(.*)"),
+                    FileFindHandler,
+                    dict(path=str(Path(__file__).parent / "vendor")),
+                )
+            ],
+        )
+        return self.warn(f"vendored paths are available")

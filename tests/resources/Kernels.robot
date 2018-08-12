@@ -8,5 +8,5 @@ ${HW_COFFEE}    document.write "hello world"
 ${HW_JS}        document.write("hello world")
 ${HW_P5}        ${HW_JS}
 ${HW_TS}        this.document.write("hello world")
-${HW_PYODIDE}        raise NotImplementedError()
+${HW_PYODIDE}        from js import document; document.body.textContent = "hello world"
 &{HELLO_WORLD}    Brython=${HW_BRYTHON}    CoffeeScript=${HW_COFFEE}    JS=${HW_JS}    P5=${HW_P5}   Pyodide=${HW_PYODIDE}  TypeScript=${HW_TS}

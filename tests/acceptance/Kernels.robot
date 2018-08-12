@@ -40,7 +40,9 @@ Start Testing JupyterLab Activities
 Verify Kernel Activity Lifecycle
     [Arguments]    ${kernel}    ${activity}    ${fortytwo}    ${hello}
     [Documentation]    Create a Kernel and verify some basic behavior
+    Execute Javascript    window.alert = window.onbeforeunload = function() {};
     Execute JupyterLab Command    Reset Application State
+    Run Keyword And Ignore Error    Handle Alert    ACCEPT
     Wait for Splash Screen
     Launch a new    ${kernel} (unsafe) — Jyve    ${activity}
     Capture Page Screenshot    ${kernel}/${activity}_0.png

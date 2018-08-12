@@ -5,7 +5,7 @@ Resource          Lab.robot
 
 *** Variables ***
 ${DEMO_CMD}       ./scripts/demo.sh
-${HTTP_CMD}       python -m http.server --bind 127.0.0.1 19980
+${HTTP_CMD}       python -m jyve.server --bind 127.0.0.1 19980
 ${DEMO_URL}       http://127.0.0.1:19980/
 
 *** Keywords ***

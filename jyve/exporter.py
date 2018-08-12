@@ -280,6 +280,18 @@ class JyveExporter(HTMLExporter):
             str(static_path / "components" / "MathJax"), str(components / "MathJax")
         )
 
+        # pyodide
+        pyodide_path = Path(__file__).parent / "vendor" / "pyodide-demo"
+        pyodide_out = output_root / "jyve" / "vendor" / "pyodide-demo"
+
+        if pyodide_out.exists():
+            rmtree(pyodide_out)
+        pyodide_out.mkdir(exist_ok=True, parents=True)
+
+        for pyfile in pyodide_path.glob("pyodide.asm*"):
+            print("WOOOOOO", pyfile)
+            copy2(pyfile, pyodide_out / pyfile.name)
+
         [jsmap.unlink() for jsmap in output_root.rglob("*.js.map")]
         [jsmap.unlink() for jsmap in output_root.rglob("stats.json")]
 

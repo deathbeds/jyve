@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation     Jyve provides Kernels for languages that work in-browser
-Suite Teardown    Clean Up JupyterLab
+Test Teardown     Clean Up JupyterLab
 Library           SeleniumLibrary
 Resource          ../resources/Browser.robot
 Resource          ../resources/Lab.robot
@@ -9,33 +9,52 @@ Resource          ../resources/Notebook.robot
 Resource          ../resources/Kernels.robot
 
 *** Test Cases ***
-The Jyve Kernels Work as Static Interactive Applications
+Firefox: Static: Kernels
     [Documentation]    Fire up an Activity with a Jyve Kernel without a Server
-    [Setup]    Start Testing Static Activities
-    : FOR    ${kernel}    IN    @{KERNELS}
-    \    Verify Kernel Activity Lifecycle    ${kernel}    Notebook    &{FORTY_TWO}[${kernel}]    &{HELLO_WORLD}[${kernel}]
-    [Teardown]    Clean Up JupyterLab
+    [Setup]    Start Testing Static Activities  ${FIREFOX}
+    Set Tags    browser:ff
+    Verify Kernel Basics
 
-The Jyve Kernels can be Authored in a Normal JupyterLab
+Firefox: JupyterLab: Kernels
     [Documentation]    Fire up an Activity with a Jyve Kernel in a full JupyterLab
-    [Setup]    Start Testing JupyterLab Activities
-    : FOR    ${kernel}    IN    @{KERNELS}
-    \    Verify Kernel Activity Lifecycle    ${kernel}    Notebook    &{FORTY_TWO}[${kernel}]    &{HELLO_WORLD}[${kernel}]
-    [Teardown]    Clean Up JupyterLab
+    [Setup]    Start Testing JupyterLab Activities  ${FIREFOX}
+    Set Tags    browser:ff
+    Verify Kernel Basics
+
+Chrome: Static: Kernels
+    [Documentation]    Fire up an Activity with a Jyve Kernel without a Server
+    [Setup]    Start Testing Static Activities  ${CHROME}
+    Set Tags    browser:chrome
+    Verify Kernel Basics
+
+Chrome: JupyterLab: Kernels
+    [Documentation]    Fire up an Activity with a Jyve Kernel in a full JupyterLab
+    [Setup]    Start Testing JupyterLab Activities  ${CHROME}
+    Set Tags    browser:chrome
+    Verify Kernel Basics
+
 
 *** Keywords ***
+Verify Kernel Basics
+    : FOR    ${kernel}    IN    @{KERNELS}
+    \    Verify Kernel Activity Lifecycle    ${kernel}    Notebook    &{FORTY_TWO}[${kernel}]    &{HELLO_WORLD}[${kernel}]
+
 Start Testing Static Activities
+    [Arguments]  ${browser}
     [Documentation]    Some demo startup stuff
-    Set Screenshot Directory    ${OUTPUT_DIR}/${BROWSER}/kernels/static/
+    Set Tags    app:static
+    Set Screenshot Directory    ${OUTPUT_DIR}/${browser}/kernels/static/
     Rebuild the Jyve Demo
     Start the Jyve Demo
-    Open the Jyve Demo with    ${BROWSER}
+    Open the Jyve Demo with    ${browser}
 
 Start Testing JupyterLab Activities
+    [Arguments]  ${browser}
     [Documentation]    Some startup stuff
-    Set Screenshot Directory    ${OUTPUT_DIR}/${BROWSER}/kernels/lab/
+    Set Tags    app:lab
+    Set Screenshot Directory    ${OUTPUT_DIR}/${browser}/kernels/lab/
     Start Jupyterlab
-    Open JupyterLab with    ${BROWSER}
+    Open JupyterLab with    ${browser}
 
 Verify Kernel Activity Lifecycle
     [Arguments]    ${kernel}    ${activity}    ${fortytwo}    ${hello}

@@ -1,36 +1,55 @@
 *** Settings ***
 Documentation     Some quick tests to see if we broke the build somehow.
-Suite Teardown    Clean Up JupyterLab
+Test Teardown    Clean Up JupyterLab
 Library           SeleniumLibrary
 Resource          ../resources/Browser.robot
 Resource          ../resources/Lab.robot
 Resource          ../resources/Jyve.robot
 
 *** Test Cases ***
-The Jyve Kyrnels Have Entered The Lab
-    [Documentation]    Does a server-backed JupyterLab open?
-    Set Screenshot Directory    ${OUTPUT_DIR}/${BROWSER}/smoke/lab
-    Start Jupyterlab
-    Open JupyterLab with    ${BROWSER}
-    Verify Kyrnels
-    Capture Page Screenshot    00_kyrnels.png
-    [Teardown]    Reset Application State and Close
+Firefox: The Jyve Kernels Have Entered the Lab
+    [Documentation]    Does a server-backed JupyterLab open in Firefox?
+    Set Tags    browser:ff
+    Smoke test JupyterLab   ${FIREFOX}
 
-Jyve don't need no WebSocket
-    [Documentation]    Does a static demo open?
-    Set Screenshot Directory    ${OUTPUT_DIR}/${BROWSER}/smoke/static
-    Rebuild the Jyve Demo
-    Start the Jyve Demo
-    Open the Jyve Demo with    ${BROWSER}
-    Verify Kyrnels
-    Capture Page Screenshot    01_kyrnels_offline.png
-    [Teardown]    Reset Application State and Close
+Firefox: Jyve don't need no WebSocket
+    [Documentation]    Does a static demo open in Firefox?
+    Set Tags    browser:ff
+    Smoke test the static app  ${FIREFOX}
+
+Chrome: The Jyve Kernels Have Entered the Lab
+    [Documentation]    Does a server-backed JupyterLab open in Chrome?
+    Set Tags    browser:chrome
+    Smoke test JupyterLab   ${CHROME}
+
+Chrome: Jyve don't need no WebSocket
+    [Documentation]    Does a static demo open in Chrome?
+    Set Tags    browser:chrome
+    Smoke test the static app  ${CHROME}
 
 *** Keywords ***
+Smoke test JupyterLab
+    [Arguments]    ${browser}
+    [Documentation]    Verify that JupyterLab still sorta works
+    Set Tags  app:lab
+    Set Screenshot Directory    ${OUTPUT_DIR}/${browser}/smoke/lab
+    Start Jupyterlab
+    Open JupyterLab with    ${browser}
+    Verify Kyrnels
+
+Smoke test the static app
+    [Arguments]    ${browser}
+    [Documentation]    Verify that the static app at least kind of works
+    Set Tags  app:static
+    Set Screenshot Directory    ${OUTPUT_DIR}/${browser}/smoke/static
+    Rebuild the Jyve Demo
+    Start the Jyve Demo
+    Open the Jyve Demo with    ${browser}
+    Verify Kyrnels
+
 Verify Kyrnels
     [Documentation]    Roughly check whether the Launcher contains all the kernels
-    Page Should Contain    Brython (unsafe)
-    Page Should Contain    CoffeeScript (unsafe)
-    Page Should Contain    JS (unsafe)
-    Page Should Contain    P5 (unsafe)
-    Page Should Contain    TypeScript (unsafe)
+    Capture Page Screenshot    00_lab.png
+    : FOR    ${kernel}    IN    @{KERNELS}
+    \    Page Should Contain    ${kernel} (unsafe)
+    Capture Page Screenshot    01_kyrnels.png

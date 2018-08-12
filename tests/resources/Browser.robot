@@ -1,5 +1,5 @@
 *** Variables ***
-${BROWSER}        headlesschrome
-# ${BROWSER}        headlessfirefox
-# ${BROWSER}      Firefox
-# ${BROWSER}      Chrome
+# ${CHROME}    headlesschrome
+# ${FIREFOX}   headlessfirefox
+${FIREFOX}      Firefox
+${CHROME}      Chrome

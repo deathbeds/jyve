@@ -1,7 +1,8 @@
 // tslint:disable-next-line
 /// <reference path="../../../node_modules/@types/webassembly-js-api/index.d.ts"/>
 
-import {Kernel, KernelMessage} from '@jupyterlab/services';
+import {Kernel, KernelMessage, ServerConnection} from '@jupyterlab/services';
+import {URLExt} from '@jupyterlab/coreutils';
 
 import {JSUnsafeKernel} from '@deathbeds/jyve-kyrnel-js-unsafe';
 
@@ -11,8 +12,6 @@ import {getPyodide, IPyodideWindow} from './pyodyde';
 const pkg = require('../package.json') as any;
 
 export const kernelSpec: Kernel.ISpecModel = pkg.jyve.kernelspec;
-
-// const DEBUG = false;
 
 export class PyodideUnsafeKernel extends JSUnsafeKernel {
   protected kernelSpec = kernelSpec;
@@ -34,7 +33,14 @@ export class PyodideUnsafeKernel extends JSUnsafeKernel {
   async pyodide(): Promise<void> {
     let window = await this.pyodideWindow();
     if (!window.pyodide) {
-      await getPyodide(window);
+      let baseURL =
+        URLExt.join(
+          ServerConnection.makeSettings().baseUrl,
+          'jyve',
+          'vendor',
+          'pyodide-demo'
+        ) + '/';
+      await getPyodide(window, baseURL);
       console.log('we have pyodide in kernel');
     }
   }

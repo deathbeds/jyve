@@ -1,5 +1,5 @@
 // FIXME: need to pull this off the app
-const baseURL = '/jyve/vendor/pyodide-demo/';
+// const baseURL = '/jyve/vendor/pyodide-demo/';
 
 interface IPyodideWasm {
   noImageDecoding: boolean;
@@ -32,7 +32,7 @@ const DEBUG = false;
 /**
  * The main bootstrap script for loading pyodide.
  */
-export function getPyodide(window: IPyodideWindow): Promise<any> {
+export function getPyodide(window: IPyodideWindow, baseURL: string): Promise<any> {
   return new Promise<any>((resolve, reject) => {
     const document = window.document;
 

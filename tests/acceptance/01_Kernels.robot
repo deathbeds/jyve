@@ -1,7 +1,5 @@
 *** Settings ***
 Documentation     Jyve provides Kernels for languages that work in-browser
-Suite Setup       Start the Servers
-Suite Teardown    Clean Up JupyterLab
 Test Teardown     Close All Browsers
 Library           SeleniumLibrary
 Resource          ../resources/Browser.robot
@@ -11,18 +9,6 @@ Resource          ../resources/Notebook.robot
 Resource          ../resources/Kernels.robot
 
 *** Test Cases ***
-Firefox: JupyterLab: Kernels
-    [Documentation]    Fire up an Activity with a Jyve Kernel in a full JupyterLab
-    [Setup]    Start Testing JupyterLab Activities    ${FIREFOX}
-    Set Tags    browser:ff
-    Verify Kernel Basics
-
-Firefox: Static: Kernels
-    [Documentation]    Fire up an Activity with a Jyve Kernel without a Server
-    [Setup]    Start Testing Static Activities    ${FIREFOX}
-    Set Tags    browser:ff
-    Verify Kernel Basics
-
 Chrome: Static: Kernels
     [Documentation]    Fire up an Activity with a Jyve Kernel without a Server
     [Setup]    Start Testing Static Activities    ${CHROME}
@@ -33,6 +19,18 @@ Chrome: JupyterLab: Kernels
     [Documentation]    Fire up an Activity with a Jyve Kernel in a full JupyterLab
     [Setup]    Start Testing JupyterLab Activities    ${CHROME}
     Set Tags    browser:chrome
+    Verify Kernel Basics
+
+Firefox: JupyterLab: Kernels
+    [Documentation]    Fire up an Activity with a Jyve Kernel in a full JupyterLab
+    [Setup]    Start Testing JupyterLab Activities    ${FIREFOX}
+    Set Tags    browser:ff
+    Verify Kernel Basics
+
+Firefox: Static: Kernels
+    [Documentation]    Fire up an Activity with a Jyve Kernel without a Server
+    [Setup]    Start Testing Static Activities    ${FIREFOX}
+    Set Tags    browser:ff
     Verify Kernel Basics
 
 *** Keywords ***
@@ -46,8 +44,6 @@ Start Testing Static Activities
     [Documentation]    Some demo startup stuff
     Set Tags    app:static
     Set Screenshot Directory    ${OUTPUT_DIR}/${browser}/kernels/static/
-    Rebuild the Jyve Demo
-    Start the Jyve Demo
     Open the Jyve Demo with    ${browser}
 
 Start Testing JupyterLab Activities
@@ -55,7 +51,6 @@ Start Testing JupyterLab Activities
     [Documentation]    Some startup stuff
     Set Tags    app:lab
     Set Screenshot Directory    ${OUTPUT_DIR}/${browser}/kernels/lab/
-    Start Jupyterlab
     Open JupyterLab with    ${browser}
 
 Verify Kernel Activity Lifecycle

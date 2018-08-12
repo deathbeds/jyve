@@ -1,7 +1,5 @@
 *** Settings ***
 Documentation     Some quick tests to see if we broke the build somehow.
-Suite Setup       Start the Servers
-Suite Teardown    Clean Up JupyterLab
 Test Teardown     Close All Browsers
 Library           SeleniumLibrary
 Resource          ../resources/Browser.robot

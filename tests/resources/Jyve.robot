@@ -14,6 +14,7 @@ Start the Servers
     Start Jupyterlab
     Rebuild the Jyve Demo
     Start the Jyve Demo
+    Sleep    3s
 
 Rebuild the Jyve Demo
     [Documentation]    Use nbconvert (and wget) to rebuild the static demo site
@@ -30,4 +31,5 @@ Open the Jyve Demo with
     [Arguments]    ${browser}
     [Documentation]    Open the browser to the static demo
     Open Browser    ${DEMO_URL}    ${browser}
+    Wait for Splash Screen
     Sleep    1s

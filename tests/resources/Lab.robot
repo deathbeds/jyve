@@ -25,6 +25,7 @@ Wait for Splash Screen
     Run Keyword and Ignore Error  Wait Until Page Contains Element    ${SPLASH_ID}
     Run Keyword and Ignore Error  Wait Until Page Does Not Contain Element    ${SPLASH_ID}
     Sleep    0.1s
+    Capture Page Screenshot
 
 Launch a new
     [Arguments]    ${kernel}    ${category}

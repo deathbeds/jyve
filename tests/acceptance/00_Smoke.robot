@@ -15,24 +15,20 @@ Firefox: Jyve don't need no WebSocket
 
 Firefox: The Jyve Kernels Have Entered the Lab
     [Documentation]    Does a server-backed JupyterLab open in Firefox?
-    Set Tags    browser:${FIREFOX}
     Smoke test JupyterLab    ${FIREFOX}
 
 Chrome: Jyve don't need no WebSocket
     [Documentation]    Does a static demo open in Chrome?
-    Set Tags    browser:${CHROME}
     Smoke test the static app    ${CHROME}
 
 Chrome: The Jyve Kernels Have Entered the Lab
     [Documentation]    Does a server-backed JupyterLab open in Chrome?
-    Set Tags    browser:${CHROME}
     Smoke test JupyterLab    ${CHROME}
 
 *** Keywords ***
 Smoke test JupyterLab
     [Arguments]    ${browser}
     [Documentation]    Verify that JupyterLab still sorta works
-    Set Tags    app:JupyterLab
     Set Screenshot Directory    ${OUTPUT_DIR}/${browser}/smoke/lab
     Open JupyterLab with    ${browser}
     Verify Kyrnels
@@ -40,7 +36,6 @@ Smoke test JupyterLab
 Smoke test the static app
     [Arguments]    ${browser}
     [Documentation]    Verify that the static app at least kind of works
-    Set Tags    app:Static
     Set Screenshot Directory    ${OUTPUT_DIR}/${browser}/smoke/static
     Open the Jyve Demo with    ${browser}
     Verify Kyrnels

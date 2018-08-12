@@ -24,5 +24,5 @@ Make a Hello World
 
 Wait Until Kernel Is Idle
     [Documentation]    Wait for the kernel to be busy, and then stop being busy
-    Wait Until Keyword Succeeds    60s    1s    Wait Until Page Does Not Contain Element    ${BUSY_KERNEL}
+    Wait Until Keyword Succeeds    30s    1s    Wait Until Page Does Not Contain Element    ${BUSY_KERNEL}
     Wait Until Page Does Not Contain    ${BUSY_PROMPT}

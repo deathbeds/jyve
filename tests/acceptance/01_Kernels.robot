@@ -1,6 +1,8 @@
 *** Settings ***
 Documentation     Jyve provides Kernels for languages that work in-browser
-Test Teardown     Clean Up JupyterLab
+Suite Setup       Start the Servers
+Suite Teardown    Clean Up JupyterLab
+Test Teardown     Close All Browsers
 Library           SeleniumLibrary
 Resource          ../resources/Browser.robot
 Resource          ../resources/Lab.robot
@@ -9,15 +11,15 @@ Resource          ../resources/Notebook.robot
 Resource          ../resources/Kernels.robot
 
 *** Test Cases ***
-Firefox: Static: Kernels
-    [Documentation]    Fire up an Activity with a Jyve Kernel without a Server
-    [Setup]    Start Testing Static Activities    ${FIREFOX}
-    Set Tags    browser:ff
-    Verify Kernel Basics
-
 Firefox: JupyterLab: Kernels
     [Documentation]    Fire up an Activity with a Jyve Kernel in a full JupyterLab
     [Setup]    Start Testing JupyterLab Activities    ${FIREFOX}
+    Set Tags    browser:ff
+    Verify Kernel Basics
+
+Firefox: Static: Kernels
+    [Documentation]    Fire up an Activity with a Jyve Kernel without a Server
+    [Setup]    Start Testing Static Activities    ${FIREFOX}
     Set Tags    browser:ff
     Verify Kernel Basics
 
@@ -61,13 +63,13 @@ Verify Kernel Activity Lifecycle
     [Documentation]    Create a Kernel and verify some basic behavior
     Execute Javascript    window.alert = window.onbeforeunload = function() {};
     Execute JupyterLab Command    Reset Application State
-    Run Keyword And Ignore Error    Handle Alert    ACCEPT
+    Run Keyword And Ignore Error    Handle Alert    ACCEPT    timeout=1s
     Wait for Splash Screen
     Launch a new    ${kernel} (unsafe) — Jyve    ${activity}
     Capture Page Screenshot    ${kernel}/${activity}_0.png
     Add and Run Cell    ${fortytwo}
     Wait Until Kernel Is Idle
-    Wait Until Keyword Succeeds    30s    1s    Element Should Contain    css:.jp-OutputArea-output    42
+    Wait Until Keyword Succeeds    20s    1s    Element Should Contain    css:.jp-OutputArea-output    42
     Capture Page Screenshot    ${kernel}/${activity}_1_run.png
     Add and Run Cell    ${hello}
     Wait Until Kernel Is Idle

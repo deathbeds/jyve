@@ -1,11 +1,12 @@
 import {JupyterLab, JupyterLabPlugin} from '@jupyterlab/application';
 import {IJyve} from '@deathbeds/jyve';
-import '../style/index.css';
 
 // tslint:disable-next-line
 const pkg = require('../package.json') as any;
 
 const id = pkg.name;
+
+import '../style/index.css';
 
 const extension: JupyterLabPlugin<void> = {
   id,
@@ -14,6 +15,7 @@ const extension: JupyterLabPlugin<void> = {
   activate: (app: JupyterLab, jyve: IJyve) => {
     jyve.register({
       kernelSpec: pkg.jyve.kernelspec,
+      // tslint:disable-next-line
       newKernel: import('.') as any,
     });
   },

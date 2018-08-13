@@ -1,0 +1,3 @@
+[submodule "vendor/pyodide-demo"]
+	path = jyve/vendor/pyodide-demo
+	url = https://github.com/deathbeds/pyodide-demo.git

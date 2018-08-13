@@ -4,9 +4,13 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.17.0"
+    "@jupyterlab/application": "^0.17.0",
+    "raw-loader": "~0.5.1"
   },
-  "description": "A totally unsafe browser js kernel",
+  "devDependencies": {
+    "@types/webassembly-js-api": "^0.0.1"
+  },
+  "description": "A totally unsafe browser Python compiled to WebAssembly kernel",
   "files": [
     "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
   ],
@@ -17,12 +21,8 @@
   "jyve": {
     "help_links": [
       {
-        "text": "MDN Web Docs",
-        "url": "https://developer.mozilla.org"
-      },
-      {
-        "text": "Can I use ... ?",
-        "url": "https://caniuse.com"
+        "text": "Pyodide",
+        "url": "https://github.com/iodide-project/pyodide"
       }
     ],
     "kernelspec": {
@@ -30,20 +30,21 @@
         "echo",
         "jyve"
       ],
-      "display_name": "JS (unsafe) — Jyve",
-      "language": "javascript",
-      "name": "jyve-kyrnel-js-unsafe",
+      "display_name": "Pyodide (unsafe) — Jyve",
+      "language": "python",
+      "name": "jyve-pyodide-unsafe",
       "resources": {}
     },
     "language_info": {
       "codemirror_mode": {
-        "name": "javascript"
+        "name": "python",
+        "version": 3
       },
-      "file_extension": ".js",
-      "mimetype": "text/javascript",
-      "name": "javascript",
-      "nbconvert_exporter": "javascript",
-      "pygments_lexer": "javascript",
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "python3",
       "version": "ES2015"
     }
   },
@@ -54,7 +55,7 @@
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
-  "name": "@deathbeds/jyve-kyrnel-js-unsafe",
+  "name": "@deathbeds/jyve-kyrnel-pyodide-unsafe",
   "peerDependencies": {
     "@deathbeds/jyve": "^0.5.0"
   },
@@ -69,5 +70,5 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.5.0"
+  "version": "0.4.0"
 }

@@ -4,9 +4,6 @@ import {JSUnsafeKernel} from '@deathbeds/jyve-kyrnel-js-unsafe';
 import {JyveKernel} from '@deathbeds/jyve/lib/kernel';
 
 // tslint:disable-next-line
-/// <reference path="../../../node_modules/@types/webpack-env/index.d.ts"/>
-
-// tslint:disable-next-line
 const {jyve} = require('../package.json') as any;
 
 export const kernelSpec: Kernel.ISpecModel = jyve.kernelspec;

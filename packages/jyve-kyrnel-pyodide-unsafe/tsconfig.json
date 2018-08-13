@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfigbase",
+  "compilerOptions": {
+    "outDir": "./lib",
+    "baseUrl": ".",
+    "paths": {
+      "!!raw-loader!*": ["../../../node_modules/*"]
+    }
+  },
+  "include": [
+    "../jyve/src/@types/**/*",
+    "./**/*",
+    "./src/**/*",
+    "./src/@types/**/*"
+  ]
+}

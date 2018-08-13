@@ -2,9 +2,10 @@ language: c
 
 os: linux
 
-sudo: false
+sudo: required
 
 addons:
+  chrome: stable
   firefox: latest
 
 branches:

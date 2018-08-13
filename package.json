@@ -33,7 +33,7 @@
     "url": "https://github.com/deathbeds/jyve.git"
   },
   "scripts": {
-    "bootstrap": "jlpm --no-optional && jlpm clean && jlpm lint && jlpm lerna bootstrap && jlpm build && jlpm lab:link",
+    "bootstrap": "git submodule update --init && jlpm --no-optional && jlpm clean && jlpm lint && jlpm lerna bootstrap && jlpm build && jlpm lab:link",
     "build": "jlpm build:core && jlpm build:js && jlpm build:kyrnel && jlpm build:lyb",
     "build:core": "lerna run build --scope '@deathbeds/jyve' --stream",
     "build:demo": "mkdir -p index_files _demo && rm -rf index_files/* && jupyter nbconvert --to=jyve index.ipynb --JyveExporter.extra_contents='[\"notebooks/*.ipynb\"]' && cp -r index_files/* _demo/",
@@ -49,9 +49,9 @@
     "lint:sh": "beautysh -i 2 -f scripts/**/*.sh postBuild",
     "lint:py": "black jyve setup.py && flake8 jyve setup.py",
     "lint:prettier": "prettier --write *.json *.md *.yml && lerna exec --stream -- prettier --write --config=../../.prettierrc ./src/**/*.ts ./style/**/*.css ./*.json ./*.md",
-    "lint:robot": "python -m robot.tidy -r tests && rflint --configure TooManyTestSteps:20 --configure TooFewKeywordSteps:0 --configure LineTooLong:200 tests/**/*.robot",
+    "lint:robot": "python -m robot.tidy -r tests && rflint --configure TooManyTestSteps:30 --configure TooFewKeywordSteps:0 --configure LineTooLong:200 tests/**/*.robot",
     "lint:ts": "lerna exec --stream -- tslint -c ../../tslint.json --fix ./src/**/*.ts",
-    "test": "python -m robot -d .testoutput tests/acceptance",
+    "test": "python -m robot --noncritical noncritical -d .testoutput tests/acceptance",
     "watch": "lerna run --parallel --stream watch"
   },
   "version": "0.5.0",

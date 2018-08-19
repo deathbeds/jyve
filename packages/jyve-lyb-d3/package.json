@@ -4,11 +4,11 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "devDependencies": {
-    "@types/d3": "4"
+    "@types/d3": "5"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.17.0",
-    "d3": "4"
+    "@jupyterlab/application": "^0.18.2",
+    "d3": "5"
   },
   "description": "An unoffical namespace package for d3",
   "files": [
@@ -37,7 +37,7 @@
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-lyb-d3",
   "peerDependencies": {
-    "@deathbeds/jyve": "^0.5.0"
+    "@deathbeds/jyve": "^0.6.0"
   },
   "repository": {
     "type": "git",
@@ -51,5 +51,5 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.5.0"
+  "version": "0.6.0"
 }

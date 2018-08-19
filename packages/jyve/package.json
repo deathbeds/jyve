@@ -4,8 +4,8 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.17.0",
-    "@phosphor/widgets": "^1.5.0",
+    "@jupyterlab/application": "^0.18.2",
+    "@phosphor/widgets": "^1.6.0",
     "mock-socket": "^7.1.0"
   },
   "devDependencies": {
@@ -63,5 +63,5 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.5.0"
+  "version": "0.6.0"
 }

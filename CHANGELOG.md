@@ -4,7 +4,13 @@
 > get bumped to the new version. This means some packages won't have some version
 > numbers.
 
-# 0.5.0 (unreleased)
+# 0.6.0
+
+### all packages
+
+- Update minimum JupyterLab version to 0.34
+
+# 0.5.0
 
 ### all packages
 

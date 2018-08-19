@@ -108,6 +108,7 @@ class JyveExporter(HTMLExporter):
             "userSettingsDir": "~/jyve/lab/user-settings",
             "workspacesDir": "~/jyve/lab/workspaces",
             "workspacesUrl": "../lab/workspaces/",
+            "workspacesApiUrl": "../api/workspaces/",
             "baseUrl": "../",
             "wsUrl": "",
             "jyveOffline": True,

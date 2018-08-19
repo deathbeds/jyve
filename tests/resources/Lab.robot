@@ -11,7 +11,7 @@ ${LAB_CMD}        jupyter-lab --no-browser --NotebookApp.token=${TOKEN} --port 1
 ${LAB_URL}        http://localhost:18888/lab?token=${TOKEN}
 ${SPLASH_ID}      jupyterlab-splash
 ${SPINNER}        css:.jp-Spinner
-${CMD_PAL_XPATH}    //div[contains(@class, "jp-mod-left")]//li//div[contains(text(), "Commands")]
+${CMD_PAL_XPATH}    //div[contains(@class, "jp-mod-left")]//li[@title = "Command Palette"]//div
 ${CMD_PAL_INPUT}    css:.p-CommandPalette-input
 ${CMD_PAL_ITEM}    css:.p-CommandPalette-item
 ${TOP}            //div[@id='jp-top-panel']
@@ -62,10 +62,13 @@ Open JupyterLab with
 Execute JupyterLab Command
     [Arguments]    ${command}
     [Documentation]    Use the JupyterLab Command Palette to run a command
+    Run Keyword And Ignore Error    Click Element   css:.jp-mod-accept
     Click Element    ${CMD_PAL_XPATH}
     Input Text    ${CMD_PAL_INPUT}    ${command}
     Wait Until Page Contains Element    ${CMD_PAL_ITEM}
     Click Element    ${CMD_PAL_ITEM}
+    Run Keyword And Ignore Error    Click Element    ${CMD_PAL_XPATH}
+
 
 Reset Application State and Close
     [Documentation]    Try to clean up after doing some things to the JupyterLab state

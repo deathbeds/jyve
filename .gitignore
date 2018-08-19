@@ -17,3 +17,5 @@ htpasswd
 lib/
 node_modules/
 Untitled*.ipynb
+.projectignore
+anaconda-project.yml

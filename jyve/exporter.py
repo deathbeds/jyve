@@ -103,7 +103,7 @@ class JyveExporter(HTMLExporter):
             "staticDir": "~/jyve/static",
             "templatesDir": "~/jyve/templates",
             "themesDir": "~/jyve/themes/",
-            "themesUrl": "../lab/api/themes/",
+            "themesUrl": "/lab/api/themes/",
             "treeUrl": "../lab/tree/",
             "userSettingsDir": "~/jyve/lab/user-settings",
             "workspacesDir": "~/jyve/lab/workspaces",

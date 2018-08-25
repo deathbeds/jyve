@@ -29,7 +29,7 @@ Jyve don't need no WebSocket
 *** Keywords ***
 Verify Kyrnels
     [Documentation]    Roughly check whether the Launcher contains all the kernels
-    Execute Jupyterlab Command   New Launcher 
+    Execute Jupyterlab Command    New Launcher
     Page Should Contain    Brython (unsafe)
     Page Should Contain    CoffeeScript (unsafe)
     Page Should Contain    JS (unsafe)

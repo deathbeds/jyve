@@ -8,6 +8,7 @@ channels:
 
 dependencies:
   - black
+  - beautysh
   - flake8
   - geckodriver
   - jupyterlab >=0.34,<0.35
@@ -18,5 +19,3 @@ dependencies:
   - robotframework-seleniumlibrary
   - selenium =3.8.0
   - wget
-  - pip:
-      - beautysh

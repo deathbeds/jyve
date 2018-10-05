@@ -42,6 +42,8 @@ class JyveExporter(HTMLExporter):
             "lab/api/settings/@jupyterlab/fileeditor-extension:plugin",
             "lab/api/settings/@jupyterlab/notebook-extension:tracker",
             "lab/api/settings/@jupyterlab/shortcuts-extension:plugin",
+            "kernelspecs/python3/logo-64x64.png",
+            "kernelspecs/python3/logo-32x32.png"
         ],
         help="additional notebook urls to cache",
         config=True,

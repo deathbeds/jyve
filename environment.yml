@@ -17,5 +17,5 @@ dependencies:
   - python-chromedriver-binary
   - robotframework-lint
   - robotframework-seleniumlibrary
-  - selenium =3.8.0
+  - selenium >=3.14, <3.15
   - wget

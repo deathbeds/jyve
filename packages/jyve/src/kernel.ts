@@ -6,9 +6,12 @@ import {Kernel, ServerConnection, KernelMessage} from '@jupyterlab/services';
 import {nbformat} from '@jupyterlab/coreutils';
 import {JyveServer, JyveRequest, jyveFetch} from './socket';
 import {ISignal, Signal} from '@phosphor/signaling';
+import {WebSocket} from 'mock-socket';
 
 import {Jyve} from '.';
 import {Display} from './display';
+
+export {WebSocket} from 'mock-socket';
 
 
 // tslint:disable-next-line
@@ -27,6 +30,8 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   private _onRestart: (ns: any) => Promise<void>;
   private _wasLoaded = false;
   private _frameCloseRequested = new Signal<this, void>(this);
+  _socket: WebSocket;
+  private _serverSettings: ServerConnection.ISettings;
   _frameChanged = new Signal<JyveKernel, HTMLIFrameElement>(this);
 
   display: Display;
@@ -36,7 +41,10 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     this.server = options.server;
     this._lab = options.lab;
     this._onRestart = options.onRestart;
-    this.server.on('message', (msg: string) => this._onMessage(msg));
+    this.server.on('connection', (socket) => {
+      this._socket = socket;
+      (socket as any).on('message', (msg: string) => this._onMessage(msg));
+    });
     this.display = new Display(this);
     this.resetUserNS();
   }
@@ -86,12 +94,10 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
   }
 
   sendJSON(data: any) {
-    this.server.send(JSON.stringify(data));
+    this._socket.send(JSON.stringify(data));
   }
 
-  private _serverSettings: ServerConnection.ISettings;
-
-  get serverSettings() {
+  get serverSettings(): ServerConnection.ISettings {
     return {
       ...this._serverSettings,
       Request: JyveRequest,
@@ -99,7 +105,7 @@ export class JyveKernel extends DefaultKernel implements Jyve.IJyveKernel {
     };
   }
 
-  set serverSettings(serverSettings) {
+  set serverSettings(serverSettings: ServerConnection.ISettings) {
     this._serverSettings = serverSettings;
   }
 

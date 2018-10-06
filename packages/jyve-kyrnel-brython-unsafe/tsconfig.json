@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfigbase",
   "compilerOptions": {
-    "outDir": "./lib",
+    "outDir": "./lib", "rootDir": "src",
     "paths": {
       "!!raw-loader!*": ["../../../node_modules/*"]
     },

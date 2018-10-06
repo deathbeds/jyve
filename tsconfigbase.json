@@ -9,6 +9,7 @@
     "preserveWatchOutput": true,
     "module": "commonjs",
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "target": "es2015",
     "types": ["node", "webpack-env"],
     "lib": ["dom", "es2015"],

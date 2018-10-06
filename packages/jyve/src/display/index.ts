@@ -1,8 +1,8 @@
 import * as core from '@phosphor/coreutils';
-import { nbformat } from '@jupyterlab/coreutils';
-import { KernelMessage } from '@jupyterlab/services';
+import {nbformat} from '@jupyterlab/coreutils';
+import {KernelMessage} from '@jupyterlab/services';
 
-import { Jyve } from '..';
+import {Jyve} from '..';
 
 const DEBUG = false;
 
@@ -19,13 +19,11 @@ export class Display {
   }
 
   messageContext(parent: KernelMessage.IMessage) {
-    const display = (
-      data: nbformat.IMimeBundle,
-      metadata?: nbformat.OutputMetadata
-    ) => this.display(parent, data, metadata);
+    const display = (data: nbformat.IMimeBundle, metadata?: nbformat.OutputMetadata) =>
+      this.display(parent, data, metadata);
 
     return {
-      display
+      display,
     };
   }
 

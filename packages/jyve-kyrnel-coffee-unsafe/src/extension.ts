@@ -1,5 +1,5 @@
-import { JupyterLab, JupyterLabPlugin } from '@jupyterlab/application';
-import { IJyve } from '@deathbeds/jyve';
+import {JupyterLab, JupyterLabPlugin} from '@jupyterlab/application';
+import {IJyve} from '@deathbeds/jyve';
 const id = '@deathbeds/jyve-kyrnel-coffee-unsafe';
 
 // tslint:disable-next-line
@@ -14,9 +14,9 @@ const extension: JupyterLabPlugin<void> = {
   activate: (app: JupyterLab, jyve: IJyve) => {
     jyve.register({
       kernelSpec: pkg.jyve.kernelspec,
-      newKernel: import('.') as any
+      newKernel: import('.') as any,
     });
-  }
+  },
 };
 
 export default extension;

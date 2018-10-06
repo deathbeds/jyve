@@ -1,5 +1,5 @@
-import { JupyterLab, JupyterLabPlugin } from '@jupyterlab/application';
-import { IJyve } from '@deathbeds/jyve';
+import {JupyterLab, JupyterLabPlugin} from '@jupyterlab/application';
+import {IJyve} from '@deathbeds/jyve';
 const id = '@deathbeds/jyve-lyb-d3';
 
 import '../style/index.css';
@@ -14,7 +14,7 @@ const extension: JupyterLabPlugin<void> = {
     jyve.lyb('d3', async function(ns: any) {
       ns['d3'] = d3;
     });
-  }
+  },
 };
 
 export default extension;

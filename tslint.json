@@ -1,7 +1,4 @@
 {
-  "linterOptions": {
-    "exclude": ["node_modules/**/*.ts", "**/*.d.ts", "jupyterlab/**/*.ts"]
-  },
   "rules": {
     "align": [true, "parameters", "statements"],
     "ban": [
@@ -47,6 +44,7 @@
     "no-string-literal": false,
     "no-switch-case-fall-through": true,
     "no-trailing-whitespace": true,
+    "no-unused-expression": true,
     "no-use-before-declare": false,
     "no-var-keyword": true,
     "no-var-requires": true,
@@ -60,18 +58,9 @@
       "check-whitespace"
     ],
     "one-variable-per-declaration": [true, "ignore-for-loop"],
-    "prettier": [
-      true,
-      {
-        "singleQuote": true
-      }
-    ],
-    "quotemark": {
-      "options": [true, "single", "avoid-escape"],
-      "severity": "off"
-    },
+    "quotemark": [true, "single", "avoid-escape"],
     "radix": true,
-    "semicolon": [true, "always", "ignore-bound-class-methods"],
+    "semicolon": [true, "always"],
     "switch-default": true,
     "trailing-comma": [
       false,
@@ -109,6 +98,5 @@
       "check-separator",
       "check-type"
     ]
-  },
-  "rulesDirectory": ["tslint-plugin-prettier"]
+  }
 }

@@ -22,10 +22,12 @@ export class JyveRequest implements IJyveRequest {
   redirect: RequestRedirect;
   referrer: string;
   referrerPolicy: ReferrerPolicy;
-  type: RequestType;
   url: string;
   signal: AbortSignal;
   bodyUsed: boolean;
+  isHistoryNavigation: boolean;
+  isReloadNavigation: boolean;
+  body: ReadableStream;
 
   constructor (input: string | IJyveRequest, init?: RequestInit) {
     if (DEBUG) {
@@ -53,6 +55,7 @@ export class JyveResponse implements IJyveResponse {
   url: string;
   redirected: boolean;
   bodyUsed: boolean;
+  trailer: Promise<Headers>;
 
   constructor(body: any, init?: ResponseInit) {
     if (DEBUG) {

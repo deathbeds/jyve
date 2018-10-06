@@ -5,6 +5,7 @@
   },
   "description": "A totally unsafe browser js kernel",
   "devDependencies": {
+    "@deathbeds/jyve": "^0.7.0",
     "@jupyterlab/application": "^0.19.1"
   },
   "files": [

@@ -1,6 +1,6 @@
-import { Kernel, KernelMessage } from '@jupyterlab/services';
+import {Kernel, KernelMessage} from '@jupyterlab/services';
 
-import { JyveKernel } from '@deathbeds/jyve/lib/kernel';
+import {JyveKernel} from '@deathbeds/jyve/lib/kernel';
 
 // tslint:disable-next-line
 const {jyve} = require('../package.json') as any;
@@ -11,7 +11,7 @@ export class JSUnsafeKernel extends JyveKernel {
   protected kernelspec = kernelSpec;
 
   jyveInfo() {
-    return { ...super.jyveInfo(), implementation: kernelSpec.name };
+    return {...super.jyveInfo(), implementation: kernelSpec.name};
   }
 
   async onMessage(msg: KernelMessage.IMessage) {
@@ -19,7 +19,7 @@ export class JSUnsafeKernel extends JyveKernel {
     if (handled) {
       return handled;
     }
-    const { msg_type } = msg.header;
+    const {msg_type} = msg.header;
     switch (msg_type) {
       case 'execute_request':
         await this.executeWithEval(msg);
@@ -50,12 +50,12 @@ export class JSUnsafeKernel extends JyveKernel {
   async execNS(msg: KernelMessage.IMessage) {
     return {
       ...this.userNS,
-      display: this.display.messageContext(msg)
+      display: this.display.messageContext(msg),
     };
   }
 
   async executeWithEval(msg: KernelMessage.IMessage) {
-    const { code } = msg.content as any;
+    const {code} = msg.content as any;
     let result: any;
 
     const execNS = await this.execNS(msg);
@@ -68,7 +68,7 @@ export class JSUnsafeKernel extends JyveKernel {
       }
       this.sendJSON(
         this.fakeExecuteResult(msg, {
-          'text/plain': `${result}`
+          'text/plain': `${result}`,
         })
       );
       this.sendJSON(this.fakeExecuteReply(msg));
@@ -81,7 +81,7 @@ export class JSUnsafeKernel extends JyveKernel {
       this.sendJSON(this.fakeStatusReply(msg, 'idle'));
       this.sendJSON(
         this.fakeExecuteResult(msg, {
-          'text/plain': `${err}`
+          'text/plain': `${err}`,
         })
       );
 
@@ -97,11 +97,11 @@ export class JSUnsafeKernel extends JyveKernel {
         ename,
         evalue,
         traceback,
-        ...errReply.content
+        ...errReply.content,
       };
       this.sendJSON(errReply);
     }
-    Object.keys(execNS).map(k => {
+    Object.keys(execNS).map((k) => {
       if (['display', 'JupyterLab'].indexOf(k) === -1) {
         return;
       }

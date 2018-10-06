@@ -1,9 +1,9 @@
 // tslint:disable-next-line
 /// <reference path="../../../node_modules/@types/webpack-env/index.d.ts"/>
 
-import { Kernel } from '@jupyterlab/services';
-import { Jyve } from '@deathbeds/jyve';
-import { JyveKernel } from '@deathbeds/jyve/lib/kernel';
+import {Kernel} from '@jupyterlab/services';
+import {Jyve} from '@deathbeds/jyve';
+import {JyveKernel} from '@deathbeds/jyve/lib/kernel';
 
 import * as KernelModuleType from './kernel';
 
@@ -19,7 +19,7 @@ export async function newKernel(
   let kernel = await new Promise<typeof KernelModuleType>((resolve, reject) => {
     require.ensure(
       ['./kernel'],
-      require => {
+      (require) => {
         const kernel = require('./kernel') as typeof KernelModuleType;
         resolve(kernel);
       },

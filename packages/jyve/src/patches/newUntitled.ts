@@ -1,7 +1,7 @@
-import {JupyterLab} from '@jupyterlab/application';
-import {Contents} from '@jupyterlab/services';
+import { JupyterLab } from '@jupyterlab/application';
+import { Contents } from '@jupyterlab/services';
 
-import {IJyve} from '..';
+import { IJyve } from '..';
 
 const DEBUG = false;
 
@@ -18,9 +18,9 @@ function jyveModel() {
     mimetype: 'text/plain',
     content: {
       metadata: {},
-      cells: [],
+      cells: []
     },
-    format: 'json',
+    format: 'json'
   };
   return model;
 }
@@ -46,7 +46,11 @@ export function patchNewUntitled(app: JupyterLab, jyve: IJyve) {
     }
 
     try {
-      let result: Contents.IModel = await _get.call(mgr, `${path}/index.html`, options);
+      let result: Contents.IModel = await _get.call(
+        mgr,
+        `${path}/index.html`,
+        options
+      );
       if (DEBUG) {
         console.log('trying with index.html');
       }
@@ -87,7 +91,9 @@ export function patchNewUntitled(app: JupyterLab, jyve: IJyve) {
     }
   }
 
-  async function listCheckpoints(path: string): Promise<Contents.ICheckpointModel[]> {
+  async function listCheckpoints(
+    path: string
+  ): Promise<Contents.ICheckpointModel[]> {
     if (DEBUG) {
       console.log('listCheckpoints[', path, ']');
     }

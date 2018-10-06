@@ -1,5 +1,5 @@
-import {JupyterLab, JupyterLabPlugin} from '@jupyterlab/application';
-import {IJyve} from '@deathbeds/jyve';
+import { JupyterLab, JupyterLabPlugin } from '@jupyterlab/application';
+import { IJyve } from '@deathbeds/jyve';
 const id = '@deathbeds/jyve-lyb-phosphor';
 
 import * as algorithm from '@phosphor/algorithm';
@@ -55,10 +55,10 @@ const extension: JupyterLabPlugin<void> = {
         signaling,
         virtualdom,
         widgets,
-        CSS,
+        CSS
       };
     });
-  },
+  }
 };
 
 export default extension;

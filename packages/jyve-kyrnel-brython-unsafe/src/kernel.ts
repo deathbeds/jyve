@@ -1,7 +1,7 @@
-import {Kernel, KernelMessage} from '@jupyterlab/services';
+import { Kernel, KernelMessage } from '@jupyterlab/services';
 
-import {JSUnsafeKernel} from '@deathbeds/jyve-kyrnel-js-unsafe';
-import {JyveKernel} from '@deathbeds/jyve/lib/kernel';
+import { JSUnsafeKernel } from '@deathbeds/jyve-kyrnel-js-unsafe';
+import { JyveKernel } from '@deathbeds/jyve/lib/kernel';
 
 // tslint:disable-next-line
 /// <reference path="../../../node_modules/@types/webpack-env/index.d.ts"/>
@@ -23,7 +23,7 @@ export class BrythonUnsafeKernel extends JSUnsafeKernel {
       ...jsInfo,
       help_links: [...jsInfo.help_links, ...jyve.help_links],
       implementation: kernelSpec.name,
-      language_info: jyve.language_info,
+      language_info: jyve.language_info
     };
   }
 
@@ -46,17 +46,17 @@ export class BrythonUnsafeKernel extends JSUnsafeKernel {
 
     let execNS = await super.execNS(parent);
     const brython = await this.brython();
-    brython.$options = {debug: DEBUG ? 10 : 0};
+    brython.$options = { debug: DEBUG ? 10 : 0 };
 
     execNS = {
       ...execNS,
-      __BRYTHON__: brython,
+      __BRYTHON__: brython
     };
 
     execNS.__BRYTHON__.stdout.write = function(data: any) {
       k.sendJSON(
         k.fakeDisplayData(parent, {
-          'text/plain': `${data}`,
+          'text/plain': `${data}`
         })
       );
     };
@@ -64,7 +64,7 @@ export class BrythonUnsafeKernel extends JSUnsafeKernel {
     execNS.__BRYTHON__.stderr.write = function(data: any) {
       k.sendJSON(
         k.fakeDisplayData(parent, {
-          'text/plain': `${data}`,
+          'text/plain': `${data}`
         })
       );
     };
@@ -75,7 +75,12 @@ export class BrythonUnsafeKernel extends JSUnsafeKernel {
   async transpile(code: string) {
     const brython = await this.brython();
     // for https://github.com/brython-dev/brython/issues/803
-    const obj = brython.py2js(code, '__main__', '__main__', brython.builtins_scope);
+    const obj = brython.py2js(
+      code,
+      '__main__',
+      '__main__',
+      brython.builtins_scope
+    );
     const src = obj.to_js();
 
     return `

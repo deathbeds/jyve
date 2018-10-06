@@ -32,8 +32,7 @@
       "display_name": "TypeScript (unsafe) — Jyve",
       "language": "typescript",
       "name": "jyve-kyrnel-typescript-unsafe",
-      "resources": {
-      }
+      "resources": {}
     },
     "language_info": {
       "codemirror_mode": {

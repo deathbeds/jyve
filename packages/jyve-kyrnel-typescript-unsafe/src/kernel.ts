@@ -1,10 +1,10 @@
 import * as ts from 'typescript';
-import {Kernel, KernelMessage} from '@jupyterlab/services';
+import { Kernel, KernelMessage } from '@jupyterlab/services';
 
-import {JSUnsafeKernel} from '@deathbeds/jyve-kyrnel-js-unsafe';
-import {JyveKernel} from '@deathbeds/jyve/lib/kernel';
+import { JSUnsafeKernel } from '@deathbeds/jyve-kyrnel-js-unsafe';
+import { JyveKernel } from '@deathbeds/jyve/lib/kernel';
 
-import {jyve, kernelSpec} from '.';
+import { jyve, kernelSpec } from '.';
 
 export interface IFiles {
   [fileName: string]: {
@@ -59,13 +59,13 @@ export class JyveHost implements ts.LanguageServiceHost {
 
   addFile(fileName: string, body: string) {
     let snap = ts.ScriptSnapshot.fromString(body);
-    snap.getChangeRange = (_) => undefined;
+    snap.getChangeRange = _ => undefined;
     let existing = this.files[fileName];
     if (existing) {
       this.files[fileName].ver++;
       this.files[fileName].file = snap;
     } else {
-      this.files[fileName] = {ver: 1, file: snap};
+      this.files[fileName] = { ver: 1, file: snap };
     }
   }
 }
@@ -98,7 +98,7 @@ export class TypeScriptUnsafeKernel extends JSUnsafeKernel {
       ...jsInfo,
       help_links: [...jsInfo.help_links, ...jyve.help_links],
       implementation: kernelSpec.name,
-      language_info: jyve.language_info,
+      language_info: jyve.language_info
     };
   }
 
@@ -119,6 +119,6 @@ export class TypeScriptUnsafeKernel extends JSUnsafeKernel {
       return last;
     }
 
-    throw new Error(diagnostics.map((d) => d.messageText).join('\n'));
+    throw new Error(diagnostics.map(d => d.messageText).join('\n'));
   }
 }

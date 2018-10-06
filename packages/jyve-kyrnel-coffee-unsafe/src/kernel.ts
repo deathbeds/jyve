@@ -1,6 +1,6 @@
-import {Kernel, KernelMessage} from '@jupyterlab/services';
+import { Kernel, KernelMessage } from '@jupyterlab/services';
 
-import {JSUnsafeKernel} from '@deathbeds/jyve-kyrnel-js-unsafe';
+import { JSUnsafeKernel } from '@deathbeds/jyve-kyrnel-js-unsafe';
 
 // tslint:disable-next-line
 const {jyve} = require('../package.json') as any;
@@ -16,12 +16,12 @@ export class CoffeeUnsafeKernel extends JSUnsafeKernel {
       ...jsInfo,
       help_links: [...jsInfo.help_links, ...jyve.help_links],
       implementation: kernelSpec.name,
-      language_info: jyve.language_info,
+      language_info: jyve.language_info
     };
   }
 
   async transpile(code: string) {
     const coffeescript = await import('coffeescript');
-    return coffeescript.compile(code, {bare: true});
+    return coffeescript.compile(code, { bare: true });
   }
 }

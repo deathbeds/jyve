@@ -33,8 +33,7 @@
       "display_name": "JS (unsafe) — Jyve",
       "language": "javascript",
       "name": "jyve-kyrnel-js-unsafe",
-      "resources": {
-      }
+      "resources": {}
     },
     "language_info": {
       "codemirror_mode": {

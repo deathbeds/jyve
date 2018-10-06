@@ -1,9 +1,9 @@
-import {JSONExt} from '@phosphor/coreutils';
+import { JSONExt } from '@phosphor/coreutils';
 
-import {JupyterLab} from '@jupyterlab/application';
-import {Kernel} from '@jupyterlab/services/lib/kernel';
+import { JupyterLab } from '@jupyterlab/application';
+import { Kernel } from '@jupyterlab/services/lib/kernel';
 
-import {IJyve} from '..';
+import { IJyve } from '..';
 
 export function patchGetSpecs(app: JupyterLab, jyve: IJyve) {
   /* tslint:disable */

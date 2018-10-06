@@ -3,8 +3,7 @@
   "bugs": {
     "url": "https://github.com/deathbeds/jyve/issues"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "description": "Jupyter Kernels in the Browser",
   "devDependencies": {
     "@types/node": "^9.4.2",
@@ -30,7 +29,7 @@
     "jupyterlab"
   ],
   "license": "BSD-3-Clause",
-  "name": "_Jyve",
+  "name": "root",
   "private": true,
   "repository": {
     "type": "git",

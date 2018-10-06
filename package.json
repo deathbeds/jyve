@@ -3,17 +3,21 @@
   "bugs": {
     "url": "https://github.com/deathbeds/jyve/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+  },
   "description": "Jupyter Kernels in the Browser",
   "devDependencies": {
     "@types/node": "^9.4.2",
     "@types/webpack-env": "~1.13.6",
-    "lerna": "^2.11.0",
-    "prettier": "1.14.0",
-    "rimraf": "^2.6.1",
-    "tslint": "^5.10.0",
-    "typescript": "^2.9.2",
-    "webpack-bundle-analyzer": "^2.10.0",
+    "lerna": "^3.4.1",
+    "prettier": "^1.11.1",
+    "rimraf": "~2.6.2",
+    "tslint": "~5.10.0",
+    "tslint-config-prettier": "^1.9.0",
+    "tslint-plugin-prettier": "^1.3.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "~3.1.1",
+    "webpack-bundle-analyzer": "^3.0.2",
     "webpack-stats-duplicates": "^2.1.0"
   },
   "files": [
@@ -46,15 +50,15 @@
     "lab:stats": "cd $CONDA_PREFIX/share/jupyter/lab/staging && mkdir -p build && ./node_modules/.bin/webpack --config webpack.prod.config.js --profile --json > stats.json && mv stats.json build/",
     "lab:viz": "cd $CONDA_PREFIX/share/jupyter/lab/staging/build && webpack-bundle-analyzer stats.json -p 6767",
     "lint": "jlpm lint:sh && jlpm lint:py && jlpm lint:prettier && jlpm lint:ts && jlpm lint:robot",
-    "lint:sh": "beautysh -i 2 -f scripts/**/*.sh postBuild",
-    "lint:py": "black jyve setup.py && flake8 jyve setup.py",
     "lint:prettier": "prettier --write *.json *.md *.yml && lerna exec --stream -- prettier --write --config=../../.prettierrc ./src/**/*.ts ./style/**/*.css ./*.json ./*.md",
+    "lint:py": "black jyve setup.py && flake8 jyve setup.py",
     "lint:robot": "python -m robot.tidy -r tests && rflint --configure TooManyTestSteps:20 --configure TooFewKeywordSteps:0 --configure LineTooLong:200 tests/**/*.robot",
+    "lint:sh": "beautysh -i 2 -f scripts/**/*.sh postBuild",
     "lint:ts": "lerna exec --stream -- tslint -c ../../tslint.json --fix ./src/**/*.ts",
     "test": "python -m robot -d .testoutput tests/acceptance",
     "watch": "lerna run --parallel --stream watch"
   },
-  "version": "0.6.0",
+  "version": "0.7.0",
   "workspaces": [
     "packages/*"
   ]

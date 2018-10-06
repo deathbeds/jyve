@@ -12,5 +12,13 @@
     "./**/*",
     "./src/**/*",
     "./src/@types/**/*"
+  ],
+  "references": [
+    {
+      "path": "../jyve"
+    },
+    {
+      "path": "../jyve-kyrnel-js-unsafe"
+    }
   ]
 }

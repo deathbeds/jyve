@@ -11,9 +11,9 @@ dependencies:
   - beautysh
   - flake8
   - geckodriver
-  - jupyterlab >=0.34,<0.35
+  - jupyterlab >=0.35,<0.36
   - nodejs >=8.9.3,<9
-  - python >=3.6,<3.7
+  - python >=3.7,<3.8
   - python-chromedriver-binary
   - robotframework-lint
   - robotframework-seleniumlibrary

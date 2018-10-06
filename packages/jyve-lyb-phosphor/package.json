@@ -3,8 +3,8 @@
   "bugs": {
     "url": "https://github.com/deathbeds/jyve/issues"
   },
-  "dependencies": {
-    "@jupyterlab/application": "^0.18.2"
+  "devDependencies": {
+    "@jupyterlab/application": "^0.19.1"
   },
   "description": "An unoffical namespace package for phosphor",
   "files": [
@@ -34,7 +34,8 @@
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-lyb-phosphor",
   "peerDependencies": {
-    "@deathbeds/jyve": "^0.6.0"
+    "@deathbeds/jyve": "^0.7.0",
+    "@jupyterlab/application": "^0.19.1"
   },
   "repository": {
     "type": "git",
@@ -48,5 +49,5 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.6.0"
+  "version": "0.7.0"
 }

@@ -6,5 +6,10 @@
   "include": [
     "./src/**/*",
     "../jyve/src/@types/**/*"
+  ],
+  "references": [
+    {
+      "path": "../jyve"
+    }
   ]
 }

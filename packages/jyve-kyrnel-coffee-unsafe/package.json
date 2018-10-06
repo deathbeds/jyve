@@ -4,8 +4,10 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.18.2",
-    "coffeescript": "^2.2.4"
+    "coffeescript": "^2.3.2"
+  },
+  "devDependencies": {
+    "@jupyterlab/application": "^0.19.1"
   },
   "description": "A totally unsafe browser coffeescript kernel",
   "files": [
@@ -48,13 +50,16 @@
     "coffeescript",
     "jupyter",
     "jupyterlab",
+    "jupyterlab-extension",
     "jyve"
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-kyrnel-coffee-unsafe",
   "peerDependencies": {
-    "@deathbeds/jyve": "^0.6.0"
+    "@deathbeds/jyve-kyrnel-js-unsafe": "^0.7.0",
+    "@deathbeds/jyve": "^0.7.0",
+    "@jupyterlab/application": "^0.19.1"
   },
   "repository": {
     "type": "git",
@@ -68,5 +73,5 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.6.0"
+  "version": "0.7.0"
 }

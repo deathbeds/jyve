@@ -3,10 +3,10 @@
   "bugs": {
     "url": "https://github.com/deathbeds/jyve/issues"
   },
-  "dependencies": {
-    "@jupyterlab/application": "^0.18.2"
-  },
   "description": "A totally unsafe browser js kernel",
+  "devDependencies": {
+    "@jupyterlab/application": "^0.19.1"
+  },
   "files": [
     "{lib,style}/**/*.{css,d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}"
   ],
@@ -33,7 +33,8 @@
       "display_name": "JS (unsafe) — Jyve",
       "language": "javascript",
       "name": "jyve-kyrnel-js-unsafe",
-      "resources": {}
+      "resources": {
+      }
     },
     "language_info": {
       "codemirror_mode": {
@@ -50,13 +51,15 @@
   "keywords": [
     "jupyter",
     "jupyterlab",
+    "jupyterlab-extension",
     "jyve"
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-kyrnel-js-unsafe",
   "peerDependencies": {
-    "@deathbeds/jyve": "^0.6.0"
+    "@deathbeds/jyve": "^0.7.0",
+    "@jupyterlab/application": "^0.19.1"
   },
   "repository": {
     "type": "git",
@@ -70,5 +73,5 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.6.0"
+  "version": "0.7.0"
 }

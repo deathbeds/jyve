@@ -4,10 +4,10 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.18.2",
-    "p5": "^0.6.0"
+    "p5": "^0.7.2"
   },
   "devDependencies": {
+    "@jupyterlab/application": "^0.19.1",
     "@types/webpack-env": "~1.13.6"
   },
   "description": "A totally unsafe browser p5 kernel",
@@ -52,13 +52,16 @@
     "processing",
     "jupyter",
     "jupyterlab",
+    "jupyterlab-extension",
     "jyve"
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-kyrnel-p5-unsafe",
   "peerDependencies": {
-    "@deathbeds/jyve": "^0.6.0"
+    "@deathbeds/jyve": "^0.7.0",
+    "@deathbeds/jyve-kyrnel-js-unsafe": "^0.7.0",
+    "@jupyterlab/application": "^0.19.1"
   },
   "repository": {
     "type": "git",
@@ -72,5 +75,5 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.6.0"
+  "version": "0.7.0"
 }

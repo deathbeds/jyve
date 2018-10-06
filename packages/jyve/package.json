@@ -4,11 +4,15 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.18.2",
-    "@phosphor/widgets": "^1.6.0",
-    "mock-socket": "^7.1.0"
+    "mock-socket": "^8.0.2"
+  },
+  "peerDependencies": {
+    "@jupyterlab/application": "^0.19.1",
+    "@phosphor/widgets": "^1.6.0"
   },
   "devDependencies": {
+    "@jupyterlab/application": "^0.19.1",
+    "@phosphor/widgets": "^1.6.0",
     "@types/socket.io": "^1.4.31"
   },
   "description": "Jupyter Kernels in the Browser",
@@ -63,5 +67,5 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.6.0"
+  "version": "0.7.0"
 }

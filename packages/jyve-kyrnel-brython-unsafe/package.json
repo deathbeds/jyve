@@ -4,9 +4,11 @@
     "url": "https://github.com/deathbeds/jyve/issues"
   },
   "dependencies": {
-    "@jupyterlab/application": "^0.18.2",
     "brython": "^3.5.0",
     "raw-loader": "~0.5.1"
+  },
+  "devDependencies": {
+    "@jupyterlab/application": "^0.19.1"
   },
   "description": "A totally unsafe browser brython kernel",
   "files": [
@@ -49,13 +51,18 @@
   "keywords": [
     "jupyter",
     "jupyterlab",
-    "jyve"
+    "jupyterlab-extension",
+    "jyve",
+    "brython",
+    "python"
   ],
   "license": "BSD-3-Clause",
   "main": "lib/index.js",
   "name": "@deathbeds/jyve-kyrnel-brython-unsafe",
   "peerDependencies": {
-    "@deathbeds/jyve": "^0.6.0"
+    "@deathbeds/jyve": "^0.7.0",
+    "@deathbeds/jyve-kyrnel-js-unsafe": "^0.7.0",
+    "@jupyterlab/application": "^0.19.1"
   },
   "repository": {
     "type": "git",
@@ -69,5 +76,5 @@
     "watch": "tsc --watch"
   },
   "types": "lib/index.d.ts",
-  "version": "0.6.0"
+  "version": "0.7.0"
 }

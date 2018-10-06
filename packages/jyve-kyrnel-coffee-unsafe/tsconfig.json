@@ -1,10 +1,18 @@
 {
   "extends": "../../tsconfigbase",
   "compilerOptions": {
-    "outDir": "./lib"
+    "outDir": "./lib", "rootDir": "src"
   },
   "include": [
     "./src/**/*",
     "../jyve/src/@types/**/*"
+  ],
+  "references": [
+    {
+      "path": "../jyve"
+    },
+    {
+      "path": "../jyve-kyrnel-js-unsafe"
+    }
   ]
 }

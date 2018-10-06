@@ -11,7 +11,7 @@ ${LAB_CMD}        jupyter-lab --no-browser --NotebookApp.token=${TOKEN} --port 1
 ${LAB_URL}        http://localhost:18888/lab?token=${TOKEN}
 ${SPLASH_ID}      jupyterlab-splash
 ${SPINNER}        css:.jp-Spinner
-${CMD_PAL_XPATH}    //div[contains(@class, "jp-mod-left")]//li[@title = "Command Palette"]//div
+${CMD_PAL_XPATH}    css:li[data-id="command-palette"]
 ${CMD_PAL_INPUT}    css:.p-CommandPalette-input
 ${CMD_PAL_ITEM}    css:.p-CommandPalette-item
 ${TOP}            //div[@id='jp-top-panel']

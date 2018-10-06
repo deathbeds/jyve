@@ -43,7 +43,7 @@
     "build:lyb": "lerna run build --scope '@deathbeds/jyve-lyb-*' --stream",
     "clean": "lerna run --parallel clean --stream",
     "lab:dupes": "cd $CONDA_PREFIX/share/jupyter/lab/staging/build && webpack-stats-duplicates stats.json",
-    "lab:link": "lerna run lab:link --stream",
+    "lab:link": "lerna exec --concurrency 1 --stream -- jupyter labextension link . --no-build --debug",
     "lab:stats": "cd $CONDA_PREFIX/share/jupyter/lab/staging && mkdir -p build && ./node_modules/.bin/webpack --config webpack.prod.config.js --profile --json > stats.json && mv stats.json build/",
     "lab:viz": "cd $CONDA_PREFIX/share/jupyter/lab/staging/build && webpack-bundle-analyzer stats.json -p 6767",
     "lint": "jlpm lint:sh && jlpm lint:py && jlpm lint:prettier && jlpm lint:ts && jlpm lint:robot",

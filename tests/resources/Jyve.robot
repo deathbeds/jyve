@@ -4,9 +4,9 @@ Library           Process
 Resource          Lab.robot
 
 *** Variables ***
-${DEMO_CMD}       ./scripts/demo.sh
-${HTTP_CMD}       python -m http.server --bind 127.0.0.1 19980
-${DEMO_URL}       http://127.0.0.1:19980/
+${DEMO_CMD}       ./scripts/build_demo.sh
+${HTTPS_CMD}      python ./scripts/serve_demo.py
+${DEMO_URL}       https://127.0.0.1:8443/d/e/m/o/
 
 *** Keywords ***
 Rebuild the Jyve Demo
@@ -18,7 +18,8 @@ Rebuild the Jyve Demo
 
 Start the Jyve Demo
     [Documentation]    Serve the static demo
-    Start Process    ${HTTP_CMD}    shell=true    cwd=demo
+    Start Process    ${HTTPS_CMD}    shell=true    stderr=STDOUT    stdout=${OUTPUT_DIR}/demo.log
+
 
 Open the Jyve Demo with
     [Arguments]    ${browser}

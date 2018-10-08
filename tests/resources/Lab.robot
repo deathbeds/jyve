@@ -7,7 +7,7 @@ Library           OperatingSystem
 *** Variables ***
 ${CELL_CSS}       .jp-Notebook .jp-Cell:last-of-type .jp-InputArea-editor .CodeMirror
 ${TOKEN}          hopelesslyinsecure
-${LAB_CMD}        jupyter-lab --no-browser --NotebookApp.token=${TOKEN} --port 18888
+${LAB_CMD}        jupyter-lab --no-browser --NotebookApp.token=${TOKEN} --port 18888  --notebook-dir ${OUTPUT_DIR}${/}notebooks
 ${LAB_URL}        http://localhost:18888/lab?token=${TOKEN}
 ${SPLASH_ID}      jupyterlab-splash
 ${SPINNER}        css:.jp-Spinner
@@ -35,6 +35,7 @@ Launch a new
 
 Start JupyterLab
     [Documentation]    Start a Jupyter Notebook Server with JupyterLab
+    Create Directory    ${OUTPUT_DIR}${/}notebooks
     Start Process    ${LAB_CMD}    shell=true    stderr=STDOUT    stdout=${OUTPUT_DIR}/lab.log
 
 Click JupyterLab Menu

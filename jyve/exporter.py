@@ -37,11 +37,13 @@ class JyveExporter(HTMLExporter):
             "favicon.ico",
             "api/contents/",
             "lab/api/settings/@jupyterlab/apputils-extension:themes",
+            "lab/api/settings/@jupyterlab/application-extension:sidebar",
             "lab/api/settings/@jupyterlab/codemirror-extension:commands",
             "lab/api/settings/@jupyterlab/docmanager-extension:plugin",
             "lab/api/settings/@jupyterlab/fileeditor-extension:plugin",
             "lab/api/settings/@jupyterlab/notebook-extension:tracker",
             "lab/api/settings/@jupyterlab/shortcuts-extension:plugin",
+            "lab/api/settings/@jupyterlab/extensionmanager-extension:plugin",
         ],
         help="additional notebook urls to cache",
         config=True,
@@ -55,6 +57,8 @@ class JyveExporter(HTMLExporter):
         {
             "api/sessions": [],
             "api/terminals": [],
+            "api/nbconvert": {},
+            "lab/api/workspaces": {"workspaces": []},
             "api/kernelspecs": {
                 "default": "python3",
                 "kernelspecs": {
@@ -84,32 +88,32 @@ class JyveExporter(HTMLExporter):
         {
             "buildAvailable": "False",
             "buildCheck": "False",
+            "quit_button": "False",
             "token": "",
             "devMode": "False",
             "terminalsAvailable": "False",
             "ignorePlugins": "[]",
             "serverRoot": "~/jyve",
             "mathjaxConfig": "TeX-AMS-MML_HTMLorMML-full,Safe",
-            "mathjaxUrl": "../static/components/MathJax/MathJax.js",
+            "mathjaxUrl": "static/components/MathJax/MathJax.js",
             "appName": "JupyterLab Beta",
             "appNamespace": "jupyterlab",
             "appSettingsDir": "~/jyve/settings",
             "appVersion": jupyterlab.__version__,
             "cacheFiles": "True",
-            "pageUrl": "./lab",
-            "publicUrl": "../lab/static/",
+            "pageUrl": "/lab",
+            "publicUrl": "/lab/static/",
             "schemasDir": "~/jyve/schemas/",
-            "settingsUrl": "../lab/api/settings/",
+            "settingsUrl": "/lab/api/settings/",
             "staticDir": "~/jyve/static",
             "templatesDir": "~/jyve/templates",
             "themesDir": "~/jyve/themes/",
             "themesUrl": "/lab/api/themes/",
-            "treeUrl": "../lab/tree/",
+            "treeUrl": "/lab/tree/",
             "userSettingsDir": "~/jyve/lab/user-settings",
             "workspacesDir": "~/jyve/lab/workspaces",
-            "workspacesUrl": "../lab/workspaces/",
-            "workspacesApiUrl": "../api/workspaces/",
-            "baseUrl": "../",
+            "workspacesUrl": "/lab/workspaces/",
+            "workspacesApiUrl": "/api/workspaces/",
             "wsUrl": "",
             "jyveOffline": True,
         },
@@ -291,9 +295,26 @@ class JyveExporter(HTMLExporter):
 
         list(output_root.glob("lab*token*"))[0].rename(index)
 
+        # we dynamically update the script tag with the proper base url
+        script_content = """
+        <script type="text/javascript">;(function(){
+            var config = %s;
+            config.baseUrl = window.location.pathname.replace(/lab\/$/, '');
+            config.mathjaxUrl = config.baseUrl + config.mathjaxUrl;
+            var script = document.createElement("script");
+            script.id = "jupyter-config-data";
+            script.type = "application/json";
+            script.textContent = JSON.stringify(config);
+            debugger;
+            document.head.appendChild(script);
+        })();</script>
+        """ % json.dumps(
+            self.jupyter_config_data, indent=2
+        )
+
         new_idx = re.sub(
             '(<script.*?id="jupyter-config-data".*?>).*?(</script>)',
-            "\\1\n{}\n</script>".format(json.dumps(self.jupyter_config_data, indent=2)),
+            script_content,
             index.read_text(),
             flags=re.M | re.S,
         )
@@ -354,5 +375,5 @@ class JyveExporter(HTMLExporter):
         index = Path(output_root) / "index.html"
         index.write_text(
             """<!DOCTYPE html>\n"""
-            """<meta http-equiv="refresh" content="0; URL=./lab" />"""
+            """<meta http-equiv="refresh" content="0; URL=./lab/" />"""
         )

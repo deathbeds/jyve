@@ -1,0 +1,352 @@
+[I 01:07:37.247 LabApp] JupyterLab extension loaded from /home/travis/miniconda3/envs/jyve-dev/lib/python3.7/site-packages/jupyterlab
+[I 01:07:37.247 LabApp] JupyterLab application directory is /home/travis/miniconda3/envs/jyve-dev/share/jupyter/lab
+[W 01:07:37.252 LabApp] JupyterLab server extension not enabled, manually loading...
+[I 01:07:37.279 LabApp] JupyterLab extension loaded from /home/travis/miniconda3/envs/jyve-dev/lib/python3.7/site-packages/jupyterlab
+[I 01:07:37.279 LabApp] JupyterLab application directory is /home/travis/miniconda3/envs/jyve-dev/share/jupyter/lab
+[I 01:07:37.280 LabApp] Serving notebooks from local directory: /home/travis/build/deathbeds/jyve/.testoutput/notebooks
+[I 01:07:37.281 LabApp] The Jupyter Notebook is running at:
+[I 01:07:37.281 LabApp] http://localhost:18888/?token=...
+[I 01:07:37.281 LabApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 01:07:40.875 LabApp] Node v8.12.0
+    
+[I 01:07:40.919 LabApp] > node /home/travis/miniconda3/envs/jyve-dev/lib/python3.7/site-packages/jupyterlab/staging/yarn.js install
+[1/4] Resolving packages...
+success Already up-to-date.
+[I 01:07:42.899 LabApp] Kernel started: 7618d766-ecad-4acc-9928-4e83cae08e6e
+[I 01:07:42.927 LabApp] > /home/travis/miniconda3/envs/jyve-dev/bin/npm pack /home/travis/build/deathbeds/jyve/packages/jyve-kyrnel-brython-unsafe
+[I 01:07:44.410 LabApp] Adapting to protocol v5.1 for kernel 7618d766-ecad-4acc-9928-4e83cae08e6e
+[I 01:07:44.426 LabApp] Adapting to protocol v5.1 for kernel 7618d766-ecad-4acc-9928-4e83cae08e6e
+npm notice 
+npm notice 📦  @deathbeds/jyve-kyrnel-brython-unsafe@0.7.0
+npm notice === Tarball Contents === 
+npm notice 1.9kB package.json      
+npm notice 468B  README.md         
+npm notice 164B  lib/extension.d.ts
+npm notice 864B  lib/extension.js  
+npm notice 332B  lib/index.d.ts    
+npm notice 1.5kB lib/index.js      
+npm notice 621B  lib/kernel.d.ts   
+npm notice 4.9kB lib/kernel.js     
+npm notice 968B  style/brython.svg 
+npm notice 162B  style/index.css   
+npm notice === Tarball Details === 
+npm notice name:          @deathbeds/jyve-kyrnel-brython-unsafe         
+npm notice version:       0.7.0                                         
+npm notice filename:      deathbeds-jyve-kyrnel-brython-unsafe-0.7.0.tgz
+npm notice package size:  4.1 kB                                        
+npm notice unpacked size: 11.9 kB                                       
+npm notice shasum:        9f5d07b78bf2481528c07769543c2b9039efb65e      
+npm notice integrity:     sha512-Q4eiU8VdaG469[...]D9762XwIV+bmQ==      
+npm notice total files:   10                                            
+npm notice 
+deathbeds-jyve-kyrnel-brython-unsafe-0.7.0.tgz
+[I 01:07:44.772 LabApp] Starting buffering for 7618d766-ecad-4acc-9928-4e83cae08e6e:d94456fe-131e-48a1-90bc-166a6353459d
+[I 01:07:44.944 LabApp] > /home/travis/miniconda3/envs/jyve-dev/bin/npm pack /home/travis/build/deathbeds/jyve/packages/jyve-kyrnel-coffee-unsafe
+npm notice 
+npm notice 📦  @deathbeds/jyve-kyrnel-coffee-unsafe@0.7.0
+npm notice === Tarball Contents === 
+npm notice 1.9kB package.json          
+npm notice 482B  README.md             
+npm notice 164B  lib/extension.d.ts    
+npm notice 863B  lib/extension.js      
+npm notice 304B  lib/index.d.ts        
+npm notice 1.4kB lib/index.js          
+npm notice 381B  lib/kernel.d.ts       
+npm notice 1.9kB lib/kernel.js         
+npm notice 2.2kB style/coffeescript.svg
+npm notice 172B  style/index.css       
+npm notice === Tarball Details === 
+npm notice name:          @deathbeds/jyve-kyrnel-coffee-unsafe         
+npm notice version:       0.7.0                                        
+npm notice filename:      deathbeds-jyve-kyrnel-coffee-unsafe-0.7.0.tgz
+npm notice package size:  3.8 kB                                       
+npm notice unpacked size: 9.8 kB                                       
+npm notice shasum:        3800aa6d8b104a9f467b43e8373894e5b9e10567     
+npm notice integrity:     sha512-rY+9+K4XYStvY[...]zSO1FvI98b22A==     
+npm notice total files:   10                                           
+npm notice 
+deathbeds-jyve-kyrnel-coffee-unsafe-0.7.0.tgz
+[I 01:07:46.770 LabApp] Node v8.12.0
+    
+[I 01:07:46.820 LabApp] > node /home/travis/miniconda3/envs/jyve-dev/lib/python3.7/site-packages/jupyterlab/staging/yarn.js install
+[I 01:07:46.970 LabApp] > node /home/travis/miniconda3/envs/jyve-dev/lib/python3.7/site-packages/jupyterlab/staging/yarn.js install
+[I 01:07:47.079 LabApp] Adapting to protocol v5.1 for kernel 7618d766-ecad-4acc-9928-4e83cae08e6e
+[1/4] Resolving packages...
+[1/4] Resolving packages...
+success Already up-to-date.
+success Already up-to-date.
+[I 01:07:50.837 LabApp] > /home/travis/miniconda3/envs/jyve-dev/bin/npm pack /home/travis/build/deathbeds/jyve/packages/jyve-kyrnel-brython-unsafe
+[I 01:07:50.990 LabApp] > /home/travis/miniconda3/envs/jyve-dev/bin/npm pack /home/travis/build/deathbeds/jyve/packages/jyve-kyrnel-p5-unsafe
+npm notice 
+npm notice 📦  @deathbeds/jyve-kyrnel-brython-unsafe@0.7.0
+npm notice === Tarball Contents === 
+npm notice 1.9kB package.json      
+npm notice 468B  README.md         
+npm notice 164B  lib/extension.d.ts
+npm notice 864B  lib/extension.js  
+npm notice 332B  lib/index.d.ts    
+npm notice 1.5kB lib/index.js      
+npm notice 621B  lib/kernel.d.ts   
+npm notice 4.9kB lib/kernel.js     
+npm notice 968B  style/brython.svg 
+npm notice 162B  style/index.css   
+npm notice === Tarball Details === 
+npm notice name:          @deathbeds/jyve-kyrnel-brython-unsafe         
+npm notice version:       0.7.0                                         
+npm notice filename:      deathbeds-jyve-kyrnel-brython-unsafe-0.7.0.tgz
+npm notice package size:  4.1 kB                                        
+npm notice unpacked size: 11.9 kB                                       
+npm notice shasum:        9f5d07b78bf2481528c07769543c2b9039efb65e      
+npm notice integrity:     sha512-Q4eiU8VdaG469[...]D9762XwIV+bmQ==      
+npm notice total files:   10                                            
+npm notice 
+deathbeds-jyve-kyrnel-brython-unsafe-0.7.0.tgz
+npm notice 
+npm notice 📦  @deathbeds/jyve-kyrnel-p5-unsafe@0.7.0
+npm notice === Tarball Contents === 
+npm notice 1.9kB package.json      
+npm notice 437B  README.md         
+npm notice 164B  lib/extension.d.ts
+npm notice 859B  lib/extension.js  
+npm notice 304B  lib/index.d.ts    
+npm notice 1.4kB lib/index.js      
+npm notice 559B  lib/kernel.d.ts   
+npm notice 2.5kB lib/kernel.js     
+npm notice 152B  style/index.css   
+npm notice 3.9kB style/p5.svg      
+npm notice === Tarball Details === 
+npm notice name:          @deathbeds/jyve-kyrnel-p5-unsafe         
+npm notice version:       0.7.0                                    
+npm notice filename:      deathbeds-jyve-kyrnel-p5-unsafe-0.7.0.tgz
+npm notice package size:  5.0 kB                                   
+npm notice unpacked size: 12.1 kB                                  
+npm notice shasum:        d6d2c8ba626a283223516efc0a88a0f2b434eb9a 
+npm notice integrity:     sha512-OqtdI1C80Y/8J[...]zV4CX3iN4TQTg== 
+npm notice total files:   10                                       
+npm notice 
+deathbeds-jyve-kyrnel-p5-unsafe-0.7.0.tgz
+[I 01:07:53.868 LabApp] > /home/travis/miniconda3/envs/jyve-dev/bin/npm pack /home/travis/build/deathbeds/jyve/packages/jyve-kyrnel-coffee-unsafe
+[I 01:07:54.033 LabApp] > /home/travis/miniconda3/envs/jyve-dev/bin/npm pack /home/travis/build/deathbeds/jyve/packages/jyve-kyrnel-typescript-unsafe
+npm notice 
+npm notice 📦  @deathbeds/jyve-kyrnel-typescript-unsafe@0.7.0
+npm notice === Tarball Contents === 
+npm notice 1.9kB package.json        
+npm notice 493B  README.md           
+npm notice 164B  lib/extension.d.ts  
+npm notice 867B  lib/extension.js    
+npm notice 409B  lib/index.d.ts      
+npm notice 1.4kB lib/index.js        
+npm notice 1.4kB lib/kernel.d.ts     
+npm notice 4.3kB lib/kernel.js       
+npm notice 168B  style/index.css     
+npm notice 2.2kB style/typescript.svg
+npm notice === Tarball Details === 
+npm notice name:          @deathbeds/jyve-kyrnel-typescript-unsafe         
+npm notice version:       0.7.0                                            
+npm notice filename:      deathbeds-jyve-kyrnel-typescript-unsafe-0.7.0.tgz
+npm notice package size:  5.0 kB                                           
+npm notice unpacked size: 13.3 kB                                          
+npm notice shasum:        6c91a9e292c0f7cb886528361d5230b407a7daa1         
+npm notice integrity:     sha512-wJoSq0HpuQn8M[...]p9lCxk4OYnu9A==         
+npm notice total files:   10                                               
+npm notice 
+deathbeds-jyve-kyrnel-typescript-unsafe-0.7.0.tgz
+npm notice 
+npm notice 📦  @deathbeds/jyve-kyrnel-coffee-unsafe@0.7.0
+npm notice === Tarball Contents === 
+npm notice 1.9kB package.json          
+npm notice 482B  README.md             
+npm notice 164B  lib/extension.d.ts    
+npm notice 863B  lib/extension.js      
+npm notice 304B  lib/index.d.ts        
+npm notice 1.4kB lib/index.js          
+npm notice 381B  lib/kernel.d.ts       
+npm notice 1.9kB lib/kernel.js         
+npm notice 2.2kB style/coffeescript.svg
+npm notice 172B  style/index.css       
+npm notice === Tarball Details === 
+npm notice name:          @deathbeds/jyve-kyrnel-coffee-unsafe         
+npm notice version:       0.7.0                                        
+npm notice filename:      deathbeds-jyve-kyrnel-coffee-unsafe-0.7.0.tgz
+npm notice package size:  3.8 kB                                       
+npm notice unpacked size: 9.8 kB                                       
+npm notice shasum:        3800aa6d8b104a9f467b43e8373894e5b9e10567     
+npm notice integrity:     sha512-rY+9+K4XYStvY[...]zSO1FvI98b22A==     
+npm notice total files:   10                                           
+npm notice 
+deathbeds-jyve-kyrnel-coffee-unsafe-0.7.0.tgz
+[I 01:07:56.045 LabApp] > node /home/travis/miniconda3/envs/jyve-dev/lib/python3.7/site-packages/jupyterlab/staging/yarn.js install
+[I 01:07:56.884 LabApp] > node /home/travis/miniconda3/envs/jyve-dev/lib/python3.7/site-packages/jupyterlab/staging/yarn.js install
+[1/4] Resolving packages...
+[1/4] Resolving packages...
+success Already up-to-date.
+success Already up-to-date.
+[I 01:07:58.891 LabApp] > /home/travis/miniconda3/envs/jyve-dev/bin/npm pack /home/travis/build/deathbeds/jyve/packages/jyve-kyrnel-p5-unsafe
+[I 01:07:59.053 LabApp] > /home/travis/miniconda3/envs/jyve-dev/bin/npm pack /home/travis/build/deathbeds/jyve/packages/jyve-lyb-d3
+npm notice 
+npm notice 📦  @deathbeds/jyve-lyb-d3@0.7.0
+npm notice === Tarball Contents === 
+npm notice 1.3kB package.json   
+npm notice 458B  README.md      
+npm notice 164B  lib/index.d.ts 
+npm notice 1.4kB lib/index.js   
+npm notice 1.4kB style/d3.svg   
+npm notice 53B   style/index.css
+npm notice === Tarball Details === 
+npm notice name:          @deathbeds/jyve-lyb-d3                  
+npm notice version:       0.7.0                                   
+npm notice filename:      deathbeds-jyve-lyb-d3-0.7.0.tgz         
+npm notice package size:  2.2 kB                                  
+npm notice unpacked size: 4.7 kB                                  
+npm notice shasum:        c1516c3bc2e3ba0f6f2148dc42f214fc305f9b58
+npm notice integrity:     sha512-JIEdfFh4g0dT2[...]I7Hpc43gdQIxQ==
+npm notice total files:   6                                       
+npm notice 
+deathbeds-jyve-lyb-d3-0.7.0.tgz
+npm notice 
+npm notice 📦  @deathbeds/jyve-kyrnel-p5-unsafe@0.7.0
+npm notice === Tarball Contents === 
+npm notice 1.9kB package.json      
+npm notice 437B  README.md         
+npm notice 164B  lib/extension.d.ts
+npm notice 859B  lib/extension.js  
+npm notice 304B  lib/index.d.ts    
+npm notice 1.4kB lib/index.js      
+npm notice 559B  lib/kernel.d.ts   
+npm notice 2.5kB lib/kernel.js     
+npm notice 152B  style/index.css   
+npm notice 3.9kB style/p5.svg      
+npm notice === Tarball Details === 
+npm notice name:          @deathbeds/jyve-kyrnel-p5-unsafe         
+npm notice version:       0.7.0                                    
+npm notice filename:      deathbeds-jyve-kyrnel-p5-unsafe-0.7.0.tgz
+npm notice package size:  5.0 kB                                   
+npm notice unpacked size: 12.1 kB                                  
+npm notice shasum:        d6d2c8ba626a283223516efc0a88a0f2b434eb9a 
+npm notice integrity:     sha512-OqtdI1C80Y/8J[...]zV4CX3iN4TQTg== 
+npm notice total files:   10                                       
+npm notice 
+deathbeds-jyve-kyrnel-p5-unsafe-0.7.0.tgz
+[I 01:08:01.063 LabApp] > node /home/travis/miniconda3/envs/jyve-dev/lib/python3.7/site-packages/jupyterlab/staging/yarn.js install
+[I 01:08:01.905 LabApp] > /home/travis/miniconda3/envs/jyve-dev/bin/npm pack /home/travis/build/deathbeds/jyve/packages/jyve-kyrnel-typescript-unsafe
+[1/4] Resolving packages...
+success Already up-to-date.
+npm notice 
+npm notice 📦  @deathbeds/jyve-kyrnel-typescript-unsafe@0.7.0
+npm notice === Tarball Contents === 
+npm notice 1.9kB package.json        
+npm notice 493B  README.md           
+npm notice 164B  lib/extension.d.ts  
+npm notice 867B  lib/extension.js    
+npm notice 409B  lib/index.d.ts      
+npm notice 1.4kB lib/index.js        
+npm notice 1.4kB lib/kernel.d.ts     
+npm notice 4.3kB lib/kernel.js       
+npm notice 168B  style/index.css     
+npm notice 2.2kB style/typescript.svg
+npm notice === Tarball Details === 
+npm notice name:          @deathbeds/jyve-kyrnel-typescript-unsafe         
+npm notice version:       0.7.0                                            
+npm notice filename:      deathbeds-jyve-kyrnel-typescript-unsafe-0.7.0.tgz
+npm notice package size:  5.0 kB                                           
+npm notice unpacked size: 13.3 kB                                          
+npm notice shasum:        6c91a9e292c0f7cb886528361d5230b407a7daa1         
+npm notice integrity:     sha512-wJoSq0HpuQn8M[...]p9lCxk4OYnu9A==         
+npm notice total files:   10                                               
+npm notice 
+deathbeds-jyve-kyrnel-typescript-unsafe-0.7.0.tgz
+[I 01:08:03.928 LabApp] > node /home/travis/miniconda3/envs/jyve-dev/lib/python3.7/site-packages/jupyterlab/staging/yarn.js install
+[I 01:08:04.089 LabApp] > /home/travis/miniconda3/envs/jyve-dev/bin/npm pack /home/travis/build/deathbeds/jyve/packages/jyve-lyb-phosphor
+npm notice 
+npm notice 📦  @deathbeds/jyve-lyb-phosphor@0.7.0
+npm notice === Tarball Contents === 
+npm notice 1.3kB package.json      
+npm notice 500B  README.md         
+npm notice 164B  lib/index.d.ts    
+npm notice 3.5kB lib/index.js      
+npm notice 65B   style/index.css   
+npm notice 4.6kB style/phosphor.svg
+npm notice === Tarball Details === 
+npm notice name:          @deathbeds/jyve-lyb-phosphor            
+npm notice version:       0.7.0                                   
+npm notice filename:      deathbeds-jyve-lyb-phosphor-0.7.0.tgz   
+npm notice package size:  3.1 kB                                  
+npm notice unpacked size: 10.1 kB                                 
+npm notice shasum:        2f1fd0a1ca9a2484a9b762e96a36e7a86a6bafde
+npm notice integrity:     sha512-cA3Otzqz0GSVG[...]hvWNsaYHmZWLw==
+npm notice total files:   6                                       
+npm notice 
+deathbeds-jyve-lyb-phosphor-0.7.0.tgz
+[1/4] Resolving packages...
+[I 01:08:06.111 LabApp] > node /home/travis/miniconda3/envs/jyve-dev/lib/python3.7/site-packages/jupyterlab/staging/yarn.js install
+success Already up-to-date.
+[I 01:08:06.937 LabApp] > /home/travis/miniconda3/envs/jyve-dev/bin/npm pack /home/travis/build/deathbeds/jyve/packages/jyve-lyb-d3
+[1/4] Resolving packages...
+success Already up-to-date.
+[I 01:08:08.121 LabApp] > /home/travis/miniconda3/envs/jyve-dev/bin/npm pack /home/travis/build/deathbeds/jyve/packages/jyve
+npm notice 
+npm notice 📦  @deathbeds/jyve-lyb-d3@0.7.0
+npm notice === Tarball Contents === 
+npm notice 1.3kB package.json   
+npm notice 458B  README.md      
+npm notice 164B  lib/index.d.ts 
+npm notice 1.4kB lib/index.js   
+npm notice 1.4kB style/d3.svg   
+npm notice 53B   style/index.css
+npm notice === Tarball Details === 
+npm notice name:          @deathbeds/jyve-lyb-d3                  
+npm notice version:       0.7.0                                   
+npm notice filename:      deathbeds-jyve-lyb-d3-0.7.0.tgz         
+npm notice package size:  2.2 kB                                  
+npm notice unpacked size: 4.7 kB                                  
+npm notice shasum:        c1516c3bc2e3ba0f6f2148dc42f214fc305f9b58
+npm notice integrity:     sha512-JIEdfFh4g0dT2[...]I7Hpc43gdQIxQ==
+npm notice total files:   6                                       
+npm notice 
+deathbeds-jyve-lyb-d3-0.7.0.tgz
+[I 01:08:08.951 LabApp] > node /home/travis/miniconda3/envs/jyve-dev/lib/python3.7/site-packages/jupyterlab/staging/yarn.js install
+npm notice 
+npm notice 📦  @deathbeds/jyve@0.7.0
+npm notice === Tarball Contents === 
+npm notice 1.7kB package.json                     
+npm notice 364B  README.md                        
+npm notice 532B  lib/display/index.d.ts           
+npm notice 918B  lib/display/index.js             
+npm notice 197B  lib/extension.d.ts               
+npm notice 1.3kB lib/extension.js                 
+npm notice 372B  lib/frame.d.ts                   
+npm notice 926B  lib/frame.js                     
+npm notice 2.6kB lib/index.d.ts                   
+npm notice 3.4kB lib/index.js                     
+npm notice 3.4kB lib/kernel.d.ts                  
+npm notice 9.8kB lib/kernel.js                    
+npm notice 165B  lib/patches/createCheckpoint.d.ts
+npm notice 1.3kB lib/patches/createCheckpoint.js  
+npm notice 157B  lib/patches/getSpecs.d.ts        
+npm notice 831B  lib/patches/getSpecs.js          
+npm notice 419B  lib/patches/index.d.ts           
+npm notice 733B  lib/patches/index.js             
+npm notice 160B  lib/patches/newUntitled.d.ts     
+npm notice 3.7kB lib/patches/newUntitled.js       
+npm notice 157B  lib/patches/startNew.d.ts        
+npm notice 475B  lib/patches/startNew.js          
+npm notice 411B  lib/session.d.ts                 
+npm notice 2.9kB lib/session.js                   
+npm notice 1.6kB lib/socket.d.ts                  
+npm notice 2.7kB lib/socket.js                    
+npm notice 319B  style/filter-frames.svg          
+npm notice 1.0kB style/index.css                  
+npm notice 688B  style/js.svg                     
+npm notice === Tarball Details === 
+npm notice name:          @deathbeds/jyve                         
+npm notice version:       0.7.0                                   
+npm notice filename:      deathbeds-jyve-0.7.0.tgz                
+npm notice package size:  10.0 kB                                 
+npm notice unpacked size: 43.3 kB                                 
+npm notice shasum:        85d2b3398f95f443df1ca53086d0c3843c2b06ac
+npm notice integrity:     sha512-6NHOoNF+sVafy[...]6LfMiICwoeobQ==
+npm notice total files:   29                                      
+npm notice 
+deathbeds-jyve-0.7.0.tgz
+[I 01:08:10.142 LabApp] > node /home/travis/miniconda3/envs/jyve-dev/lib/python3.7/site-packages/jupyterlab/staging/yarn.js install
+[1/4] Resolving packages...
